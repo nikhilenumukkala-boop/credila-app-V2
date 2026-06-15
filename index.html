@@ -198,7 +198,21 @@ h1{font-size:24px;font-weight:700}h2{font-size:20px;font-weight:700}h3{font-size
 
 /* Tag upgrades */
 .tag-new{background:linear-gradient(135deg,#5145CD,#7C6FE8);color:white;border-radius:99px;padding:2px 10px;font-size:10px;font-weight:700;display:inline-block}
+
+/* 4-step payment progress */
+.pay-steps{display:flex;align-items:center;margin-bottom:24px}
+.pay-step{display:flex;flex-direction:column;align-items:center;position:relative;flex:1}
+.pay-step-circle{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;z-index:1;border:2px solid var(--border);background:var(--bg);color:var(--text2);transition:.3s}
+.pay-step-circle.done{background:var(--navy);border-color:var(--navy);color:white}
+.pay-step-circle.active{background:white;border-color:var(--navy);color:var(--navy);box-shadow:0 0 0 3px rgba(81,69,205,.15)}
+.pay-step-label{font-size:10px;font-weight:600;margin-top:5px;color:var(--text3);white-space:nowrap}
+.pay-step-label.active{color:var(--navy)}
+.pay-step-label.done{color:var(--text2)}
+.pay-step-line{flex:1;height:2px;background:var(--border);margin:0 4px;margin-bottom:18px;transition:.3s}
+.pay-step-line.done{background:var(--navy)}
+
 </style>
+
 </head>
 <body>
 <div class="phone">
@@ -259,29 +273,59 @@ h1{font-size:24px;font-weight:700}h2{font-size:20px;font-weight:700}h3{font-size
     <h2 class="mb8">Welcome back</h2>
     <p class="tm">Sign in to your Credila account.</p>
   </div>
+
+  <!-- Step 1: Mobile number + Password -->
   <div class="ig">
     <label class="il">Mobile number</label>
     <div style="display:flex;gap:0">
       <div style="padding:14px 12px;background:var(--bg);border:1.5px solid var(--border);border-right:none;border-radius:10px 0 0 10px;color:var(--text2);font-size:15px;white-space:nowrap">+91</div>
-      <input class="if" style="border-radius:0 10px 10px 0;flex:1" placeholder="98765 43210" type="tel" maxlength="10">
+      <input id="si-phone" class="if" style="border-radius:0 10px 10px 0;flex:1;background:#F7F5FF" value="98765 43210" placeholder="98765 43210" type="tel" maxlength="11">
     </div>
   </div>
   <div class="ig">
     <label class="il">Password</label>
     <div style="position:relative">
-      <input class="if" type="password" placeholder="Enter password" style="padding-right:48px">
-      <span style="position:absolute;right:14px;top:50%;transform:translateY(-50%);cursor:pointer;color:var(--text2)"><i class="ti ti-eye" style="font-size:18px"></i></span>
+      <input id="si-password" class="if" type="password" placeholder="Enter password" style="padding-right:48px">
+      <span onclick="var i=document.getElementById('si-password');i.type=i.type==='password'?'text':'password'" style="position:absolute;right:14px;top:50%;transform:translateY(-50%);cursor:pointer;color:var(--text2)"><i class="ti ti-eye" style="font-size:18px"></i></span>
     </div>
   </div>
   <p class="tr" style="margin-top:-8px;margin-bottom:24px"><span class="tn2 fw6 f13" style="cursor:pointer">Forgot password?</span></p>
-  <button class="bp" onclick="goTo('sc-home')">Sign in</button>
-  <div class="card mt16" style="background:var(--bg);text-align:center;border:none;padding:12px">
-    <p class="f13 tm">Or sign in with</p>
-    <div class="flex g12 mt8" style="justify-content:center">
-      <div style="padding:10px 24px;border:1.5px solid var(--border);border-radius:10px;cursor:pointer;font-size:13px;font-weight:600">Biometric</div>
-      <div style="padding:10px 24px;border:1.5px solid var(--border);border-radius:10px;cursor:pointer;font-size:13px;font-weight:600">OTP</div>
+
+  <!-- Step 2: OTP input (hidden until Send OTP clicked) -->
+  <div id="si-otp-section" style="display:none;margin-bottom:0">
+    <div class="ig" style="margin-bottom:6px">
+      <label class="il">Enter OTP</label>
+      <div style="display:flex;gap:10px;justify-content:center;margin-top:4px">
+        <input type="text" maxlength="1" inputmode="numeric"
+          oninput="siOtpNext(this,1)" onkeydown="siOtpBack(event,this,1)"
+          style="width:48px;height:52px;text-align:center;font-size:22px;font-weight:700;border:1.5px solid var(--border);border-radius:10px;background:var(--bg);color:var(--navy);outline:none" id="si-otp-1">
+        <input type="text" maxlength="1" inputmode="numeric"
+          oninput="siOtpNext(this,2)" onkeydown="siOtpBack(event,this,2)"
+          style="width:48px;height:52px;text-align:center;font-size:22px;font-weight:700;border:1.5px solid var(--border);border-radius:10px;background:var(--bg);color:var(--navy);outline:none" id="si-otp-2">
+        <input type="text" maxlength="1" inputmode="numeric"
+          oninput="siOtpNext(this,3)" onkeydown="siOtpBack(event,this,3)"
+          style="width:48px;height:52px;text-align:center;font-size:22px;font-weight:700;border:1.5px solid var(--border);border-radius:10px;background:var(--bg);color:var(--navy);outline:none" id="si-otp-3">
+        <input type="text" maxlength="1" inputmode="numeric"
+          oninput="siOtpNext(this,4)" onkeydown="siOtpBack(event,this,4)"
+          style="width:48px;height:52px;text-align:center;font-size:22px;font-weight:700;border:1.5px solid var(--border);border-radius:10px;background:var(--bg);color:var(--navy);outline:none" id="si-otp-4">
+        <input type="text" maxlength="1" inputmode="numeric"
+          oninput="siOtpNext(this,5)" onkeydown="siOtpBack(event,this,5)"
+          style="width:48px;height:52px;text-align:center;font-size:22px;font-weight:700;border:1.5px solid var(--border);border-radius:10px;background:var(--bg);color:var(--navy);outline:none" id="si-otp-5">
+        <input type="text" maxlength="1" inputmode="numeric"
+          oninput="siOtpNext(this,6)" onkeydown="siOtpBack(event,this,6)"
+          style="width:48px;height:52px;text-align:center;font-size:22px;font-weight:700;border:1.5px solid var(--border);border-radius:10px;background:var(--bg);color:var(--navy);outline:none" id="si-otp-6">
+      </div>
     </div>
+    <p class="tc tm" style="font-size:12px;margin-bottom:24px">
+      OTP sent to <strong>+91 98765 43210</strong> ·
+      <span id="si-resend-timer" style="color:var(--text2)">Resend in <strong>00:30</strong></span>
+      <span id="si-resend-btn" style="display:none;color:var(--navy);font-weight:600;cursor:pointer" onclick="siSendOTP()">Resend OTP</span>
+    </p>
   </div>
+
+  <!-- CTA: changes from "Send OTP" to "Sign in" -->
+  <button id="si-cta" class="bp" onclick="siSendOTP()">Send OTP</button>
+
   <p class="tc tm" style="margin-top:20px;font-size:13px">Don't have an account? <span class="tn2 fw6" style="cursor:pointer" onclick="goTo('sc-role')">Get started</span></p>
 </div>
 </div>
@@ -319,18 +363,19 @@ h1{font-size:24px;font-weight:700}h2{font-size:20px;font-weight:700}h3{font-size
   </div>
   <div class="ig">
     <label class="il">Full name</label>
-    <input class="if" value="Aarav Kumar" style="background:#F7F5FF;color:var(--text1)">
+    <input class="if" value="Aarav Kumar" style="background:#F7F5FF" placeholder="As per loan records">
   </div>
   <div class="ig">
     <label class="il">Mobile number</label>
     <div style="display:flex;gap:0">
       <div style="padding:14px 12px;background:var(--bg);border:1.5px solid var(--border);border-right:none;border-radius:10px 0 0 10px;color:var(--text2);font-size:15px;white-space:nowrap">+91</div>
-      <input class="if" style="border-radius:0 10px 10px 0;flex:1;background:#F7F5FF" value="98765 43210" type="tel" maxlength="10">
+      <input class="if" style="border-radius:0 10px 10px 0;flex:1;background:#F7F5FF" value="98765 43210" placeholder="98765 43210" type="tel" maxlength="10">
     </div>
-    <div style="display:flex;align-items:center;gap:6px;margin-top:7px;padding:8px 10px;background:#DCFCE7;border-radius:8px;border:1px solid #BBF7D0">
-      <i class="ti ti-circle-check" style="font-size:14px;color:#059669;flex-shrink:0"></i>
-      <p style="font-size:12px;color:#065F46;font-weight:600">Active loan #CRL-xxx123 found for this number</p>
-    </div>
+    <p style="font-size:12px;color:var(--text2);margin-top:6px"><i class="ti ti-info-circle" style="font-size:12px;vertical-align:-1px"></i> The loan linked to this mobile number will be connected to this account</p>
+  <div style="margin-top:8px;padding:10px 12px;background:#DCFCE7;border:1px solid #BBF7D0;border-radius:10px;display:flex;align-items:center;gap:8px">
+    <i class="ti ti-circle-check" style="font-size:18px;color:#059669;flex-shrink:0"></i>
+    <span style="font-size:13px;color:#065F46;font-weight:600">Active loan #CRL-xxx123 found for this number</span>
+  </div>
   </div>
   <div class="ig">
     <label class="il">Set password</label>
@@ -353,31 +398,26 @@ h1{font-size:24px;font-weight:700}h2{font-size:20px;font-weight:700}h3{font-size
 </div>
 </div>
 
-<!-- SETUP: OTP VERIFICATION -->
+
+<!-- SETUP: OTP VERIFY -->
 <div class="screen" id="sc-setup-otp">
-<div class="sb"><span>9:41</span><span>●●●●</span></div>
-<div class="tn"><button class="bb" onclick="back()">←</button><span class="nt">Verify mobile</span></div>
+<div class="sb"><span>9:41</span><span>&#x25CF;&#x25CF;&#x25CF;&#x25CF;</span></div>
+<div class="tn"><button class="bb" onclick="back()">&#x2190;</button><span class="nt">Verify mobile</span></div>
 <div class="sc px py">
-  <div style="margin-top:8px;margin-bottom:28px">
-    <div style="width:56px;height:56px;border-radius:16px;background:#EDE9FF;display:flex;align-items:center;justify-content:center;margin-bottom:16px">
-      <i class="ti ti-message-2" style="font-size:28px;color:#5145CD"></i>
-    </div>
-    <h2 class="mb8">OTP sent to your mobile</h2>
-    <p class="tm">We sent a 6-digit code to <strong>+91 98765 43210</strong>. Enter it below to verify your account.</p>
+  <div style="width:56px;height:56px;border-radius:16px;background:#EDE9FF;display:flex;align-items:center;justify-content:center;margin-bottom:16px">
+    <i class="ti ti-message-2" style="font-size:28px;color:#5145CD"></i>
   </div>
-  <!-- OTP boxes -->
-  <div style="display:flex;gap:10px;justify-content:center;margin-bottom:20px">
-    <input type="tel" maxlength="1" style="width:48px;height:54px;border:2px solid #5145CD;border-radius:12px;text-align:center;font-size:22px;font-weight:700;color:#5145CD;background:#F7F5FF;outline:none" value="4">
-    <input type="tel" maxlength="1" style="width:48px;height:54px;border:2px solid #5145CD;border-radius:12px;text-align:center;font-size:22px;font-weight:700;color:#5145CD;background:#F7F5FF;outline:none" value="8">
-    <input type="tel" maxlength="1" style="width:48px;height:54px;border:2px solid var(--border);border-radius:12px;text-align:center;font-size:22px;font-weight:700;color:var(--text1);background:white;outline:none" placeholder="-">
-    <input type="tel" maxlength="1" style="width:48px;height:54px;border:2px solid var(--border);border-radius:12px;text-align:center;font-size:22px;font-weight:700;color:var(--text1);background:white;outline:none" placeholder="-">
-    <input type="tel" maxlength="1" style="width:48px;height:54px;border:2px solid var(--border);border-radius:12px;text-align:center;font-size:22px;font-weight:700;color:var(--text1);background:white;outline:none" placeholder="-">
-    <input type="tel" maxlength="1" style="width:48px;height:54px;border:2px solid var(--border);border-radius:12px;text-align:center;font-size:22px;font-weight:700;color:var(--text1);background:white;outline:none" placeholder="-">
+  <h2 class="mb8">OTP sent to your mobile</h2>
+  <p class="tm mb24">We sent a 6-digit code to <strong>+91 98765 43210</strong>. Enter it below to verify your account.</p>
+  <div class="otp-row">
+    <input class="otp-b" maxlength="1" value="4">
+    <input class="otp-b" maxlength="1" value="8">
+    <input class="otp-b" maxlength="1" value="">
+    <input class="otp-b" maxlength="1" value="">
+    <input class="otp-b" maxlength="1" value="">
+    <input class="otp-b" maxlength="1" value="">
   </div>
-  <!-- Timer -->
-  <div style="text-align:center;margin-bottom:28px">
-    <p style="font-size:13px;color:var(--text2)">Resend OTP in <span style="font-weight:700;color:#5145CD">00:42</span></p>
-  </div>
+  <p class="tc tm mb24">Resend OTP in <strong class="tn2">00:42</strong></p>
   <button class="bp mb12" onclick="goTo('sc-home')">Verify &amp; sign in</button>
   <button class="bl" onclick="back()">Change mobile number</button>
 </div>
@@ -396,7 +436,7 @@ h1{font-size:24px;font-weight:700}h2{font-size:20px;font-weight:700}h3{font-size
   <div class="card wf mb16" style="background:var(--bg)">
     <div class="flex jb mb8"><span class="tm">Account holder</span><span class="fw6">Aarav Kumar</span></div>
     <div class="flex jb mb8"><span class="tm">Mobile</span><span class="fw6">+91 98765 43210</span></div>
-    <div class="flex jb"><span class="tm">Loan linked</span><span class="fw6 ts"> Connected</span></div>
+    <div class="flex jb"><span class="tm">Loan linked</span><span class="fw6 ts">✓ Connected</span></div>
   </div>
   <button class="bp wf" onclick="goToHome()">Go to my account →</button>
 </div>
@@ -632,7 +672,7 @@ h1{font-size:24px;font-weight:700}h2{font-size:20px;font-weight:700}h3{font-size
       <p style="color:rgba(255,255,255,.6);font-size:12px">Aarav's outstanding balance</p>
       <h2 style="color:white;margin-top:2px;margin-bottom:8px">₹18,25,000</h2>
       <div style="background:rgba(255,255,255,.15);border-radius:99px;height:5px;overflow:hidden"><div style="width:73%;height:100%;background:var(--orange);border-radius:99px"></div></div>
-      <div class="flex jb mt8"><small style="color:rgba(255,255,255,.5)">73% of ₹25L sanctioned</small><span class="tag" style="background:rgba(255,255,255,.15);color:white;font-size:10px">On Track </span></div>
+      <div class="flex jb mt8"><small style="color:rgba(255,255,255,.5)">73% of ₹25L sanctioned</small><span class="tag" style="background:rgba(255,255,255,.15);color:white;font-size:10px">On Track ✓</span></div>
     </div>
   </div>
   <div class="px" style="margin-top:-14px">
@@ -731,7 +771,7 @@ h1{font-size:24px;font-weight:700}h2{font-size:20px;font-weight:700}h3{font-size
     </div>    <!-- Service requests -->
     <div class="card">
       <div class="flex jb aic mb12"><p class="fw6">Service requests</p><span class="f12 tm" style="cursor:pointer" onclick="goTo('sc-prev-req')">Previous ›</span></div>
-      <div class="flex jb aic mb10"><div><p class="fw6 f13">Tranche 3 disbursement</p><small class="tm">Upload pending · Jun 4</small></div><button class="bsm" style="font-size:11px;padding:6px 10px" onclick="goTo('sc-tranche-upload')">Details</button></div>
+      <div class="flex jb aic mb10"><div><p class="fw6 f13">Tranche 3 disbursement</p><small class="tm">Upload pending · Jun 4</small></div><button class="bsm" style="font-size:11px;padding:6px 10px;background:var(--bg);color:var(--navy)" onclick="goTo('sc-tranche-upload')">Details</button></div>
       <div class="div" style="margin:6px 0"></div>
       <div class="flex jb aic"><div><p class="fw6 f13">Contact update #CR-2026-04821</p><small class="tm">Under Review</small></div><button class="bsm" style="font-size:11px;padding:6px 10px;background:var(--bg);color:var(--navy)" onclick="goTo('sc-cr-success')">Details</button></div>
     </div>
@@ -946,36 +986,6 @@ h1{font-size:24px;font-weight:700}h2{font-size:20px;font-weight:700}h3{font-size
       </div>
     </div>
 
-    <!-- Remitter section -->
-    <div class="flex jb aic mb10">
-      <p class="home-section-title" style="margin-bottom:0"> Remitter</p>
-      <span class="f12 tn2 fw6" style="cursor:pointer">Manage ›</span>
-    </div>
-    <div style="display:flex;gap:10px;overflow-x:auto;margin-bottom:16px;padding-bottom:4px;-webkit-overflow-scrolling:touch">
-      <div style="min-width:170px;background:var(--white);border-radius:14px;padding:10px 12px;border:1px solid var(--border);flex-shrink:0;box-shadow:0 2px 10px rgba(81,69,205,0.06)">
-        <div class="flex jb aic mb6">
-          <div style="width:28px;height:28px;border-radius:50%;background:#EEF2FF;display:flex;align-items:center;justify-content:center"><i class="ti ti-user" style="font-size:14px;color:var(--navy)"></i></div>
-          <span style="font-size:10px;background:rgba(0,196,140,0.12);color:var(--orange);border-radius:99px;padding:3px 8px;font-weight:600">Primary</span>
-        </div>
-        <p class="fw6 f13" style="margin-bottom:1px">Rakesh Kumar</p>
-        <p style="font-size:11px;color:var(--text2);margin-bottom:0">Father · HDFC Bank </p>
-        <p style="font-size:11px;color:var(--text2);font-family:monospace">A/C ••••4521</p>
-      </div>
-      <div style="min-width:170px;background:var(--white);border-radius:14px;padding:10px 12px;border:1px solid var(--border);flex-shrink:0;box-shadow:0 2px 10px rgba(81,69,205,0.06)">
-        <div class="flex jb aic mb6">
-          <div style="width:28px;height:28px;border-radius:50%;background:#EEF2FF;display:flex;align-items:center;justify-content:center"><i class="ti ti-user" style="font-size:14px;color:var(--navy)"></i></div>
-          <span style="font-size:10px;background:rgba(81,69,205,0.08);color:var(--navy);border-radius:99px;padding:3px 8px;font-weight:600">Secondary</span>
-        </div>
-        <p class="fw6 f13" style="margin-bottom:1px">Sunita Kumar</p>
-        <p style="font-size:11px;color:var(--text2);margin-bottom:0">Mother · SBI </p>
-        <p style="font-size:11px;color:var(--text2);font-family:monospace">A/C ••••7892</p>
-      </div>
-      <div style="min-width:150px;background:var(--bg);border-radius:16px;padding:14px;border:1.5px dashed rgba(81,69,205,0.2);flex-shrink:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;cursor:pointer">
-        <div style="width:36px;height:36px;border-radius:50%;background:rgba(81,69,205,0.08);display:flex;align-items:center;justify-content:center"><i class="ti ti-plus" style="font-size:18px;color:var(--navy)"></i></div>
-        <p class="fw6 f13" style="color:var(--navy);text-align:center">Add Remitter</p>
-      </div>
-    </div>
-
     <!-- Beneficiary section -->
     <div class="flex jb aic mb10">
       <p class="home-section-title" style="margin-bottom:0"> Beneficiary</p>
@@ -1104,61 +1114,86 @@ h1{font-size:24px;font-weight:700}h2{font-size:20px;font-weight:700}h3{font-size
 </div>
 </div>
 
-<!-- FX COMPARISON (in send money) -->
+<!-- SEND MONEY: STEP 1 — AMOUNT & BENEFICIARY -->
 <div class="screen" id="sc-send-money">
-<div class="sb"><span>9:41</span><span>●●●●</span></div>
-<div class="tn"><button class="bb" onclick="back()">←</button><span class="nt">Send money abroad</span></div>
-<div class="sc px py">
-  <!-- FX rate card -->
-  <div class="card mb16" style="background:var(--navy);color:white">
-    <div class="flex jb mb4"><small style="color:rgba(255,255,255,.6)">Live rate (USD/INR)</small><span style="font-size:12px;color:#86EFAC;background:rgba(255,255,255,.1);padding:2px 8px;border-radius:99px">↓ 0.5% today</span></div>
-    <div class="fw7" style="font-size:32px;color:white">₹83.42</div>
-    <small style="color:rgba(255,255,255,.4)">Updated 2 min ago</small>
+<div class="sb"><span>9:41</span><span>&#x25CF;&#x25CF;&#x25CF;&#x25CF;</span></div>
+<div class="tn"><button class="bb" onclick="back()">&#x2190;</button><span class="nt">Send money abroad</span></div>
+<div class="sc px py" style="padding-bottom:80px">
+
+  <div class="pay-steps">
+    <div class="pay-step"><div class="pay-step-circle active">1</div><div class="pay-step-label active">Amount</div></div>
+    <div class="pay-step-line"></div>
+    <div class="pay-step"><div class="pay-step-circle">2</div><div class="pay-step-label">Quote</div></div>
+    <div class="pay-step-line"></div>
+    <div class="pay-step"><div class="pay-step-circle">3</div><div class="pay-step-label">Review</div></div>
+    <div class="pay-step-line"></div>
+    <div class="pay-step"><div class="pay-step-circle">4</div><div class="pay-step-label">Payment</div></div>
   </div>
-  <!-- Amount input -->
-  <div class="ig"><label class="il">You send (INR)</label><input class="if fw7" value="₹3,50,000" style="font-size:20px"></div>
-  <div style="text-align:center;margin:-4px 0 8px;color:var(--text2);font-size:20px">⇅</div>
-  <div class="card mb16" style="background:var(--bg)"><div class="flex jb mb4"><span class="tm">Recipient gets</span><span class="fw7 tn2 f18">USD 4,194.87</span></div></div>
-  <!-- Transfer method -->
-  <p class="fw6 mb10">Transfer method</p>
-  <div class="card mb8" style="border:2px solid var(--navy);cursor:pointer" id="method-instant">
-    <div class="flex jb aic">
-      <div class="flex g12 aic">
-        <div style="width:40px;height:40px;border-radius:10px;background:#EEF2FF;display:flex;align-items:center;justify-content:center"><i class="ti ti-bolt" style="font-size:20px;color:var(--navy)"></i></div>
-        <div>
-          <p class="fw6">Borderless Instant</p>
-          <small class="tm">Arrives in minutes · Fee ₹199</small>
-        </div>
+
+  <!-- Amount input card -->
+  <div class="card mb14" style="background:var(--bg)">
+    <div style="margin-bottom:14px">
+      <p style="font-size:12px;font-weight:600;color:var(--text2);text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px">Amount to send</p>
+      <div style="display:flex;align-items:baseline;gap:3px">
+        <span style="font-size:22px;font-weight:800;color:#059669">&#x20B9;</span>
+        <input id="tr-amount-input" type="text" inputmode="decimal" value="3,50,000" oninput="trFromInput(this)"
+          style="font-size:36px;font-weight:800;color:#059669;border:none;background:transparent;outline:none;text-align:left;width:160px;padding:0;transition:color .2s;line-height:1">
+      </div>
+    </div>
+    <div id="tr-usd-pill" style="display:flex;align-items:center;gap:6px;background:rgba(81,69,205,.08);border-radius:8px;padding:8px 12px;cursor:default">
+      <i class="ti ti-currency-dollar" style="font-size:14px;color:var(--navy)"></i>
+      <span style="font-size:12px;color:var(--text2)">USD equivalent</span>
+      <span id="tr-usd-eq" style="font-size:13px;font-weight:700;color:var(--navy);margin-left:auto">&#x2248; $3,684.21</span>
+    </div>
+  </div>
+
+  <!-- Beneficiary selection -->
+  <p class="fw6 mb10 f12" style="color:var(--text2);text-transform:uppercase;letter-spacing:.6px">Select beneficiary</p>
+
+  <div id="tr-bene-1" class="card mb8" style="border:2px solid var(--navy);background:#EDE9FF;cursor:pointer" onclick="trSelectBene(1)">
+    <div class="flex g12 aic">
+      <div style="width:40px;height:40px;background:white;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0">
+        <i class="ti ti-building-bank" style="font-size:20px;color:var(--navy)"></i>
+      </div>
+      <div style="flex:1">
+        <p class="fw6 f13">Carnegie Mellon University</p>
+        <small class="tm">PNC Bank &#x25CF;&#x25CF;&#x25CF;8824 &#xB7; Pittsburgh</small>
+      </div>
+      <div style="width:20px;height:20px;border-radius:50%;background:var(--navy);display:flex;align-items:center;justify-content:center;flex-shrink:0">
+        <div style="width:8px;height:8px;border-radius:50%;background:white"></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="tr-bene-2" class="card mb8" style="border:1.5px solid var(--border);background:white;cursor:pointer" onclick="trSelectBene(2)">
+    <div class="flex g12 aic">
+      <div style="width:40px;height:40px;background:var(--bg);border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0">
+        <i class="ti ti-user" style="font-size:20px;color:var(--text2)"></i>
+      </div>
+      <div style="flex:1">
+        <p class="fw6 f13">Aarav Kumar (personal)</p>
+        <small class="tm">Chase Bank &#x25CF;&#x25CF;&#x25CF;2291 &#xB7; New York</small>
+      </div>
+      <div style="width:20px;height:20px;border-radius:50%;border:2px solid var(--border);flex-shrink:0"></div>
+    </div>
+  </div>
+
+  <div class="card mb8" style="border:1.5px dashed var(--border);background:transparent;cursor:pointer">
+    <div class="flex g12 aic">
+      <div style="width:40px;height:40px;background:var(--bg);border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0">
+        <i class="ti ti-plus" style="font-size:20px;color:var(--navy)"></i>
       </div>
       <div>
-        <div style="width:20px;height:20px;border-radius:50%;background:var(--navy);display:flex;align-items:center;justify-content:center"><div style="width:8px;height:8px;border-radius:50%;background:white"></div></div>
+        <p class="fw6 f13" style="color:var(--navy)">Add new beneficiary</p>
+        <small class="tm">Add bank details</small>
       </div>
     </div>
-    <div style="margin-top:10px;background:#EEF2FF;border-radius:8px;padding:8px 10px">
-      <p style="font-size:12px;color:var(--navy)"><i class="ti ti-bolt" style="font-size:12px;vertical-align:-1px"></i> Best rate · Powered by Borderless · Typically &lt; 5 minutes</p>
-    </div>
   </div>
-  <div class="card mb16" style="cursor:pointer;border:1.5px solid var(--border)" id="method-swift">
-    <div class="flex jb aic">
-      <div class="flex g12 aic">
-        <div style="width:40px;height:40px;border-radius:10px;background:var(--bg);display:flex;align-items:center;justify-content:center"><i class="ti ti-building-bank" style="font-size:20px;color:var(--text2)"></i></div>
-        <div>
-          <p class="fw6">SWIFT Transfer</p>
-          <small class="tm">2–5 business days · Fee ₹500</small>
-        </div>
-      </div>
-      <div style="width:20px;height:20px;border-radius:50%;border:2px solid var(--border)"></div>
-    </div>
-    <div style="margin-top:10px;background:var(--bg);border-radius:8px;padding:8px 10px">
-      <p style="font-size:12px;color:var(--text2)">Standard international bank transfer · Accepted by all universities</p>
-    </div>
-  </div>
-  <!-- Beneficiaries -->
-  <p class="fw6 mb10">Saved beneficiaries</p>
-  <div class="card mb8" style="border:2px solid var(--navy);cursor:pointer" onclick="goTo('sc-transfer-confirm')"><div class="flex g12 aic"><div style="width:40px;height:40px;background:var(--bg);border-radius:10px;display:flex;align-items:center;justify-content:center"><i class="ti ti-building-bank" style="font-size:20px"></i></div><div><p class="fw6 f13">Carnegie Mellon University</p><small class="tm">PNC Bank ···8824 · Pittsburgh</small></div><div style="margin-left:auto;width:20px;height:20px;border-radius:50%;background:var(--navy);display:flex;align-items:center;justify-content:center"><div style="width:8px;height:8px;border-radius:50%;background:white"></div></div></div></div>
-  <div class="card mb16" style="cursor:pointer"><div class="flex g12 aic"><div style="width:40px;height:40px;background:var(--bg);border-radius:10px;display:flex;align-items:center;justify-content:center"><i class="ti ti-user" style="font-size:20px"></i></div><div><p class="fw6 f13">Aarav Kumar (personal)</p><small class="tm">Chase Bank ···2291 · New York</small></div><div style="margin-left:auto;width:20px;height:20px;border-radius:50%;border:2px solid var(--border)"></div></div></div>
-  <button class="bp mb8" onclick="goTo('sc-transfer-confirm')">Continue with CMU →</button>
-  <button class="bl">+ Add new beneficiary</button>
+
+</div>
+<!-- Floating CTA -->
+<div style="padding:12px 20px 20px;background:white;border-top:1px solid var(--border);flex-shrink:0">
+  <button class="bp" style="margin:0" onclick="trProceed()">Continue &#x2192;</button>
 </div>
 </div>
 
@@ -1194,7 +1229,7 @@ h1{font-size:24px;font-weight:700}h2{font-size:20px;font-weight:700}h3{font-size
     <div class="flex jb aic mt4 mb8"><h2 style="color:white">₹18,250</h2><span class="tag" style="background:rgba(255,255,255,.15);color:white">Jul 5 · 9 days</span></div>
     <div class="flex g8">
       <div style="flex:1;background:rgba(255,255,255,.1);border-radius:8px;padding:8px;text-align:center"><small style="color:rgba(255,255,255,.6)">EMI 18 of 120</small></div>
-      <div style="flex:1;background:rgba(255,255,255,.1);border-radius:8px;padding:8px;text-align:center"><small style="color:rgba(255,255,255,.6)">Auto-debit active </small></div>
+      <div style="flex:1;background:rgba(255,255,255,.1);border-radius:8px;padding:8px;text-align:center"><small style="color:rgba(255,255,255,.6)">Auto-debit active ✓</small></div>
     </div>
   </div>
   <!-- Payment history immediately below -->
@@ -1214,7 +1249,7 @@ h1{font-size:24px;font-weight:700}h2{font-size:20px;font-weight:700}h3{font-size
         <div style="width:38px;height:38px;border-radius:10px;background:#DCFCE7;display:flex;align-items:center;justify-content:center"><i class="ti ti-building-bank" style="font-size:18px;color:var(--success)"></i></div>
         <div><p class="fw6">HDFC Bank ···4521</p><small class="tm">NACH active · Next: ₹18,250 on Jul 5</small></div>
       </div>
-      <span class="tag tg">Active </span>
+      <span class="tag tg">Active ✓</span>
     </div>
   </div>
   <!-- Single CTA at bottom -->
@@ -1263,171 +1298,401 @@ h1{font-size:24px;font-weight:700}h2{font-size:20px;font-weight:700}h3{font-size
 
 <!-- PART PAYMENT -->
 <div class="screen" id="sc-part-payment">
-<div class="sb"><span>9:41</span><span>●●●●</span></div>
-<div class="tn"><button class="bb" onclick="back()">←</button><span class="nt">Part payment</span></div>
+<div class="sb"><span>9:41</span><span>&#x25CF;&#x25CF;&#x25CF;&#x25CF;</span></div>
+<div class="tn"><button class="bb" onclick="back()">&#x2190;</button><span class="nt">Part payment</span></div>
 <div class="sc px py">
 
-  <!-- Amount selector (compact) -->
-  <div class="card mb14" style="background:var(--bg)">
-    <div class="flex jb aic mb10">
-      <span class="tm f13 fw6">Part payment amount</span>
-      <div id="pp-amount" style="font-size:22px;font-weight:800;color:#059669">₹1,00,000</div>
+  <!-- 4-step progress -->
+  <div class="pay-steps">
+    <div class="pay-step">
+      <div class="pay-step-circle active">1</div>
+      <div class="pay-step-label active">Amount</div>
     </div>
-    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:6px">
-      <div id="pp-q1" class="csm tc" style="cursor:pointer;border:1px solid var(--border);padding:8px 4px" onclick="ppSelect(1,'₹25,000','₹25K')"><p class="fw6 f12">₹25K</p></div>
-      <div id="pp-q2" class="csm tc" style="cursor:pointer;border:2px solid #059669;background:#DCFCE7;padding:8px 4px" onclick="ppSelect(2,'₹1,00,000','₹1L')"><p class="fw6 f12" style="color:#065F46">₹1L</p></div>
-      <div id="pp-q3" class="csm tc" style="cursor:pointer;border:1px solid var(--border);padding:8px 4px" onclick="ppSelect(3,'₹2,00,000','₹2L')"><p class="fw6 f12">₹2L</p></div>
-      <div id="pp-q4" class="csm tc" style="cursor:pointer;border:1px solid var(--border);padding:8px 4px" onclick="ppSelect(4,'₹5,00,000','₹5L')"><p class="fw6 f12">₹5L</p></div>
+    <div class="pay-step-line"></div>
+    <div class="pay-step">
+      <div class="pay-step-circle">2</div>
+      <div class="pay-step-label">Quote</div>
     </div>
-    <p style="font-size:10px;color:var(--text2);text-align:center;margin-top:5px">Min ₹10,000 · Max ₹18,25,000</p>
+    <div class="pay-step-line"></div>
+    <div class="pay-step">
+      <div class="pay-step-circle">3</div>
+      <div class="pay-step-label">Review</div>
+    </div>
+    <div class="pay-step-line"></div>
+    <div class="pay-step">
+      <div class="pay-step-circle">4</div>
+      <div class="pay-step-label">Payment</div>
+    </div>
   </div>
 
-  <!-- Summary card -->
+  <!-- Amount selector — INR only -->
+  <div class="card mb14" style="background:var(--bg)">
+
+    <!-- Row 1: Label + Amount stacked -->
+    <div style="margin-bottom:14px">
+      <p style="font-size:12px;font-weight:600;color:var(--text2);text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px">Part payment amount</p>
+      <div style="display:flex;align-items:baseline;gap:3px">
+        <span style="font-size:22px;font-weight:800;color:#059669">&#x20B9;</span>
+        <input id="pp-amount-input" type="text" inputmode="decimal"
+          value="1,00,000"
+          oninput="ppFromInput(this)"
+          style="font-size:36px;font-weight:800;color:#059669;border:none;background:transparent;outline:none;text-align:left;width:160px;padding:0;transition:color .2s;line-height:1">
+      </div>
+    </div>
+
+    <!-- Row 3: USD equivalent pill CTA -->
+    <div id="pp-usd-pill" style="display:flex;align-items:center;gap:6px;background:rgba(81,69,205,.08);border-radius:8px;padding:8px 12px;margin-bottom:12px;cursor:default">
+      <i class="ti ti-currency-dollar" style="font-size:14px;color:var(--navy)"></i>
+      <span style="font-size:12px;color:var(--text2)">USD equivalent</span>
+      <span id="pp-usd-eq" style="font-size:13px;font-weight:700;color:var(--navy);margin-left:auto">≈ $1,052.63</span>
+    </div>
+
+    <!-- Row 4: Quick-pick tiles (INR only) -->
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-bottom:10px">
+      <div id="pp-q1" class="csm tc" style="cursor:pointer;border:1px solid var(--border);padding:8px 4px" onclick="ppSelect(1,25000)">
+        <p id="pp-q1-main" class="fw6" style="font-size:12px">&#x20B9;25K</p>
+      </div>
+      <div id="pp-q2" class="csm tc" style="cursor:pointer;border:2px solid var(--success);background:#DCFCE7;padding:8px 4px" onclick="ppSelect(2,100000)">
+        <p id="pp-q2-main" class="fw6" style="font-size:12px;color:#065F46">&#x20B9;1L</p>
+      </div>
+      <div id="pp-q3" class="csm tc" style="cursor:pointer;border:1px solid var(--border);padding:8px 4px" onclick="ppSelect(3,200000)">
+        <p id="pp-q3-main" class="fw6" style="font-size:12px">&#x20B9;2L</p>
+      </div>
+      <div id="pp-q4" class="csm tc" style="cursor:pointer;border:1px solid var(--border);padding:8px 4px" onclick="ppSelect(4,500000)">
+        <p id="pp-q4-main" class="fw6" style="font-size:12px">&#x20B9;5L</p>
+      </div>
+    </div>
+
+    <p id="pp-range-msg" style="font-size:11px;color:var(--text2);text-align:center;transition:color .2s">Min &#x20B9;10,000 · Max &#x20B9;18,25,000</p>
+    <p id="pp-err-msg" style="font-size:12px;color:var(--error);text-align:center;margin-top:4px;font-weight:600;display:none"></p>
+  </div>
+
+  <!-- Preference toggle (drives which impact to show) -->
+  <p class="fw6 mb8">Apply payment towards</p>
+  <div style="display:flex;border:1.5px solid var(--border);border-radius:10px;overflow:hidden;margin-bottom:14px">
+    <div id="pp-pref1" onclick="ppPref(1)"
+      style="flex:1;padding:9px 12px;text-align:center;cursor:pointer;background:#EDE9FF;border:2px solid var(--navy);border-radius:8px;margin:3px;transition:.2s">
+      <p style="color:var(--navy);font-size:12px;font-weight:700;line-height:1.2">Reduce tenure</p>
+    </div>
+    <div id="pp-pref2" onclick="ppPref(2)"
+      style="flex:1;padding:9px 12px;text-align:center;cursor:pointer;background:transparent;border:2px solid transparent;border-radius:8px;margin:3px;transition:.2s">
+      <p style="color:var(--text2);font-size:12px;font-weight:600;line-height:1.2">Reduce EMI</p>
+    </div>
+  </div>
+
+  <!-- Live impact summary card -->
   <div class="card mb14" style="background:white;border:1.5px solid #BBF7D0">
     <div class="flex g16">
       <div style="flex:1;text-align:center;padding:10px 0">
-        <div style="font-size:11px;color:var(--text2);margin-bottom:4px">New tenure</div>
-        <div id="pp-tenure" style="font-weight:700;color:#059669;font-size:16px">94 months ↓</div>
+        <div id="pp-impact-lbl1" style="font-size:11px;color:var(--text2);margin-bottom:4px">New tenure</div>
+        <div id="pp-tenure" style="font-weight:700;color:#059669;font-size:16px">94 months &#x2193;</div>
       </div>
       <div style="width:1px;background:#BBF7D0;margin:8px 0"></div>
       <div style="flex:1;text-align:center;padding:10px 0">
         <div style="font-size:11px;color:var(--text2);margin-bottom:4px">Interest saved</div>
-        <div id="pp-saved" style="font-weight:700;color:#059669;font-size:16px">₹1,42,800 ↓</div>
+        <div id="pp-saved" style="font-weight:700;color:#059669;font-size:16px">&#x20B9;1,42,800 &#x2193;</div>
       </div>
     </div>
-  </div>
-
-  <!-- Preference (reduce tenure vs reduce EMI) -->
-  <p class="fw6 mb8">Apply payment towards</p>
-  <div class="flex g8 mb16">
-    <div id="pp-pref1" style="flex:1;background:linear-gradient(135deg,#059669,#34D399);border-radius:12px;padding:12px;text-align:center;cursor:pointer;box-shadow:0 3px 12px rgba(5,150,105,.25)" onclick="ppPref(1)">
-      <p style="color:white;font-size:13px;font-weight:600">Reduce tenure</p>
-      <small style="color:rgba(255,255,255,.75)">Same EMI · close sooner</small>
-    </div>
-    <div id="pp-pref2" style="flex:1;border:1.5px solid var(--border);border-radius:12px;padding:12px;text-align:center;cursor:pointer" onclick="ppPref(2)">
-      <p class="fw6 f13">Reduce EMI</p>
-      <small class="tm">Same tenure · lower monthly</small>
+    <div id="pp-emi-row" style="display:none;border-top:1px solid #BBF7D0;margin-top:12px;padding-top:12px;text-align:center">
+      <div style="font-size:11px;color:var(--text2);margin-bottom:4px">New monthly EMI</div>
+      <div id="pp-new-emi" style="font-weight:700;color:#059669;font-size:16px">&#x20B9;18,250 &#x2193;</div>
     </div>
   </div>
 
-  <!-- Download statement (mirrors download foreclosure letter) -->
+  <!-- Download statement -->
   <div class="card mb16" style="cursor:pointer;border:1px dashed var(--border)" onclick="goTo('sc-documents')">
     <div class="flex g12 aic">
-      <div style="width:38px;height:38px;border-radius:10px;background:#DCFCE7;display:flex;align-items:center;justify-content:center"><i class="ti ti-file-description" style="font-size:18px;color:#065F46"></i></div>
-      <div style="flex:1"><p class="fw6">Download part-payment letter</p><small class="tm">Revised schedule after payment</small></div>
-      <i class="ti ti-download" style="color:var(--text2)"></i>
+      <div style="width:40px;height:40px;border-radius:10px;background:var(--bg);display:flex;align-items:center;justify-content:center"><i class="ti ti-file-download" style="font-size:20px;color:var(--navy)"></i></div>
+      <div><p class="fw6 f13">See updated schedule</p><small class="tm">PDF · for tax records</small></div>
     </div>
   </div>
 
-  <button class="bp mb8" id="pp-cta" style="background:linear-gradient(135deg,#059669,#34D399)" onclick="goTo('sc-pay-method')">Proceed to pay ₹1,00,000</button>
-  <p class="tc tm f12">By proceeding you confirm part prepayment terms</p>
+  <button id="pp-cta" class="bp" onclick="ppProceed()">Continue to quote &#x2192;</button>
+</div>
+</div>
 
+<!-- PAYMENT: STEP 2 — QUOTE -->
+<div class="screen" id="sc-pay-quote">
+<div class="sb"><span>9:41</span><span>&#x25CF;&#x25CF;&#x25CF;&#x25CF;</span></div>
+<div class="tn"><button class="bb" onclick="back()">&#x2190;</button><span class="nt">Payment quote</span></div>
+<div class="sc px py">
+
+  <div class="pay-steps">
+    <div class="pay-step"><div class="pay-step-circle done">&#x2713;</div><div class="pay-step-label done">Amount</div></div>
+    <div class="pay-step-line done"></div>
+    <div class="pay-step"><div class="pay-step-circle active">2</div><div class="pay-step-label active">Quote</div></div>
+    <div class="pay-step-line"></div>
+    <div class="pay-step"><div class="pay-step-circle">3</div><div class="pay-step-label">Review</div></div>
+    <div class="pay-step-line"></div>
+    <div class="pay-step"><div class="pay-step-circle">4</div><div class="pay-step-label">Payment</div></div>
+  </div>
+
+  <!-- Pay from (currency selector) -->
+  <p class="fw6 mb8 f13" style="color:var(--text2);text-transform:uppercase;letter-spacing:.6px">Pay from</p>
+  <div style="display:flex;gap:8px;margin-bottom:16px">
+    <button id="pq-cur1" onclick="pqSetCur(1)"
+      style="display:flex;align-items:center;gap:7px;padding:10px 16px;border-radius:99px;border:2px solid var(--navy);background:white;font-weight:700;font-size:13px;cursor:pointer;color:var(--navy)">
+      <span style="font-size:16px">&#x1F1FA;&#x1F1F8;</span> USD
+    </button>
+    <button id="pq-cur2" onclick="pqSetCur(2)"
+      style="display:flex;align-items:center;gap:7px;padding:10px 16px;border-radius:99px;border:1.5px solid var(--border);background:white;font-weight:600;font-size:13px;cursor:pointer;color:var(--text2)">
+      <span style="font-size:16px">&#x1F1EA;&#x1F1FA;</span> EUR
+    </button>
+    <button id="pq-cur3" onclick="pqSetCur(3)"
+      style="display:flex;align-items:center;gap:7px;padding:10px 16px;border-radius:99px;border:1.5px solid var(--border);background:white;font-weight:600;font-size:13px;cursor:pointer;color:var(--text2)">
+      <span style="font-size:16px">&#x1F1F8;&#x1F1EC;</span> SGD
+    </button>
+  </div>
+
+  <!-- Exchange rate card -->
+  <div class="card mb14" style="background:linear-gradient(135deg,#1E1659,#3730A3);color:white;padding:20px">
+
+    <!-- Row 1: label + timer -->
+    <div class="flex jb aic mb14">
+      <small style="color:rgba(255,255,255,.6);font-size:12px;letter-spacing:.4px;text-transform:uppercase">Exchange rate</small>
+      <span id="pq-expires" style="background:rgba(255,255,255,.12);border-radius:99px;padding:4px 12px;font-size:11px;font-weight:700;color:#FCD34D">Expires in 02:00</span>
+    </div>
+
+    <!-- Row 2: big rate -->
+    <div class="flex aic g8 mb18" style="margin-bottom:18px">
+      <span style="font-size:22px">&#x1F1FA;&#x1F1F8;</span>
+      <span id="pq-rate-display" class="fw7" style="font-size:22px;color:white;letter-spacing:-.3px">1 USD = &#x20B9;95.00</span>
+    </div>
+
+    <!-- Row 3: you send -->
+    <div class="flex jb aic mb8">
+      <span style="color:rgba(255,255,255,.65);font-size:13px">You send</span>
+      <span id="pq-you-send" class="fw6 f13">$1,052.63</span>
+    </div>
+
+    <!-- Row 4: recipient gets -->
+    <div class="flex jb aic" style="margin-bottom:14px">
+      <span style="color:rgba(255,255,255,.65);font-size:13px">Recipient gets</span>
+      <span id="pq-recipient-gets" class="fw7" style="font-size:17px;color:#86EFAC">&#x20B9;1,00,000</span>
+    </div>
+
+    <div style="height:1px;background:rgba(255,255,255,.15);margin-bottom:14px"></div>
+
+    <!-- Row 5: fees -->
+    <div class="flex jb mb8">
+      <span style="color:rgba(255,255,255,.65);font-size:12px">Processing fee</span>
+      <span class="fw6" style="font-size:12px;color:rgba(255,255,255,.75)">&#x20B9;0 (waived)</span>
+    </div>
+    <div class="flex jb" style="margin-bottom:14px">
+      <span style="color:rgba(255,255,255,.65);font-size:12px">Prepayment charges</span>
+      <span class="fw6" style="font-size:12px;color:rgba(255,255,255,.75)">&#x20B9;0 (waived)</span>
+    </div>
+
+    <!-- Row 6: refresh rate -->
+    <button onclick="pqRefreshRate()" style="background:none;border:none;padding:4px 0 0;margin-top:0;color:#93C5FD;font-size:12px;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:5px;border-top:1px solid rgba(255,255,255,.12);width:100%">
+      <span style="font-size:13px">&#x21BB;</span> Refresh rate
+    </button>
+  </div>
+
+  <!-- Impact summary -->
+  <div class="card mb16" style="background:var(--bg)">
+    <p class="fw6 mb6" style="color:var(--navy);font-size:15px">Loan impact</p>
+    <div style="height:1px;background:var(--border);margin-bottom:10px"></div>
+    <div class="flex jb mb8">
+      <span class="tm f13">New tenure</span>
+      <span id="pq-tenure" class="fw6 f13 ts">94 months (&#x2212;8 months)</span>
+    </div>
+    <div class="flex jb mb8">
+      <span class="tm f13">Interest saved</span>
+      <span id="pq-saved" class="fw6 f13 ts">&#x20B9;1,42,800</span>
+    </div>
+    <div class="flex jb">
+      <span class="tm f13">Credited by</span>
+      <span class="fw6 f13">Next business day</span>
+    </div>
+  </div>
+
+  <button class="bp" onclick="pqLockAndContinue()">Lock rate &amp; continue &#x2192;</button>
+</div>
+</div>
+
+<!-- PAYMENT: STEP 3 — REVIEW -->
+<div class="screen" id="sc-pay-review">
+<div class="sb"><span>9:41</span><span>&#x25CF;&#x25CF;&#x25CF;&#x25CF;</span></div>
+<div class="tn"><button class="bb" onclick="back()">&#x2190;</button><span class="nt">Review transfer</span></div>
+<div class="sc px py" style="padding-bottom:8px">
+
+  <div class="pay-steps">
+    <div class="pay-step"><div class="pay-step-circle done">&#x2713;</div><div class="pay-step-label done">Amount</div></div>
+    <div class="pay-step-line done"></div>
+    <div class="pay-step"><div class="pay-step-circle done">&#x2713;</div><div class="pay-step-label done">Quote</div></div>
+    <div class="pay-step-line done"></div>
+    <div class="pay-step"><div class="pay-step-circle active">3</div><div class="pay-step-label active">Review</div></div>
+    <div class="pay-step-line"></div>
+    <div class="pay-step"><div class="pay-step-circle">4</div><div class="pay-step-label">Payment</div></div>
+  </div>
+
+  <!-- Transfer summary -->
+  <p class="fw6 mb8 f12" style="color:var(--text2);text-transform:uppercase;letter-spacing:.6px">Transfer summary</p>
+  <div class="card mb10" style="background:var(--bg)">
+    <div class="flex jb py8" style="padding:7px 0;border-bottom:1px solid var(--border)"><span class="tm f12">Loan</span><span class="fw6 f12">CRL-xxx123</span></div>
+    <div class="flex jb py8" style="padding:7px 0;border-bottom:1px solid var(--border)"><span class="tm f12">Recipient</span><span class="fw6 f12">Credila Financial Services</span></div>
+    <div class="flex jb py8" style="padding:7px 0;border-bottom:1px solid var(--border)"><span class="tm f12">To account</span><span class="fw6 f12">HSBC &#x25CF;&#x25CF;&#x25CF;&#x25CF;8801</span></div>
+    <div class="flex jb py8" style="padding:7px 0;border-bottom:1px solid var(--border)"><span class="tm f12">Exchange rate</span><span id="prv-rate" class="fw6 f12">1 USD = &#x20B9;95.00</span></div>
+    <div class="flex jb py8" style="padding:7px 0;border-bottom:1px solid var(--border)"><span class="tm f12">Amount</span><span id="prv-amount" class="fw7 f15" style="color:var(--navy)">&#x20B9;1,00,000</span></div>
+    <div class="flex jb py8" style="padding:7px 0"><span class="tm f12">Payment type</span><span class="fw6 f12">Part payment — reduce tenure</span></div>
+  </div>
+
+  <!-- US bank account details -->
+  <p class="fw6 mb8 f12" style="color:var(--text2);text-transform:uppercase;letter-spacing:.6px">Wire transfer to</p>
+  <div class="card mb12" style="background:var(--bg)">
+    <div class="flex jb aic" style="padding:7px 0;border-bottom:1px solid var(--border)">
+      <span class="tm f12">Beneficiary name</span>
+      <div class="flex g6 aic">
+        <span class="fw7 f12">Credila Financial Services</span>
+        <button onclick="navigator.clipboard&&navigator.clipboard.writeText('Credila Financial Services')" style="border:none;background:none;cursor:pointer;padding:0;color:var(--text2)"><i class="ti ti-copy" style="font-size:13px"></i></button>
+      </div>
+    </div>
+    <div class="flex jb aic" style="padding:7px 0;border-bottom:1px solid var(--border)">
+      <span class="tm f12">Bank name</span>
+      <div class="flex g6 aic"><span class="fw7 f12">JPMorgan Chase Bank, N.A.</span><button onclick="navigator.clipboard&&navigator.clipboard.writeText('JPMorgan Chase Bank')" style="border:none;background:none;cursor:pointer;padding:0;color:var(--text2)"><i class="ti ti-copy" style="font-size:13px"></i></button></div>
+    </div>
+    <div class="flex jb aic" style="padding:7px 0;border-bottom:1px solid var(--border)">
+      <span class="tm f12">Account number</span>
+      <div class="flex g6 aic"><span class="fw7 f12">4071 8823 9901</span><button onclick="navigator.clipboard&&navigator.clipboard.writeText('407188239901')" style="border:none;background:none;cursor:pointer;padding:0;color:var(--text2)"><i class="ti ti-copy" style="font-size:13px"></i></button></div>
+    </div>
+    <div class="flex jb aic" style="padding:7px 0;border-bottom:1px solid var(--border)">
+      <span class="tm f12">Routing (ABA)</span>
+      <div class="flex g6 aic"><span class="fw7 f12">021 000 021</span><button onclick="navigator.clipboard&&navigator.clipboard.writeText('021000021')" style="border:none;background:none;cursor:pointer;padding:0;color:var(--text2)"><i class="ti ti-copy" style="font-size:13px"></i></button></div>
+    </div>
+    <div class="flex jb aic" style="padding:7px 0;border-bottom:1px solid var(--border)">
+      <span class="tm f12">SWIFT / BIC</span>
+      <div class="flex g6 aic"><span class="fw7 f12">CHASUS33</span><button onclick="navigator.clipboard&&navigator.clipboard.writeText('CHASUS33')" style="border:none;background:none;cursor:pointer;padding:0;color:var(--text2)"><i class="ti ti-copy" style="font-size:13px"></i></button></div>
+    </div>
+    <div class="flex jb aic" style="padding:7px 0">
+      <span class="tm f12">Reference / Memo</span>
+      <div class="flex g6 aic"><span class="fw7 f12">CRL-xxx123</span><button onclick="navigator.clipboard&&navigator.clipboard.writeText('CRL-xxx123')" style="border:none;background:none;cursor:pointer;padding:0;color:var(--text2)"><i class="ti ti-copy" style="font-size:13px"></i></button></div>
+    </div>
+  </div>
+
+
+</div>
+<!-- Floating CTA -->
+<div style="padding:12px 20px 20px;background:white;border-top:1px solid var(--border);flex-shrink:0">
+  <button class="bp" style="margin:0" onclick="goTo('sc-pay-confirm')">Confirm</button>
+</div>
+</div>
+
+<!-- PAYMENT: STEP 4 — CONFIRM -->
+<div class="screen" id="sc-pay-confirm">
+<div class="sb"><span>9:41</span><span>&#x25CF;&#x25CF;&#x25CF;&#x25CF;</span></div>
+<div class="tn"><button class="bb" onclick="back()">&#x2190;</button><span class="nt">Complete payment</span></div>
+<div class="sc px py">
+
+  <div class="pay-steps">
+    <div class="pay-step"><div class="pay-step-circle done">&#x2713;</div><div class="pay-step-label done">Amount</div></div>
+    <div class="pay-step-line done"></div>
+    <div class="pay-step"><div class="pay-step-circle done">&#x2713;</div><div class="pay-step-label done">Quote</div></div>
+    <div class="pay-step-line done"></div>
+    <div class="pay-step"><div class="pay-step-circle done">&#x2713;</div><div class="pay-step-label done">Review</div></div>
+    <div class="pay-step-line done"></div>
+    <div class="pay-step"><div class="pay-step-circle active">4</div><div class="pay-step-label active">Payment</div></div>
+  </div>
+
+  <!-- Final summary -->
+  <div class="card mb14" style="background:linear-gradient(135deg,#1E1659,#5145CD);color:white;padding:20px;text-align:center">
+    <small style="color:rgba(255,255,255,.6)">Amount to be paid</small>
+    <div id="pconf-amount" class="fw7 mb4" style="font-size:32px;margin-top:6px">&#x20B9;1,00,000</div>
+    <div style="background:rgba(255,255,255,.12);border-radius:8px;padding:8px 12px;font-size:12px;color:rgba(255,255,255,.8)">
+      towards Loan CRL-xxx123
+    </div>
+  </div>
+
+  <!-- Loan impact -->
+  <div class="card mb14" style="background:var(--bg)">
+    <p class="fw6 mb6" style="color:var(--navy);font-size:15px">After this payment</p>
+    <div style="height:1px;background:var(--border);margin-bottom:10px"></div>
+    <div class="flex jb mb8"><span class="tm f13">Outstanding principal</span><span id="pconf-outstanding" class="fw6 f13">&#x20B9;17,25,000</span></div>
+    <div class="flex jb mb8"><span class="tm f13">New tenure</span><span id="pconf-tenure" class="fw6 f13 ts">94 months</span></div>
+    <div class="flex jb"><span class="tm f13">Interest saved</span><span id="pconf-saved" class="fw6 f13 ts">&#x20B9;1,42,800</span></div>
+  </div>
+
+  <!-- Payment acknowledgement upload -->
+  <p class="fw6 mb8" style="font-size:13px;color:var(--text)">Payment acknowledgement</p>
+  <div id="pconf-upload-box" onclick="pconfTriggerUpload()" style="border:2px dashed var(--navy);border-radius:12px;padding:16px;text-align:center;cursor:pointer;margin-bottom:16px;transition:background .2s">
+    <i class="ti ti-upload" style="font-size:20px;color:var(--navy);display:block;margin-bottom:6px"></i>
+    <p class="fw6" style="font-size:12px;color:var(--navy);margin-bottom:2px">Tap to upload receipt or screenshot</p>
+    <p style="font-size:11px;color:var(--text2)">PDF, PNG or JPG</p>
+    <p id="pconf-upload-name" style="font-size:12px;color:var(--success);margin-top:6px;display:none"></p>
+  </div>
+  <input id="pconf-file-input" type="file" accept=".pdf,.png,.jpg,.jpeg" style="display:none" onchange="pconfFileSelected(this)">
+
+  <button id="pconf-btn" class="bp" onclick="paymentDone()">Payment complete &#x2713;</button>
+  <button class="bl mt8" onclick="back()" style="margin-top:10px">Go back</button>
+  <div style="height:16px"></div>
 </div>
 </div>
 
 <div class="screen" id="sc-pay-method">
-<div class="sb"><span>9:41</span><span>●●●●</span></div>
-<div class="tn"><button class="bb" onclick="back()">←</button><span class="nt">Payment details</span></div>
+<div class="sb"><span>9:41</span><span>&#x25CF;&#x25CF;&#x25CF;&#x25CF;</span></div>
+<div class="tn"><button class="bb" onclick="back()">&#x2190;</button><span class="nt">Payment details</span></div>
 <div class="sc px py">
 
-  <!-- Header -->
-  <div class="mb16">
-    <h3 class="mb4">Part payment</h3>
-    <p class="tm f12">Loan #CRL-xxx123 &nbsp;·&nbsp; Jun 2026</p>
-  </div>
-
-  <!-- ── SECTION 1: BENEFICIARY (CREDILA) ── -->
+  <!-- Section 1: Lender / Beneficiary -->
+  <p class="fw6 mb8" style="font-size:13px;color:var(--text2);text-transform:uppercase;letter-spacing:.6px">Beneficiary</p>
   <div class="card mb14" style="border:1.5px solid #EDE9FF">
-    <div class="flex aic g10 mb12">
-      <div style="width:34px;height:34px;border-radius:10px;background:#EDE9FF;display:flex;align-items:center;justify-content:center;flex-shrink:0">
-        <i class="ti ti-building-bank" style="color:#5145CD;font-size:17px"></i>
+    <div class="flex g12 aic mb10">
+      <div style="width:44px;height:44px;border-radius:12px;background:#EDE9FF;display:flex;align-items:center;justify-content:center;flex-shrink:0">
+        <i class="ti ti-building-bank" style="font-size:22px;color:#5145CD"></i>
       </div>
       <div>
-        <p class="fw6 f13">Beneficiary</p>
-        <p class="tm f11">Your loan repayment goes to</p>
+        <p class="fw6">Credila Financial Services</p>
+        <small class="tm">Loan provider — HDFC Bank</small>
       </div>
+      <span class="tag tg" style="margin-left:auto">Lender</span>
     </div>
-    <div style="background:var(--bg);border-radius:10px;padding:12px">
-      <div class="flex jb mb6"><span class="tm f12">Lender</span><span class="fw6 f12">Credila Financial Services</span></div>
-      <div class="flex jb mb6"><span class="tm f12">Bank</span><span class="fw6 f12">HDFC Bank</span></div>
-      <div class="flex jb mb6"><span class="tm f12">A/C</span><span class="fw6 f12">••••8801</span></div>
-      <div class="flex jb mb6"><span class="tm f12">Loan ref.</span><span class="fw6 f12" style="color:#5145CD">CRL-xxx123</span></div>
-      <div style="border-top:1px solid var(--border);margin:8px 0"></div>
-      <div class="flex jb aic">
-        <span class="tm f12">Amount due</span>
-        <span class="fw7 f15" style="color:#5145CD">&#8377;1,00,000</span>
-      </div>
+    <div style="background:var(--bg);border-radius:10px;padding:10px 12px">
+      <div class="flex jb mb4"><span style="font-size:12px;color:var(--text2)">Account</span><span style="font-size:12px;font-weight:600">&#x25CF;&#x25CF;&#x25CF;&#x25CF; 8801</span></div>
+      <div class="flex jb mb4"><span style="font-size:12px;color:var(--text2)">IFSC</span><span style="font-size:12px;font-weight:600">HDFC0001234</span></div>
+      <div class="flex jb"><span style="font-size:12px;color:var(--text2)">Loan ref</span><span style="font-size:12px;font-weight:600">CRL-xxx123</span></div>
     </div>
   </div>
 
-  <!-- ── SECTION 2: HOW TO PAY (via Payment Partner) ── -->
+  <!-- Section 2: How to pay (via Razorpay) -->
+  <p class="fw6 mb8" style="font-size:13px;color:var(--text2);text-transform:uppercase;letter-spacing:.6px">How to pay</p>
   <div class="card mb14" style="border:1.5px solid #D1FAE5">
-    <div class="flex aic g10 mb12">
-      <div style="width:34px;height:34px;border-radius:10px;background:#D1FAE5;display:flex;align-items:center;justify-content:center;flex-shrink:0">
-        <i class="ti ti-arrow-right-circle" style="color:#059669;font-size:17px"></i>
+    <div class="flex g12 aic mb10">
+      <div style="width:44px;height:44px;border-radius:12px;background:#D1FAE5;display:flex;align-items:center;justify-content:center;flex-shrink:0">
+        <i class="ti ti-credit-card" style="font-size:22px;color:#059669"></i>
       </div>
       <div>
-        <p class="fw6 f13" style="color:#059669">How to make the payment</p>
-        <p class="tm f11">Pay via our payment partner — funds go to Credila</p>
+        <p class="fw6">Pay via Razorpay</p>
+        <small class="tm">Payment partner — transfers to Credila</small>
       </div>
     </div>
-
-    <!-- Step 1 -->
-    <div style="display:flex;gap:10px;margin-bottom:12px">
-      <div style="width:22px;height:22px;border-radius:50%;background:#059669;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px">
-        <span style="font-size:11px;font-weight:700;color:white">1</span>
-      </div>
-      <div>
-        <p class="fw6 f13 mb2">Transfer &#8377;1,00,000 via NEFT / IMPS / UPI</p>
-        <p class="tm f11">Pay to the payment partner account below. They will settle the amount directly to Credila.</p>
-      </div>
+    <div style="background:#F0FDF9;border-radius:10px;padding:10px 12px;margin-bottom:10px">
+      <div class="flex jb mb4"><span style="font-size:12px;color:var(--text2)">Bank</span><span style="font-size:12px;font-weight:600">Yes Bank</span></div>
+      <div class="flex jb mb4"><span style="font-size:12px;color:var(--text2)">Account</span><span style="font-size:12px;font-weight:600">9876 5432 1001</span></div>
+      <div class="flex jb mb4"><span style="font-size:12px;color:var(--text2)">IFSC</span><span style="font-size:12px;font-weight:600">YESB0000123</span></div>
+      <div class="flex jb"><span style="font-size:12px;color:var(--text2)">Reference</span><span style="font-size:12px;font-weight:600">CRL-xxx123</span></div>
     </div>
-
-    <!-- Payment partner bank details -->
-    <div style="background:#F0FDF9;border:1px solid #BBF7D0;border-radius:10px;padding:12px;margin-bottom:12px">
-      <div style="display:flex;align-items:center;gap:6px;margin-bottom:10px">
-        <i class="ti ti-shield-check" style="font-size:13px;color:#059669"></i>
-        <span style="font-size:11px;font-weight:600;color:#065F46">Verified payment partner · Razorpay</span>
-      </div>
-      <div class="flex jb mb6"><span class="tm f12">Account name</span><span class="fw6 f12">Razorpay Software Pvt Ltd</span></div>
-      <div class="flex jb mb6"><span class="tm f12">Bank</span><span class="fw6 f12">Yes Bank</span></div>
-      <div class="flex jb mb6"><span class="tm f12">Account no.</span>
-        <span class="fw6 f12" style="font-family:monospace;letter-spacing:.5px">9876 5432 1001</span>
-      </div>
-      <div class="flex jb mb6"><span class="tm f12">IFSC</span><span class="fw6 f12" style="font-family:monospace">YESB0000123</span></div>
-      <div class="flex jb"><span class="tm f12">Reference</span><span class="fw6 f12" style="color:#059669">CRL-xxx123</span></div>
-    </div>
-
-    <!-- Step 2 -->
-    <div style="display:flex;gap:10px">
-      <div style="width:22px;height:22px;border-radius:50%;background:#059669;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px">
-        <span style="font-size:11px;font-weight:700;color:white">2</span>
-      </div>
-      <div>
-        <p class="fw6 f13 mb2">Always include your loan reference</p>
-        <p class="tm f11">Add <strong>CRL-xxx123</strong> in payment remarks so your repayment is matched instantly</p>
-      </div>
+    <div style="display:flex;gap:8px;align-items:flex-start;padding:10px 12px;background:#ECFDF5;border-radius:8px">
+      <i class="ti ti-info-circle" style="font-size:16px;color:#059669;flex-shrink:0;margin-top:1px"></i>
+      <p style="font-size:12px;color:#065F46">Razorpay transfers your payment to Credila within 1 business day. Always use your loan reference <strong>CRL-xxx123</strong> in the remarks.</p>
     </div>
   </div>
 
-  <!-- Info note -->
-  <div style="display:flex;gap:8px;align-items:flex-start;margin-bottom:20px">
-    <i class="ti ti-info-circle" style="color:#D97706;font-size:15px;margin-top:1px;flex-shrink:0"></i>
-    <p class="f12 tm" style="color:#92400E;line-height:1.5">Razorpay will transfer your payment to Credila within <strong>1 business day</strong>. Your loan account will be updated automatically once received.</p>
-  </div>
-
-  <!-- ── SECTION 3: CONFIRM ── -->
+  <!-- Section 3: Confirm payment -->
+  <p class="fw6 mb8" style="font-size:13px;color:var(--text2);text-transform:uppercase;letter-spacing:.6px">Confirm payment</p>
   <div class="card mb16" style="background:linear-gradient(135deg,#1E1659,#5145CD);color:white">
-    <p class="fw6 mb4" style="color:white">Confirm your payment</p>
-    <p style="font-size:12px;opacity:.8;margin-bottom:16px">Once you've transferred &#8377;1,00,000 to Razorpay's account above, tap below to notify Credila.</p>
-    <button style="width:100%;padding:14px;background:white;color:#5145CD;border:none;border-radius:12px;font-size:15px;font-weight:700;cursor:pointer" onclick="paymentDone()">Payment done</button>
+    <div class="flex jb mb8">
+      <span style="color:rgba(255,255,255,.65);font-size:13px">Amount</span>
+      <span style="font-weight:700;font-size:18px">&#x20B9;1,00,000</span>
+    </div>
+    <div class="flex jb mb16">
+      <span style="color:rgba(255,255,255,.65);font-size:13px">Loan</span>
+      <span style="font-weight:600;font-size:13px">CRL-xxx123</span>
+    </div>
+    <button class="bp" style="background:white;color:#5145CD" onclick="paymentDone()">Payment done &#x2713;</button>
   </div>
 
 </div>
 </div>
-
-<!-- PAYMENT PROCESSING -->
-<!-- PAYMENT PROCESSING -->
 
 <div class="screen" id="sc-pay-processing">
 <div class="sb"><span>9:41</span><span>●●●●</span></div>
@@ -1467,14 +1732,106 @@ h1{font-size:24px;font-weight:700}h2{font-size:20px;font-weight:700}h3{font-size
 </div>
 
 <div class="screen" id="sc-pay-success">
-<div class="sb"><span>9:41</span><span>●●●●</span></div>
-<div class="sc px" style="display:flex;flex-direction:column;align-items:center;justify-content:center;padding-top:60px">
-  <div class="sc-circle"><i class="ti ti-circle-check" style="font-size:40px;vertical-align:-2px"></i></div>
-  <h2 class="tc mb8">Payment successful!</h2>
-  <p class="tc tm mb24">Your remittance of ₹18,52,187 has been submitted successfully. Reference: CRED-2026-06-7284</p>
-  <div class="card wf mb24" style="background:var(--bg)"><div class="flex jb mb8"><span class="tm">Amount paid</span><span class="fw6 ts">₹1,00,000</span></div><div class="flex jb mb8"><span class="tm">Reference</span><span class="fw6">PP-20260705-8821</span></div><div class="flex jb mb8"><span class="tm">Tenure saved</span><span class="fw6 ts">8 months</span></div><div class="flex jb"><span class="tm">Interest saved</span><span class="fw6 ts">₹1,42,800</span></div></div>
-  <button class="bp mb8 wf" onclick="goTo('sc-home')">Back to home</button>
+<div class="sb"><span>9:41</span><span>&#x25CF;&#x25CF;&#x25CF;&#x25CF;</span></div>
+<div class="sc px py">
+
+  <!-- Animated check -->
+  <div style="display:flex;flex-direction:column;align-items:center;text-align:center;padding-top:12px;margin-bottom:20px">
+    <div id="succ-icon" style="width:80px;height:80px;border-radius:50%;background:#DCFCE7;display:flex;align-items:center;justify-content:center;margin-bottom:16px;transform:scale(0);transition:transform .4s cubic-bezier(.34,1.56,.64,1)">
+      <svg width="40" height="40" viewBox="0 0 44 44" fill="none">
+        <path id="succ-check" d="M10 22L18 30L34 14" stroke="#059669" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="36" stroke-dashoffset="36" style="transition:stroke-dashoffset .5s ease .35s"/>
+      </svg>
+    </div>
+    <h2 style="font-size:21px;font-weight:800;color:var(--text);margin-bottom:6px">Payment submitted!</h2>
+    <p style="font-size:13px;color:var(--text2);line-height:1.5;max-width:260px">Your part payment of <strong id="succ-amount" style="color:var(--navy)">₹1,00,000</strong> towards Loan CRL-xxx123 has been received.</p>
+  </div>
+
+  <!-- Transfer tracker -->
+  <div style="width:100%;background:var(--bg);border-radius:16px;padding:16px 16px 8px;margin-bottom:16px">
+    <div class="flex aic g8 mb14">
+      <i class="ti ti-bolt" style="font-size:15px;color:var(--navy)"></i>
+      <span style="font-size:12px;font-weight:600;color:var(--text2)">Transfer tracker · Near instant</span>
+    </div>
+
+    <!-- Step 1 -->
+    <div class="flex g12" style="margin-bottom:0">
+      <div style="display:flex;flex-direction:column;align-items:center;width:36px;flex-shrink:0">
+        <div id="tr-icon-1" style="width:36px;height:36px;border-radius:50%;background:white;border:2px solid #E5E7EB;display:flex;align-items:center;justify-content:center;transition:all .4s ease;flex-shrink:0">
+          <i class="ti ti-circle-check" style="font-size:16px;color:#CBD5E1"></i>
+        </div>
+        <div style="width:2px;flex:1;min-height:20px;background:#E5E7EB;margin:4px 0" id="tr-line-1"></div>
+      </div>
+      <div style="padding-bottom:20px;padding-top:4px">
+        <p id="tr-label-1" class="fw7" style="font-size:13px;color:var(--text2);margin-bottom:2px">Transfer initiated <span id="tr-tick-1" style="display:none;color:#059669">✓</span></p>
+        <p style="font-size:12px;color:var(--text2)">Your payment has been authorised</p>
+      </div>
+    </div>
+
+    <!-- Step 2 -->
+    <div class="flex g12">
+      <div style="display:flex;flex-direction:column;align-items:center;width:36px;flex-shrink:0">
+        <div id="tr-icon-2" style="width:36px;height:36px;border-radius:50%;background:white;border:2px solid #E5E7EB;display:flex;align-items:center;justify-content:center;transition:all .4s ease;flex-shrink:0">
+          <i class="ti ti-arrows-exchange" style="font-size:16px;color:#CBD5E1"></i>
+        </div>
+        <div style="width:2px;flex:1;min-height:20px;background:#E5E7EB;margin:4px 0" id="tr-line-2"></div>
+      </div>
+      <div style="padding-bottom:20px;padding-top:4px">
+        <p id="tr-label-2" class="fw7" style="font-size:13px;color:var(--text2);margin-bottom:2px">Payment received <span id="tr-tick-2" style="display:none;color:#059669">✓</span></p>
+        <p style="font-size:12px;color:var(--text2)">Funds received by our partner</p>
+      </div>
+    </div>
+
+    <!-- Step 3 -->
+    <div class="flex g12">
+      <div style="display:flex;flex-direction:column;align-items:center;width:36px;flex-shrink:0">
+        <div id="tr-icon-3" style="width:36px;height:36px;border-radius:50%;background:white;border:2px solid #E5E7EB;display:flex;align-items:center;justify-content:center;transition:all .4s ease;flex-shrink:0">
+          <i class="ti ti-building-bank" style="font-size:16px;color:#CBD5E1"></i>
+        </div>
+        <div style="width:2px;flex:1;min-height:20px;background:#E5E7EB;margin:4px 0" id="tr-line-3"></div>
+      </div>
+      <div style="padding-bottom:20px;padding-top:4px">
+        <p id="tr-label-3" class="fw7" style="font-size:13px;color:var(--text2);margin-bottom:2px">Routing to India <span id="tr-tick-3" style="display:none;color:#059669">✓</span></p>
+        <p style="font-size:12px;color:var(--text2)">Converting and routing to beneficiary bank</p>
+      </div>
+    </div>
+
+    <!-- Step 4 -->
+    <div class="flex g12">
+      <div style="display:flex;flex-direction:column;align-items:center;width:36px;flex-shrink:0">
+        <div id="tr-icon-4" style="width:36px;height:36px;border-radius:50%;background:white;border:2px solid #E5E7EB;display:flex;align-items:center;justify-content:center;transition:all .4s ease;flex-shrink:0">
+          <i class="ti ti-credit-card" style="font-size:16px;color:#CBD5E1"></i>
+        </div>
+      </div>
+      <div style="padding-bottom:8px;padding-top:4px">
+        <p id="tr-label-4" class="fw7" style="font-size:13px;color:var(--text2);margin-bottom:2px">Credited to account <span id="tr-tick-4" style="display:none;color:#059669">✓</span></p>
+        <p style="font-size:12px;color:var(--text2)">INR deposited to recipient account</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Reference card -->
+  <div style="width:100%;background:var(--bg);border-radius:16px;padding:14px 16px;margin-bottom:20px">
+    <div class="flex jb mb8">
+      <span class="tm f13">Reference ID</span>
+      <span class="fw7 f13" style="color:var(--navy);letter-spacing:.3px">PP-20260615-8821</span>
+    </div>
+    <div class="flex jb mb8">
+      <span class="tm f13">Amount paid</span>
+      <span id="succ-amt2" class="fw7 f13" style="color:var(--success)">₹1,00,000</span>
+    </div>
+    <div class="flex jb mb8">
+      <span class="tm f13">Tenure saved</span>
+      <span class="fw6 f13 ts">8 months</span>
+    </div>
+    <div class="flex jb">
+      <span class="tm f13">Interest saved</span>
+      <span class="fw6 f13 ts">₹1,42,800</span>
+    </div>
+  </div>
+
+  <button class="bp mb10 wf" onclick="goTo('sc-home')">Back to home</button>
   <button class="bl wf" onclick="goTo('sc-documents')">Download receipt</button>
+  <div style="height:20px"></div>
 </div>
 </div>
 
@@ -1531,8 +1888,291 @@ h1{font-size:24px;font-weight:700}h2{font-size:20px;font-weight:700}h3{font-size
       <i class="ti ti-download" style="color:var(--text2)"></i>
     </div>
   </div>
-  <button class="bp mb8" onclick="goTo('sc-pay-method')">Proceed to pay ₹18,52,187</button>
+  <button class="bp mb8" onclick="goTo('sc-full-pay-amount')">Proceed to pay ₹18,52,187</button>
   <p class="tc tm f12">By proceeding you confirm the foreclosure terms</p>
+</div>
+</div>
+
+<!-- FULL REPAYMENT: STEP 2 — AMOUNT / USD-INR -->
+<div class="screen" id="sc-full-pay-amount">
+<div class="sb"><span>9:41</span><span>&#x25CF;&#x25CF;&#x25CF;&#x25CF;</span></div>
+<div class="tn"><button class="bb" onclick="back()">&#x2190;</button><span class="nt">Full repayment</span></div>
+<div class="sc px py">
+
+  <div class="pay-steps">
+    <div class="pay-step"><div class="pay-step-circle done">&#x2713;</div><div class="pay-step-label done">Summary</div></div>
+    <div class="pay-step-line done"></div>
+    <div class="pay-step"><div class="pay-step-circle active">2</div><div class="pay-step-label active">Amount</div></div>
+    <div class="pay-step-line"></div>
+    <div class="pay-step"><div class="pay-step-circle">3</div><div class="pay-step-label">Quote</div></div>
+    <div class="pay-step-line"></div>
+    <div class="pay-step"><div class="pay-step-circle">4</div><div class="pay-step-label">Review</div></div>
+    <div class="pay-step-line"></div>
+    <div class="pay-step"><div class="pay-step-circle">5</div><div class="pay-step-label">Payment</div></div>
+  </div>
+
+  <!-- Amount card -->
+  <div class="card mb14" style="background:var(--bg)">
+
+    <!-- Row 1: Label + currency toggle -->
+    <div class="flex jb aic mb12">
+      <span class="tm f13">Foreclosure amount</span>
+      <div style="display:flex;border:1.5px solid var(--border);border-radius:8px;overflow:hidden;flex-shrink:0">
+        <button id="fa-cur-usd" onclick="faSetCurrency('USD')"
+          style="padding:5px 12px;border:none;font-size:11px;font-weight:700;cursor:pointer;background:var(--navy);color:white;letter-spacing:.4px">USD</button>
+        <button id="fa-cur-inr" onclick="faSetCurrency('INR')"
+          style="padding:5px 12px;border:none;font-size:11px;font-weight:700;cursor:pointer;background:transparent;color:var(--text2);letter-spacing:.4px">INR</button>
+      </div>
+    </div>
+
+    <!-- Row 2: Amount display (read-only) -->
+    <div style="display:flex;align-items:baseline;gap:3px;margin-bottom:10px;justify-content:flex-end">
+      <span id="fa-cur-sym" style="font-size:18px;font-weight:700;color:#059669">$</span>
+      <span id="fa-amount-display" style="font-size:26px;font-weight:800;color:#059669">19,497</span>
+    </div>
+
+    <!-- Row 3: Conversion info -->
+    <div style="background:rgba(81,69,205,.07);border-radius:8px;padding:8px 12px;margin-bottom:12px">
+      <div class="flex jb aic">
+        <span style="font-size:11px;color:var(--text2)">Exchange rate</span>
+        <span style="font-size:11px;font-weight:600;color:var(--text2)">1 USD = &#x20B9;95.00</span>
+      </div>
+      <div class="flex jb aic" style="margin-top:4px">
+        <span style="font-size:11px;color:var(--text2)" id="fa-conv-lbl">INR equivalent</span>
+        <span id="fa-conv-val" style="font-size:13px;font-weight:700;color:var(--navy)">= &#x20B9;18,52,187</span>
+      </div>
+    </div>
+
+    <!-- Row 4: Breakdown -->
+    <div style="border-top:1px solid var(--border);padding-top:10px">
+      <div class="flex jb mb6">
+        <span class="tm f13">Outstanding principal</span>
+        <span id="fa-principal" class="fw6 f13">$21,190</span>
+      </div>
+      <div class="flex jb mb6">
+        <span class="tm f13">Accrued interest</span>
+        <span id="fa-interest" class="fw6 f13">$859</span>
+      </div>
+      <div class="flex jb">
+        <span class="tm f13">Foreclosure charges</span>
+        <span class="fw6 f13 ts">$0 (waived)</span>
+      </div>
+    </div>
+  </div>
+
+  <p class="tc tm" style="font-size:11px;margin-bottom:20px">Amount is fixed based on your loan balance as of today</p>
+  <button class="bp" onclick="goTo('sc-full-pay-quote')">Continue to quote &#x2192;</button>
+</div>
+</div>
+
+
+<!-- FULL REPAYMENT: STEP 3 — QUOTE -->
+<div class="screen" id="sc-full-pay-quote">
+<div class="sb"><span>9:41</span><span>&#x25CF;&#x25CF;&#x25CF;&#x25CF;</span></div>
+<div class="tn"><button class="bb" onclick="back()">&#x2190;</button><span class="nt">Payment quote</span></div>
+<div class="sc px py">
+
+  <div class="pay-steps">
+    <div class="pay-step"><div class="pay-step-circle done">&#x2713;</div><div class="pay-step-label done">Summary</div></div>
+    <div class="pay-step-line done"></div>
+    <div class="pay-step"><div class="pay-step-circle done">&#x2713;</div><div class="pay-step-label done">Amount</div></div>
+    <div class="pay-step-line done"></div>
+    <div class="pay-step"><div class="pay-step-circle active">3</div><div class="pay-step-label active">Quote</div></div>
+    <div class="pay-step-line"></div>
+    <div class="pay-step"><div class="pay-step-circle">4</div><div class="pay-step-label">Review</div></div>
+    <div class="pay-step-line"></div>
+    <div class="pay-step"><div class="pay-step-circle">5</div><div class="pay-step-label">Payment</div></div>
+  </div>
+
+  <!-- Pay from -->
+  <p class="fw6 mb8 f13" style="color:var(--text2);text-transform:uppercase;letter-spacing:.6px">Pay from</p>
+  <div style="display:flex;gap:8px;margin-bottom:16px">
+    <button id="fq-cur1" onclick="fqSetCur(1)"
+      style="display:flex;align-items:center;gap:7px;padding:10px 16px;border-radius:99px;border:2px solid var(--navy);background:white;font-weight:700;font-size:13px;cursor:pointer;color:var(--navy)">
+      <span style="font-size:16px">&#x1F1FA;&#x1F1F8;</span> USD
+    </button>
+    <button id="fq-cur2" onclick="fqSetCur(2)"
+      style="display:flex;align-items:center;gap:7px;padding:10px 16px;border-radius:99px;border:1.5px solid var(--border);background:white;font-weight:600;font-size:13px;cursor:pointer;color:var(--text2)">
+      <span style="font-size:16px">&#x1F1EA;&#x1F1FA;</span> EUR
+    </button>
+    <button id="fq-cur3" onclick="fqSetCur(3)"
+      style="display:flex;align-items:center;gap:7px;padding:10px 16px;border-radius:99px;border:1.5px solid var(--border);background:white;font-weight:600;font-size:13px;cursor:pointer;color:var(--text2)">
+      <span style="font-size:16px">&#x1F1F8;&#x1F1EC;</span> SGD
+    </button>
+  </div>
+
+  <!-- Exchange rate card -->
+  <div class="card mb14" style="background:linear-gradient(135deg,#1E1659,#3730A3);color:white;padding:20px">
+    <div class="flex jb aic mb14">
+      <small style="color:rgba(255,255,255,.6);font-size:12px;letter-spacing:.4px;text-transform:uppercase">Exchange rate</small>
+      <span id="fq-expires" style="background:rgba(255,255,255,.12);border-radius:99px;padding:4px 12px;font-size:11px;font-weight:700;color:#FCD34D">Expires in 02:00</span>
+    </div>
+    <div class="flex aic g8 mb18" style="margin-bottom:18px">
+      <span style="font-size:22px">&#x1F1FA;&#x1F1F8;</span>
+      <span class="fw7" style="font-size:22px;color:white;letter-spacing:-.3px">1 USD = &#x20B9;95.00</span>
+    </div>
+    <div class="flex jb aic mb8">
+      <span style="color:rgba(255,255,255,.65);font-size:13px">You send</span>
+      <span id="fq-you-send" class="fw6 f13">$19,496.71</span>
+    </div>
+    <div class="flex jb aic" style="margin-bottom:14px">
+      <span style="color:rgba(255,255,255,.65);font-size:13px">Recipient gets</span>
+      <span class="fw7" style="font-size:17px;color:#86EFAC">&#x20B9;18,52,187</span>
+    </div>
+    <div style="height:1px;background:rgba(255,255,255,.15);margin-bottom:14px"></div>
+    <div class="flex jb mb8">
+      <span style="color:rgba(255,255,255,.65);font-size:12px">Processing fee</span>
+      <span class="fw6" style="font-size:12px;color:rgba(255,255,255,.75)">&#x20B9;0 (waived)</span>
+    </div>
+    <div class="flex jb" style="margin-bottom:14px">
+      <span style="color:rgba(255,255,255,.65);font-size:12px">Foreclosure charges</span>
+      <span class="fw6" style="font-size:12px;color:rgba(255,255,255,.75)">&#x20B9;0 (waived)</span>
+    </div>
+    <button onclick="fqRefreshRate()" style="background:none;border:none;padding:4px 0 0;margin-top:0;color:#93C5FD;font-size:12px;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:5px;border-top:1px solid rgba(255,255,255,.12);width:100%">
+      <span style="font-size:13px">&#x21BB;</span> Refresh rate
+    </button>
+  </div>
+
+  <!-- Loan closure impact -->
+  <div class="card mb16" style="background:var(--bg)">
+    <p class="fw6 mb6" style="color:var(--navy);font-size:15px">Loan closure</p>
+    <div style="height:1px;background:var(--border);margin-bottom:10px"></div>
+    <div class="flex jb mb8"><span class="tm f13">Loan closes on</span><span class="fw6 f13">Jun 30, 2026</span></div>
+    <div class="flex jb mb8"><span class="tm f13">Interest saved</span><span class="fw6 f13 ts">&#x20B9;4,32,500 &#x2193;</span></div>
+    <div class="flex jb"><span class="tm f13">Credited by</span><span class="fw6 f13">Next business day</span></div>
+  </div>
+
+  <button class="bp" onclick="fqLockAndContinue()">Lock rate &amp; continue &#x2192;</button>
+</div>
+</div>
+
+<!-- FULL REPAYMENT: STEP 4 — REVIEW -->
+<div class="screen" id="sc-full-pay-review">
+<div class="sb"><span>9:41</span><span>&#x25CF;&#x25CF;&#x25CF;&#x25CF;</span></div>
+<div class="tn"><button class="bb" onclick="back()">&#x2190;</button><span class="nt">Review transfer</span></div>
+<div class="sc px py" style="padding-bottom:8px">
+
+  <div class="pay-steps">
+    <div class="pay-step"><div class="pay-step-circle done">&#x2713;</div><div class="pay-step-label done">Summary</div></div>
+    <div class="pay-step-line done"></div>
+    <div class="pay-step"><div class="pay-step-circle done">&#x2713;</div><div class="pay-step-label done">Amount</div></div>
+    <div class="pay-step-line done"></div>
+    <div class="pay-step"><div class="pay-step-circle done">&#x2713;</div><div class="pay-step-label done">Quote</div></div>
+    <div class="pay-step-line done"></div>
+    <div class="pay-step"><div class="pay-step-circle active">4</div><div class="pay-step-label active">Review</div></div>
+    <div class="pay-step-line"></div>
+    <div class="pay-step"><div class="pay-step-circle">5</div><div class="pay-step-label">Payment</div></div>
+  </div>
+
+  <!-- Transfer summary -->
+  <p class="fw6 mb12 f13" style="color:var(--text2);text-transform:uppercase;letter-spacing:.6px">Transfer summary</p>
+  <div class="card mb14" style="background:var(--bg)">
+    <div class="flex jb py8" style="padding:10px 0;border-bottom:1px solid var(--border)"><span class="tm f13">Loan</span><span class="fw6 f13">CRL-xxx123</span></div>
+    <div class="flex jb py8" style="padding:10px 0;border-bottom:1px solid var(--border)"><span class="tm f13">Recipient</span><span class="fw6 f13">Credila Financial Services</span></div>
+    <div class="flex jb py8" style="padding:10px 0;border-bottom:1px solid var(--border)"><span class="tm f13">To account</span><span class="fw6 f13">HSBC &#x25CF;&#x25CF;&#x25CF;&#x25CF;8801</span></div>
+    <div class="flex jb py8" style="padding:10px 0;border-bottom:1px solid var(--border)"><span class="tm f13">Exchange rate</span><span class="fw6 f13">1 USD = &#x20B9;95.00</span></div>
+    <div class="flex jb py8" style="padding:10px 0;border-bottom:1px solid var(--border)"><span class="tm f13">Amount</span><span id="frv-amount" class="fw7 f16" style="color:var(--navy)">$19,496.71</span></div>
+    <div class="flex jb py8" style="padding:10px 0"><span class="tm f13">Payment type</span><span class="fw6 f13">Full repayment — foreclosure</span></div>
+  </div>
+
+  <!-- Transfer method -->
+  <p class="fw6 mb8 f13" style="color:var(--text2);text-transform:uppercase;letter-spacing:.6px">Transfer method</p>
+  <div style="display:flex;gap:10px;margin-bottom:16px">
+    <button id="frv-m1" onclick="frvMethod(1)"
+      style="flex:1;padding:12px;border-radius:10px;border:2px solid var(--navy);background:var(--navy);color:white;font-weight:600;font-size:13px;cursor:pointer">
+      ACH Transfer
+    </button>
+    <button id="frv-m2" onclick="frvMethod(2)"
+      style="flex:1;padding:12px;border-radius:10px;border:1.5px solid var(--border);background:white;color:var(--text2);font-weight:600;font-size:13px;cursor:pointer">
+      Wire Transfer
+    </button>
+  </div>
+
+  <!-- US bank account details -->
+  <p class="fw6 mb12 f13" style="color:var(--text2);text-transform:uppercase;letter-spacing:.6px">Transfer to</p>
+  <div class="card mb16" style="background:var(--bg)">
+    <div class="flex jb py8 aic" style="padding:10px 0;border-bottom:1px solid var(--border)">
+      <span class="tm f13">Beneficiary name</span>
+      <div class="flex g8 aic"><span class="fw7 f13">Credila Financial Services</span><button onclick="navigator.clipboard&&navigator.clipboard.writeText('Credila Financial Services')" style="border:none;background:none;cursor:pointer;padding:0;color:var(--text2)"><i class="ti ti-copy" style="font-size:14px"></i></button></div>
+    </div>
+    <div class="flex jb py8 aic" style="padding:10px 0;border-bottom:1px solid var(--border)">
+      <span class="tm f13">Bank name</span>
+      <div class="flex g8 aic"><span class="fw7 f13">JPMorgan Chase Bank, N.A.</span><button onclick="navigator.clipboard&&navigator.clipboard.writeText('JPMorgan Chase Bank')" style="border:none;background:none;cursor:pointer;padding:0;color:var(--text2)"><i class="ti ti-copy" style="font-size:14px"></i></button></div>
+    </div>
+    <div class="flex jb py8 aic" style="padding:10px 0;border-bottom:1px solid var(--border)">
+      <span class="tm f13">Account number</span>
+      <div class="flex g8 aic"><span class="fw7 f13">4071 8823 9901</span><button onclick="navigator.clipboard&&navigator.clipboard.writeText('407188239901')" style="border:none;background:none;cursor:pointer;padding:0;color:var(--text2)"><i class="ti ti-copy" style="font-size:14px"></i></button></div>
+    </div>
+    <div class="flex jb py8 aic" style="padding:10px 0;border-bottom:1px solid var(--border)">
+      <span class="tm f13">Routing number (ABA)</span>
+      <div class="flex g8 aic"><span class="fw7 f13">021 000 021</span><button onclick="navigator.clipboard&&navigator.clipboard.writeText('021000021')" style="border:none;background:none;cursor:pointer;padding:0;color:var(--text2)"><i class="ti ti-copy" style="font-size:14px"></i></button></div>
+    </div>
+    <div class="flex jb py8 aic" style="padding:10px 0;border-bottom:1px solid var(--border)">
+      <span class="tm f13">SWIFT / BIC</span>
+      <div class="flex g8 aic"><span class="fw7 f13">CHASUS33</span><button onclick="navigator.clipboard&&navigator.clipboard.writeText('CHASUS33')" style="border:none;background:none;cursor:pointer;padding:0;color:var(--text2)"><i class="ti ti-copy" style="font-size:14px"></i></button></div>
+    </div>
+    <div class="flex jb py8 aic" style="padding:10px 0">
+      <span class="tm f13">Reference / Memo</span>
+      <div class="flex g8 aic"><span class="fw7 f13">CRL-xxx123</span><button onclick="navigator.clipboard&&navigator.clipboard.writeText('CRL-xxx123')" style="border:none;background:none;cursor:pointer;padding:0;color:var(--text2)"><i class="ti ti-copy" style="font-size:14px"></i></button></div>
+    </div>
+  </div>
+
+</div>
+<!-- Floating CTA -->
+<div style="padding:12px 20px 20px;background:white;border-top:1px solid var(--border);flex-shrink:0">
+  <button class="bp" style="margin:0" onclick="goTo('sc-full-pay-confirm')">Confirm</button>
+</div>
+</div>
+
+<!-- FULL REPAYMENT: STEP 5 — PAYMENT -->
+<div class="screen" id="sc-full-pay-confirm">
+<div class="sb"><span>9:41</span><span>&#x25CF;&#x25CF;&#x25CF;&#x25CF;</span></div>
+<div class="tn"><button class="bb" onclick="back()">&#x2190;</button><span class="nt">Complete payment</span></div>
+<div class="sc px py">
+
+  <div class="pay-steps">
+    <div class="pay-step"><div class="pay-step-circle done">&#x2713;</div><div class="pay-step-label done">Summary</div></div>
+    <div class="pay-step-line done"></div>
+    <div class="pay-step"><div class="pay-step-circle done">&#x2713;</div><div class="pay-step-label done">Amount</div></div>
+    <div class="pay-step-line done"></div>
+    <div class="pay-step"><div class="pay-step-circle done">&#x2713;</div><div class="pay-step-label done">Quote</div></div>
+    <div class="pay-step-line done"></div>
+    <div class="pay-step"><div class="pay-step-circle done">&#x2713;</div><div class="pay-step-label done">Review</div></div>
+    <div class="pay-step-line done"></div>
+    <div class="pay-step"><div class="pay-step-circle active">5</div><div class="pay-step-label active">Payment</div></div>
+  </div>
+
+  <!-- Final amount card -->
+  <div class="card mb14" style="background:linear-gradient(135deg,#1E1659,#5145CD);color:white;padding:20px;text-align:center">
+    <small style="color:rgba(255,255,255,.6)">Amount to be paid</small>
+    <div class="fw7 mb4" style="font-size:32px;margin-top:6px">&#x20B9;18,52,187</div>
+    <div style="background:rgba(255,255,255,.12);border-radius:8px;padding:8px 12px;font-size:12px;color:rgba(255,255,255,.8)">
+      towards Loan CRL-xxx123 · full closure
+    </div>
+  </div>
+
+  <!-- Closure impact -->
+  <div class="card mb14" style="background:var(--bg)">
+    <p class="fw6 mb6" style="color:var(--navy);font-size:15px">After this payment</p>
+    <div style="height:1px;background:var(--border);margin-bottom:10px"></div>
+    <div class="flex jb mb8"><span class="tm f13">Loan status</span><span class="fw6 f13 ts">Closed &#x2713;</span></div>
+    <div class="flex jb mb8"><span class="tm f13">Closure date</span><span class="fw6 f13">Jun 30, 2026</span></div>
+    <div class="flex jb"><span class="tm f13">Interest saved</span><span class="fw6 f13 ts">&#x20B9;4,32,500 &#x2193;</span></div>
+  </div>
+
+  <!-- Authorization -->
+  <div class="card mb16" style="border:1.5px solid var(--border)">
+    <div class="flex g12 aic" onclick="toggleFullAuth()" style="cursor:pointer">
+      <div id="full-auth-box" style="width:22px;height:22px;border-radius:6px;border:2px solid var(--navy);background:var(--navy);display:flex;align-items:center;justify-content:center;flex-shrink:0">
+        <i class="ti ti-check" style="font-size:14px;color:white"></i>
+      </div>
+      <p style="font-size:13px;line-height:1.5;color:var(--text)">I confirm the full repayment of <strong>&#x20B9;18,52,187</strong> towards loan CRL-xxx123 and authorise closure of my loan account.</p>
+    </div>
+  </div>
+
+  <button class="bp" onclick="paymentDone()">Payment complete &#x2713;</button>
+  <button class="bl mt8" onclick="back()" style="margin-top:10px">Go back</button>
+  <div style="height:16px"></div>
 </div>
 </div>
 
@@ -1570,7 +2210,7 @@ h1{font-size:24px;font-weight:700}h2{font-size:20px;font-weight:700}h3{font-size
   <div class="card mb12" style="border:1.5px solid var(--error);background:#FEF2F2"><div class="flex jb aic mb4"><p class="fw6 f13" style="color:var(--error)">Documents required</p><span class="timer-badge"> 6 days left</span></div><p class="f13" style="color:#7F1D1D;line-height:1.6">1. Fee receipt from university<br>2. Enrollment / admission letter<br>3. I-20 / Visa document</p></div>
   <div class="ig"><label class="il">Tranche amount</label><input class="if" value="₹4,00,000" readonly></div>
   <div class="ig"><label class="il">Semester</label><input class="if" value="Fall 2026 — Carnegie Mellon University"></div>
-  <div class="card mb8" style="border:1.5px solid var(--success)"><div class="flex jb aic"><div class="flex g8 aic"><i class="ti ti-file" style="font-size:20px"></i><div><p class="fw6 f13">fee_receipt_fall2026.pdf</p><small class="tm">2.1 MB · Uploaded</small></div></div><span class="tag tg"></span></div></div>
+  <div class="card mb8" style="border:1.5px solid var(--success)"><div class="flex jb aic"><div class="flex g8 aic"><i class="ti ti-file" style="font-size:20px"></i><div><p class="fw6 f13">fee_receipt_fall2026.pdf</p><small class="tm">2.1 MB · Uploaded</small></div></div><span class="tag tg">✓</span></div></div>
   <div class="card mb16" style="border:1.5px dashed var(--error)"><div class="flex jb aic"><div class="flex g8 aic"><i class="ti ti-file" style="font-size:20px"></i><div><p class="fw6 f13">Enrollment letter</p><small style="color:var(--error)">Required — not uploaded</small></div></div><button class="bsm" onclick="goTo('sc-tranche-upload')">Upload</button></div></div>
   <button class="bp mb8" onclick="goTo('sc-tranche-upload')">Submit request</button>
   <button class="bl" style="color:var(--error);border-color:var(--error)">Cancel request</button>
@@ -1641,81 +2281,29 @@ h1{font-size:24px;font-weight:700}h2{font-size:20px;font-weight:700}h3{font-size
 <div class="sb"><span>9:41</span><span>●●●●</span></div>
 <div class="tn"><button class="bb" onclick="back()">←</button><span class="nt">Repayment planner</span></div>
 <div class="sc px py">
+  <div class="card mb12" style="background:var(--navy);color:white"><div class="flex jb"><div><small style="color:rgba(255,255,255,.6)">Outstanding</small><div class="fw7 f18">₹18,25,000</div></div><div><small style="color:rgba(255,255,255,.6)">Rate</small><div class="fw7 f18">10.75%</div></div><div><small style="color:rgba(255,255,255,.6)">Tenure left</small><div class="fw7 f18">102 mo</div></div></div></div>
+  <div class="card mb12"><p class="fw6 mb12 f13">If I make a part payment of...</p><div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:12px"><div class="csm tc" style="cursor:pointer;border:1px solid var(--border)"><p class="fw6 f13">₹25K</p></div><div class="csm tc" style="cursor:pointer;border:2px solid var(--navy)"><p class="fw6 f13 tn2">₹1L</p></div><div class="csm tc" style="cursor:pointer;border:1px solid var(--border)"><p class="fw6 f13">₹5L</p></div></div><div class="ig" style="margin-bottom:0"><label class="il">Custom amount</label><input class="if" value="₹1,00,000"></div></div>
+  <div class="card mb12"><p class="fw6 mb8 f13">I prefer to...</p><div class="flex g8"><div id="pl-pref1" style="flex:1;background:linear-gradient(135deg,#5145CD,#7C6FE8);border-radius:8px;padding:10px;text-align:center;cursor:pointer;box-shadow:0 4px 14px rgba(81,69,205,.25)" onclick="plannerPref(1)"><p style="color:white;font-size:13px;font-weight:600">Reduce tenure</p><small style="color:rgba(255,255,255,.6)">Same EMI</small></div><div id="pl-pref2" style="flex:1;border:1.5px solid var(--border);border-radius:8px;padding:10px;text-align:center;cursor:pointer" onclick="plannerPref(2)"><p class="fw6 f13">Reduce EMI</p><small class="tm">Same tenure</small></div></div></div>
+  <button class="bp mb12" onclick="showPlannerResult()">Calculate impact →</button>
 
-  <!-- Loan summary -->
-  <div class="card mb12" style="background:var(--navy);color:white">
-    <div class="flex jb">
-      <div><small style="color:rgba(255,255,255,.6)">Outstanding</small><div class="fw7 f18">₹18,25,000</div></div>
-      <div><small style="color:rgba(255,255,255,.6)">Rate</small><div class="fw7 f18">10.75%</div></div>
-      <div><small style="color:rgba(255,255,255,.6)">Tenure left</small><div class="fw7 f18">102 mo</div></div>
-    </div>
-  </div>
-
-  <!-- Amount selector -->
-  <div class="card mb12">
-    <p class="fw6 mb12 f13">If I make a part payment of...</p>
-    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:12px">
-      <div class="csm tc" style="cursor:pointer;border:1px solid var(--border)" onclick="plannerSelect(this,'₹25,000')"><p class="fw6 f13">₹25K</p></div>
-      <div class="csm tc" style="cursor:pointer;border:2px solid var(--navy)" onclick="plannerSelect(this,'₹1,00,000')"><p class="fw6 f13 tn2">₹1L</p></div>
-      <div class="csm tc" style="cursor:pointer;border:1px solid var(--border)" onclick="plannerSelect(this,'₹5,00,000')"><p class="fw6 f13">₹5L</p></div>
-    </div>
-    <div class="ig" style="margin-bottom:0"><label class="il">Custom amount</label><input class="if" id="planner-custom" value="₹1,00,000"></div>
-  </div>
-
-  <!-- Preference -->
-  <div class="card mb12">
-    <p class="fw6 mb8 f13">I prefer to...</p>
-    <div class="flex g8">
-      <div id="pl-pref1" style="flex:1;background:var(--navy);border-radius:8px;padding:10px;text-align:center;cursor:pointer" onclick="plannerPref(1)">
-        <p style="color:white;font-size:13px;font-weight:600">Reduce tenure</p><small style="color:rgba(255,255,255,.6)">Same EMI</small>
-      </div>
-      <div id="pl-pref2" style="flex:1;border:1.5px solid var(--border);border-radius:8px;padding:10px;text-align:center;cursor:pointer" onclick="plannerPref(2)">
-        <p class="fw6 f13">Reduce EMI</p><small class="tm">Same tenure</small>
-      </div>
-    </div>
-  </div>
-
-  <button class="bp mb16" onclick="showPlannerResult()">Calculate impact →</button>
-
-  <!-- ── INLINE RESULTS (hidden until calculated) ── -->
+  <!-- Inline result (hidden until Calculate is clicked) -->
   <div id="planner-result" style="display:none">
-
-    <!-- Impact summary card -->
-    <div class="card mb12" style="background:linear-gradient(135deg,#1E1659,#5145CD);color:white;text-align:center">
-      <small style="color:rgba(255,255,255,.65)">If you pay ₹1,00,000 today</small>
+    <div class="card mb12" style="background:linear-gradient(135deg,#1E1659,#5145CD);color:white;text-align:center;padding:20px 16px">
+      <small style="color:rgba(255,255,255,.6)">If you pay ₹1,00,000 today</small>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:14px">
-        <div>
-          <div class="fw7" style="font-size:26px;color:#A5F3FC">8 months</div>
-          <small style="color:rgba(255,255,255,.6)">saved off tenure</small>
-        </div>
-        <div>
-          <div class="fw7" style="font-size:26px;color:#86EFAC">₹1.43L</div>
-          <small style="color:rgba(255,255,255,.6)">interest saved</small>
-        </div>
+        <div><div class="fw7" style="font-size:26px;color:#A5F3FC">8 months</div><small style="color:rgba(255,255,255,.6)">saved off tenure</small></div>
+        <div><div class="fw7" style="font-size:26px;color:#86EFAC">₹1.43L</div><small style="color:rgba(255,255,255,.6)">interest saved</small></div>
       </div>
     </div>
-
-    <!-- Before vs after -->
     <div class="card mb12">
       <p class="fw6 mb12">Before vs. after</p>
-      <div class="flex jb mb8">
-        <span class="tm">Tenure</span>
-        <div class="flex g8"><span style="text-decoration:line-through;color:var(--text3)">102 mo</span><span class="fw6 ts">→ 94 mo</span></div>
-      </div>
-      <div class="flex jb mb8">
-        <span class="tm">Total interest</span>
-        <div class="flex g8"><span style="text-decoration:line-through;color:var(--text3)">₹8,42,300</span><span class="fw6 ts">→ ₹6,99,500</span></div>
-      </div>
-      <div class="flex jb">
-        <span class="tm">New end date</span>
-        <span class="fw6">Aug 2032 <span class="tm">(was Apr 2033)</span></span>
-      </div>
+      <div class="flex jb mb8"><span class="tm">Tenure</span><div class="flex g8"><span style="text-decoration:line-through;color:var(--text3)">102 mo</span><span class="fw6 ts">→ 94 mo</span></div></div>
+      <div class="flex jb mb8"><span class="tm">Total interest</span><div class="flex g8"><span style="text-decoration:line-through;color:var(--text3)">₹8,42,300</span><span class="fw6 ts">→ ₹6,99,500</span></div></div>
+      <div class="flex jb"><span class="tm">New end date</span><span class="fw6">Aug 2032 (was Apr 2033)</span></div>
     </div>
-
-    <button class="bp mb8" style="background:linear-gradient(135deg,#059669,#34D399)" onclick="goTo('sc-part-payment')">Make this payment now</button>
+    <button class="bp mb8" onclick="goTo('sc-part-payment')">Make this payment now</button>
     <button class="bl mb16" onclick="document.getElementById('planner-result').style.display='none'">Try another scenario</button>
   </div>
-
 </div>
 </div>
 
@@ -1774,7 +2362,7 @@ h1{font-size:24px;font-weight:700}h2{font-size:20px;font-weight:700}h3{font-size
 
 <!-- LOAN DETAIL -->
 <div class="screen" id="sc-loan-detail">
-<div class="sb" style="background:var(--navy)"><span style="color:white">9:41</span><span style="color:white"></span></div>
+<div class="sb" style="background:var(--navy)"><span style="color:white">9:41</span><span style="color:white">●●●●</span></div>
 <div class="tn navy"><button class="bb light" onclick="back()">←</button><span class="nt light">Loan schedule</span></div>
 <div class="sc px py">
   <div class="card mb12" style="background:var(--navy);color:white"><div class="flex jb mb12"><div><small style="color:rgba(255,255,255,.6)">Outstanding</small><div class="fw7 f22">₹18,25,000</div></div><div class="tr"><small style="color:rgba(255,255,255,.6)">EMI 18 of 120</small><div class="fw7 f22">₹18,250</div></div></div><div class="flex jb"><div><small style="color:rgba(255,255,255,.6)">Interest remaining</small><div class="fw6">₹8,42,300</div></div><div class="tr"><small style="color:rgba(255,255,255,.6)">Tenure left</small><div class="fw6">102 months</div></div></div></div>
@@ -1785,7 +2373,7 @@ h1{font-size:24px;font-weight:700}h2{font-size:20px;font-weight:700}h3{font-size
 
 <!-- LIFECYCLE -->
 <div class="screen" id="sc-lifecycle">
-<div class="sb" style="background:var(--navy)"><span style="color:white">9:41</span><span style="color:white"></span></div>
+<div class="sb" style="background:var(--navy)"><span style="color:white">9:41</span><span style="color:white">●●●●</span></div>
 <div class="tn navy"><button class="bb light" onclick="back()">←</button><span class="nt light">Loan lifecycle</span></div>
 <div class="sc px py">
   <div class="card mb12">
@@ -1793,8 +2381,8 @@ h1{font-size:24px;font-weight:700}h2{font-size:20px;font-weight:700}h3{font-size
     <div class="tl"><div class="td done"></div><div class="tline" style="background:var(--success)"></div><div><p class="fw6">Tranche 1 disbursed</p><small class="tm">Jan 15, 2026 · ₹8,00,000</small></div></div>
     <div class="tl"><div class="td done"></div><div class="tline" style="background:var(--success)"></div><div><p class="fw6">Tranche 2 disbursed</p><small class="tm">Jun 1, 2026 · ₹10,25,000</small></div></div>
     <div class="tl"><div class="td act"></div><div class="tline"></div><div><p class="fw6" style="color:var(--orange)">Moratorium period</p><small class="tm">Active · PEMI ongoing · Ends Dec 2027</small><div class="tag tw mt8" style="margin-top:6px">You are here</div></div></div>
-    <div class="tl"><div class="td pen"></div><div class="tline"></div><div><p class="fw6 tm">Tranche 3 to be disbursed</p><small class="tm">Est. Jan 2027 · ₹4,00,000</small><span style="display:inline-block;margin-top:5px;font-size:10px;font-weight:600;background:#FEF3C7;color:#92400E;padding:2px 8px;border-radius:99px">Pending</span></div></div>
-    <div class="tl"><div class="td pen"></div><div class="tline"></div><div><p class="fw6 tm">Tranche 4 to be disbursed</p><small class="tm">Est. Jun 2027 · ₹2,75,000</small><span style="display:inline-block;margin-top:5px;font-size:10px;font-weight:600;background:#FEF3C7;color:#92400E;padding:2px 8px;border-radius:99px">Pending</span></div></div>
+    <div class="tl"><div class="td pen"></div><div class="tline"></div><div><p class="fw6 tm">Tranche 3 to be disbursed</p><small class="tm">Est. Jan 2027 · ₹4,00,000</small><span style="display:inline-block;margin-top:6px;background:#FEF3C7;color:#92400E;padding:2px 8px;border-radius:99px;font-size:11px;font-weight:600">Pending</span></div></div>
+    <div class="tl"><div class="td pen"></div><div class="tline"></div><div><p class="fw6 tm">Tranche 4 to be disbursed</p><small class="tm">Est. Jun 2027 · ₹2,75,000</small><span style="display:inline-block;margin-top:6px;background:#FEF3C7;color:#92400E;padding:2px 8px;border-radius:99px;font-size:11px;font-weight:600">Pending</span></div></div>
     <div class="tl"><div class="td pen"></div><div class="tline"></div><div><p class="fw6 tm">Full EMI repayment</p><small class="tm">Jan 2028 · ₹18,250/month · 120 months</small></div></div>
     <div class="tl" style="margin-bottom:0"><div class="td pen"></div><div><p class="fw6 tm">Loan closure</p><small class="tm">Projected: Dec 2035</small></div></div>
   </div>
@@ -1965,7 +2553,7 @@ h1{font-size:24px;font-weight:700}h2{font-size:20px;font-weight:700}h3{font-size
       <div class="flex jb aic mb12">
         <div class="flex g12 aic">
           <div style="width:44px;height:44px;border-radius:12px;background:linear-gradient(135deg,#FEF3C7,#FCE7F3);display:flex;align-items:center;justify-content:center;font-size:24px"><i class="ti ti-star" style="font-size:24px"></i></div>
-          <div><p class="fw6">⭐ Alumni network</p><small class="tm">Learn from those who've been there</small></div>
+          <div><p class="fw6"> Alumni network</p><small class="tm">Learn from those who've been there</small></div>
         </div>
       </div>
       <div style="display:flex;gap:10px;overflow-x:auto;padding-bottom:4px">
@@ -2106,31 +2694,6 @@ function toggleContact2(){
   el.style.display=el.style.display==='none'?'block':'none';
 }
 
-function showPlannerResult() {
-  var r = document.getElementById('planner-result');
-  if (r) { r.style.display='block'; r.scrollIntoView({behavior:'smooth',block:'start'}); }
-}
-function plannerSelect(el, amt) {
-  document.querySelectorAll('#sc-planner .csm').forEach(function(c){ c.style.border='1px solid var(--border)'; c.querySelector('p').style.color=''; });
-  el.style.border='2px solid var(--navy)'; el.querySelector('p').style.color='var(--navy)';
-  var inp = document.getElementById('planner-custom');
-  if (inp) inp.value = amt;
-}
-function plannerPref(n) {
-  var p1=document.getElementById('pl-pref1'), p2=document.getElementById('pl-pref2');
-  if(n===1){ p1.style.background='var(--navy)'; p1.querySelector('p').style.color='white'; p2.style.background=''; p2.style.border='1.5px solid var(--border)'; p2.querySelector('p').style.color=''; }
-  else { p2.style.background='var(--navy)'; p2.style.border='none'; p2.querySelector('p').style.color='white'; p1.style.background=''; p1.querySelector('p').style.color=''; }
-}
-function paymentDone() {
-  var overlay = document.createElement('div');
-  overlay.style.cssText = 'position:fixed;inset:0;background:rgba(81,69,205,.92);display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:9999;color:white';
-  overlay.innerHTML = '<div style="width:64px;height:64px;border:4px solid rgba(255,255,255,.3);border-top-color:white;border-radius:50%;animation:spin 1s linear infinite;margin-bottom:20px"></div><p style="font-size:18px;font-weight:700;margin-bottom:8px">Processing payment...</p><p style="font-size:13px;opacity:.7">Verifying with Credila</p>';
-  var style = document.createElement('style');
-  style.textContent = '@keyframes spin{to{transform:rotate(360deg)}}';
-  document.head.appendChild(style);
-  document.querySelector('.phone').appendChild(overlay);
-  setTimeout(function() { overlay.remove(); goTo('sc-pay-success'); }, 3000);
-}
 function pdNext(step) {
   for(var i=1;i<=4;i++){
     var el = document.getElementById('pd-step'+i);
@@ -2207,30 +2770,7 @@ function ppSelect(n, display, short) {
     }
   }
 }
-function ppPref(n) {
-  var p1 = document.getElementById('pp-pref1');
-  var p2 = document.getElementById('pp-pref2');
-  if(!p1||!p2) return;
-  if(n===1){
-    p1.style.background='linear-gradient(135deg,#059669,#34D399)';
-    p1.style.border='none';
-    p1.querySelector('p').style.color='white';
-    p1.querySelector('small').style.color='rgba(255,255,255,.75)';
-    p2.style.background='';
-    p2.style.border='1.5px solid var(--border)';
-    p2.querySelector('p').style.color='';
-    p2.querySelector('small').style.color='';
-  } else {
-    p2.style.background='linear-gradient(135deg,#059669,#34D399)';
-    p2.style.border='none';
-    p2.querySelector('p').style.color='white';
-    p2.querySelector('small').style.color='rgba(255,255,255,.75)';
-    p1.style.background='';
-    p1.style.border='1.5px solid var(--border)';
-    p1.querySelector('p').style.color='';
-    p1.querySelector('small').style.color='';
-  }
-}
+
 
 
 function toggleCurrencies() {
@@ -2242,6 +2782,525 @@ function toggleCurrencies() {
   if (ch) ch.style.transform = open ? 'rotate(0deg)' : 'rotate(180deg)';
 }
 
+function paymentDone() {
+  goTo('sc-pay-success');
+}
+function pconfTriggerUpload() {
+  var inp = document.getElementById('pconf-file-input');
+  if (inp) inp.click();
+}
+function pconfFileSelected(inp) {
+  if (!inp.files || !inp.files[0]) return;
+  var name = inp.files[0].name;
+  var box = document.getElementById('pconf-upload-box');
+  var lbl = document.getElementById('pconf-upload-name');
+  if (box) box.style.background = 'rgba(5,150,105,.06)';
+  if (lbl) { lbl.textContent = '✓ ' + name; lbl.style.display = 'block'; }
+}
+
+function showPlannerResult() {
+  var r = document.getElementById('planner-result');
+  if (r) { r.style.display = 'block'; r.scrollIntoView({behavior:'smooth', block:'start'}); }
+}
+
+function plannerSelect(el, amt) {
+  var container = el.closest('.card') || el.parentNode;
+  container.querySelectorAll('.csm').forEach(function(c) {
+    c.style.border = '1px solid var(--border)';
+    var p = c.querySelector('p'); if(p) { p.style.color=''; p.style.fontWeight=''; }
+  });
+  el.style.border = '2px solid var(--navy)';
+  var p = el.querySelector('p'); if(p) { p.style.color='var(--navy)'; p.style.fontWeight='700'; }
+  var inp = document.getElementById('planner-custom');
+  if (inp) inp.value = amt;
+}
+
+function plannerPref(n) {
+  var p1 = document.getElementById('pl-pref1');
+  var p2 = document.getElementById('pl-pref2');
+  if(!p1||!p2) return;
+  var PURPLE = 'linear-gradient(135deg,#5145CD,#7C6FE8)';
+  if(n===1){
+    p1.style.background=PURPLE; p1.style.border='none'; p1.style.boxShadow='0 4px 14px rgba(81,69,205,.25)';
+    p1.querySelector('p').style.color='white'; p1.querySelector('small').style.color='rgba(255,255,255,.6)';
+    p2.style.background=''; p2.style.border='1.5px solid var(--border)'; p2.style.boxShadow='';
+    p2.querySelector('p').style.color=''; p2.querySelector('small').style.color='';
+  } else {
+    p2.style.background=PURPLE; p2.style.border='none'; p2.style.boxShadow='0 4px 14px rgba(81,69,205,.25)';
+    p2.querySelector('p').style.color='white'; p2.querySelector('small').style.color='rgba(255,255,255,.6)';
+    p1.style.background=''; p1.style.border='1.5px solid var(--border)'; p1.style.boxShadow='';
+    p1.querySelector('p').style.color=''; p1.querySelector('small').style.color='';
+  }
+}
+
+// On load: make sc-splash the active screen
+window.addEventListener('DOMContentLoaded', function() {
+  var splash = document.getElementById('sc-splash');
+  if(splash) { splash.classList.add('active'); }
+});
+
+/* ── Loan calculation engine ── */
+var PP_OUTSTANDING = 1825000;
+var PP_RATE_PA = 10.75;
+var PP_MONTHS = 102;
+var PP_MODE = 1; // 1=reduce tenure, 2=reduce EMI
+var PP_AMOUNT = 100000;
+
+function calcMonthlyRate(){ return PP_RATE_PA / 100 / 12; }
+function calcEMI(){
+  var r = calcMonthlyRate(), P = PP_OUTSTANDING, n = PP_MONTHS;
+  return P * r * Math.pow(1+r,n) / (Math.pow(1+r,n) - 1);
+}
+function calcImpact(amount, mode) {
+  var r = calcMonthlyRate();
+  var emi = calcEMI();
+  var newP = Math.max(0, PP_OUTSTANDING - amount);
+  if (newP <= 0) return {newN: 0, saved: Math.round(emi*PP_MONTHS - PP_OUTSTANDING), newEMI: 0};
+  if (mode === 1) { // reduce tenure
+    var newN = Math.round(-Math.log(1 - newP*r/emi) / Math.log(1+r));
+    var oldInt = Math.round(emi*PP_MONTHS - PP_OUTSTANDING);
+    var newInt = Math.round(emi*newN - newP);
+    return {newN: newN, saved: Math.max(0, oldInt-newInt), newEMI: Math.round(emi)};
+  } else { // reduce EMI
+    var newEMI = Math.round(newP * r * Math.pow(1+r,PP_MONTHS) / (Math.pow(1+r,PP_MONTHS)-1));
+    var saved = Math.round((emi - newEMI) * PP_MONTHS);
+    return {newN: PP_MONTHS, saved: Math.max(0, saved), newEMI: newEMI};
+  }
+}
+function fmtINR(n) {
+  if (n >= 100000) return '₹' + (n/100000).toFixed(n%100000===0?0:2).replace(/\.?0+$/,'') + 'L';
+  if (n >= 1000) return '₹' + Math.round(n/1000) + ',000';
+  return '₹' + n.toLocaleString('en-IN');
+}
+function fmtINRFull(n) {
+  return '₹' + n.toLocaleString('en-IN');
+}
+function parseINR(s) {
+  return parseInt(s.replace(/[^0-9]/g,'')) || 0;
+}
+function updatePPDisplay(amount, mode) {
+  if (!amount || amount < 0) amount = 0;
+  PP_AMOUNT = amount;
+  var imp = calcImpact(amount, mode || PP_MODE);
+  // Summary card
+  var tenureEl = document.getElementById('pp-tenure');
+  var savedEl = document.getElementById('pp-saved');
+  var emiRow = document.getElementById('pp-emi-row');
+  var newEmiEl = document.getElementById('pp-new-emi');
+  var lbl1 = document.getElementById('pp-impact-lbl1');
+  if (PP_MODE === 1) {
+    if (tenureEl) tenureEl.textContent = imp.newN + ' months ↓';
+    if (lbl1) lbl1.textContent = 'New tenure';
+    if (emiRow) emiRow.style.display = 'none';
+  } else {
+    if (tenureEl) tenureEl.textContent = PP_MONTHS + ' months';
+    if (lbl1) lbl1.textContent = 'Tenure (unchanged)';
+    if (emiRow) emiRow.style.display = 'block';
+    if (newEmiEl) newEmiEl.textContent = fmtINRFull(imp.newEMI) + ' ↓';
+  }
+  if (savedEl) savedEl.textContent = fmtINRFull(imp.saved) + ' ↓';
+  // CTA
+  var cta = document.getElementById('pp-cta');
+  if (cta) cta.textContent = 'Continue to quote →';
+  // Sync quote screen
+  // Sync quote screen exchange rate card
+  var qRate = document.getElementById('pq-rate-display');
+  var qYouSend = document.getElementById('pq-you-send');
+  var qRecipient = document.getElementById('pq-recipient-gets');
+  var rate = USD_RATE || 95;
+  if (qRate) qRate.innerHTML = '1 USD = &#x20B9;' + rate.toFixed(2);
+  if (qYouSend) {
+    var usdAmt = (amount / rate);
+    qYouSend.textContent = '$' + usdAmt.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});
+  }
+  if (qRecipient) qRecipient.textContent = fmtINRFull(amount);
+  var qTenure = document.getElementById('pq-tenure');
+  if (qTenure) qTenure.textContent = imp.newN + ' months (−' + (PP_MONTHS - imp.newN) + ' months)';
+  var qSaved = document.getElementById('pq-saved');
+  if (qSaved) qSaved.textContent = fmtINRFull(imp.saved);
+  // prv-amount is synced by pqLockAndContinue() with the USD "You send" value
+  var rvRate = document.getElementById('prv-rate');
+  if (rvRate) rvRate.innerHTML = '1 USD = &#x20B9;' + (USD_RATE||84).toFixed(2);
+  // Confirm screen — pconf-amount & auth-amount synced in pqLockAndContinue() with USD value
+  var cOut = document.getElementById('pconf-outstanding');
+  if (cOut) cOut.textContent = fmtINRFull(PP_OUTSTANDING - amount);
+  var cTen = document.getElementById('pconf-tenure');
+  if (cTen) cTen.textContent = imp.newN + ' months';
+  var cSav = document.getElementById('pconf-saved');
+  if (cSav) cSav.textContent = fmtINRFull(imp.saved);
+  // Timer simulation (reset to 2:00 on quote screen)
+  startQuoteTimer();
+}
+/* ── Currency state ── */
+var USD_RATE    = 95.00;   // 1 USD = ₹95.00 (prototype rate)
+var PP_AMOUNT_INR = 100000; // always track internally in INR
+
+function ppGetINRAmount() { return PP_AMOUNT_INR; }
+
+function ppUpdateUSDPill(amountINR) {
+  var pill = document.getElementById('pp-usd-eq');
+  if (!pill) return;
+  var usd = amountINR / USD_RATE;
+  pill.textContent = '≈ $' + usd.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});
+}
+
+function ppValidateAmount(amountINR) {
+  var errEl = document.getElementById('pp-err-msg');
+  var msgEl = document.getElementById('pp-range-msg');
+  var inp   = document.getElementById('pp-amount-input');
+  var cta   = document.getElementById('pp-cta');
+  var err = '';
+  if (!amountINR || amountINR === 0) {
+    err = 'Enter an amount to continue';
+  } else if (amountINR < 10000) {
+    err = 'Minimum part payment is ₹10,000';
+  } else if (amountINR > PP_OUTSTANDING) {
+    err = 'Cannot exceed outstanding principal ₹18,25,000';
+  }
+  if (err) {
+    if (errEl) { errEl.textContent = err; errEl.style.display = 'block'; }
+    if (msgEl) msgEl.style.color = 'var(--error)';
+    if (inp) inp.style.color = 'var(--error)';
+    if (cta) { cta.disabled = true; cta.style.opacity = '0.45'; cta.style.cursor = 'not-allowed'; }
+    return false;
+  } else {
+    if (errEl) { errEl.textContent = ''; errEl.style.display = 'none'; }
+    if (msgEl) msgEl.style.color = 'var(--text2)';
+    if (inp) inp.style.color = '#059669';
+    if (cta) { cta.disabled = false; cta.style.opacity = '1'; cta.style.cursor = 'pointer'; }
+    return true;
+  }
+}
+
+function ppResizeInput(el) {
+  var mirror = document.getElementById('pp-amount-mirror');
+  if (!mirror) return;
+  mirror.textContent = el.value || '0';
+  el.style.width = (mirror.offsetWidth + 4) + 'px';
+}
+function ppFromInput(el) {
+  var raw = el.value.replace(/[^0-9]/g,'');
+  var num = parseInt(raw) || 0;
+  PP_AMOUNT_INR = num;
+  PP_AMOUNT = num;
+  if (raw.length > 0) {
+    el.value = num.toLocaleString('en-IN');
+    var len = el.value.length; el.setSelectionRange(len, len);
+  }
+  ppResizeInput(el);
+  // Deselect preset tiles
+  [1,2,3,4].forEach(function(i){
+    var q = document.getElementById('pp-q'+i);
+    if(!q) return;
+    q.style.border='1px solid var(--border)'; q.style.background='';
+    var p=q.querySelector('p'); if(p){ p.style.color=''; }
+  });
+  ppUpdateUSDPill(PP_AMOUNT_INR);
+  ppValidateAmount(PP_AMOUNT_INR);
+  if (PP_AMOUNT_INR >= 10000 && PP_AMOUNT_INR <= PP_OUTSTANDING) {
+    updatePPDisplay(PP_AMOUNT_INR, PP_MODE);
+  }
+}
+function ppSelect(n, rawAmountINR) {
+  PP_AMOUNT_INR = rawAmountINR;
+  PP_AMOUNT = rawAmountINR;
+  var inp = document.getElementById('pp-amount-input');
+  if (inp) {
+    inp.value = rawAmountINR.toLocaleString('en-IN');
+    ppResizeInput(inp);
+  }
+  // Highlight selected preset, dim others
+  [1,2,3,4].forEach(function(i){
+    var q = document.getElementById('pp-q'+i);
+    if (!q) return;
+    var ml = document.getElementById('pp-q'+i+'-main');
+    if (i===n) {
+      q.style.border = '2px solid var(--success)'; q.style.background = '#DCFCE7';
+      if (ml) ml.style.color='#065F46';
+    } else {
+      q.style.border = '1px solid var(--border)'; q.style.background = '';
+      if (ml) ml.style.color='';
+    }
+  });
+  ppUpdateUSDPill(PP_AMOUNT_INR);
+  ppValidateAmount(PP_AMOUNT_INR);
+  updatePPDisplay(PP_AMOUNT_INR, PP_MODE);
+}
+function ppPref(n) {
+  PP_MODE = n;
+  var p1 = document.getElementById('pp-pref1');
+  var p2 = document.getElementById('pp-pref2');
+  if (p1) { p1.style.background = n===1 ? '#EDE9FF' : 'transparent'; p1.style.border = n===1 ? '2px solid var(--navy)' : '2px solid transparent'; p1.querySelector('p').style.color = n===1 ? 'var(--navy)' : 'var(--text2)'; p1.querySelector('p').style.fontWeight = n===1 ? '700' : '600'; }
+  if (p2) { p2.style.background = n===2 ? '#EDE9FF' : 'transparent'; p2.style.border = n===2 ? '2px solid var(--navy)' : '2px solid transparent'; p2.querySelector('p').style.color = n===2 ? 'var(--navy)' : 'var(--text2)'; p2.querySelector('p').style.fontWeight = n===2 ? '700' : '600'; }
+  updatePPDisplay(PP_AMOUNT_INR, PP_MODE);
+}
+function ppProceed() {
+  if (!ppValidateAmount(PP_AMOUNT_INR)) return;
+  updatePPDisplay(PP_AMOUNT_INR, PP_MODE);
+  goTo('sc-pay-quote');
+}
+var quoteTimer = null;
+function startQuoteTimer() {
+  var el = document.getElementById('pq-expires');
+  if (!el) return;
+  clearInterval(quoteTimer);
+  var secs = 120;
+  function tick() {
+    var m = Math.floor(secs/60), s = secs%60;
+    el.textContent = 'Locks in ' + String(m).padStart(2,'0') + ':' + String(s).padStart(2,'0');
+    if (--secs < 0) { clearInterval(quoteTimer); el.textContent = 'Rate expired'; el.style.color='#F97066'; }
+  }
+  tick(); quoteTimer = setInterval(tick, 1000);
+}
+function pqSetCur(n) {
+  [1,2,3].forEach(function(i){
+    var b = document.getElementById('pq-cur'+i);
+    if (!b) return;
+    b.style.border = i===n ? '2px solid var(--navy)' : '1.5px solid var(--border)';
+    b.style.fontWeight = i===n ? '700' : '600';
+    b.style.color = i===n ? 'var(--navy)' : 'var(--text2)';
+  });
+}
+function pqRefreshRate() {
+  // Simulate a rate refresh with slight variation
+  var jitter = (Math.random() - 0.5) * 0.6;
+  USD_RATE = Math.round((84.00 + jitter) * 100) / 100;
+  updatePPDisplay(PP_AMOUNT_INR, PP_MODE);
+  startQuoteTimer();
+}
+function pqSelectSrc(n) {
+  var s1 = document.getElementById('pq-src1'), s2 = document.getElementById('pq-src2');
+  if(s1) s1.style.border = (n===1)?'2px solid var(--navy)':'1.5px solid var(--border)';
+  if(s2) s2.style.border = (n===2)?'2px solid var(--navy)':'1.5px solid var(--border)';
+}
+function prvTriggerUpload() {
+  var inp = document.getElementById('prv-file-input');
+  if (inp) inp.click();
+}
+function prvFileSelected(inp) {
+  if (!inp.files || !inp.files[0]) return;
+  var name = inp.files[0].name;
+  var box = document.getElementById('prv-upload-box');
+  var lbl = document.getElementById('prv-upload-name');
+  if (box) box.style.background = 'rgba(5,150,105,.06)';
+  if (lbl) { lbl.textContent = '✓ ' + name; lbl.style.display = 'block'; }
+}
+function prvMethod(n) {
+  [1,2].forEach(function(i){
+    var b = document.getElementById('prv-m'+i);
+    if(!b) return;
+    b.style.background = (i===n)?'var(--navy)':'transparent';
+    b.style.color = (i===n)?'white':'var(--text2)';
+  });
+}
+var authChecked = true;
+function toggleAuth() {
+  authChecked = !authChecked;
+  var box = document.getElementById('auth-box');
+  if (box) {
+    box.style.background = 'transparent';
+    box.style.border = '2px solid var(--navy)';
+    box.innerHTML = authChecked ? '<i class="ti ti-check" style="font-size:14px;color:var(--navy)"></i>' : '';
+  }
+}
+
+/* ── Sign-in OTP flow ── */
+var siOtpSent = false;
+var siResendInterval = null;
+
+function siSendOTP() {
+  if (!siOtpSent) {
+    // First tap: reveal OTP section, change CTA
+    siOtpSent = true;
+    var sec = document.getElementById('si-otp-section');
+    var cta = document.getElementById('si-cta');
+    if (sec) sec.style.display = 'block';
+    if (cta) { cta.textContent = 'Sign in'; cta.onclick = function(){ goTo('sc-home'); }; }
+    siStartResendTimer(30);
+    setTimeout(function(){ var f = document.getElementById('si-otp-1'); if(f) f.focus(); }, 100);
+  } else {
+    // Resend tap: reset timer
+    [1,2,3,4,5,6].forEach(function(i){ var el=document.getElementById('si-otp-'+i); if(el) el.value=''; });
+    document.getElementById('si-otp-1') && document.getElementById('si-otp-1').focus();
+    siStartResendTimer(30);
+  }
+}
+
+function siStartResendTimer(secs) {
+  clearInterval(siResendInterval);
+  var timerEl = document.getElementById('si-resend-timer');
+  var resendEl = document.getElementById('si-resend-btn');
+  if (timerEl) timerEl.style.display = 'inline';
+  if (resendEl) resendEl.style.display = 'none';
+  siResendInterval = setInterval(function() {
+    secs--;
+    var m = String(Math.floor(secs/60)).padStart(2,'0');
+    var s = String(secs%60).padStart(2,'0');
+    if (timerEl) timerEl.innerHTML = 'Resend in <strong>' + m + ':' + s + '</strong>';
+    if (secs <= 0) {
+      clearInterval(siResendInterval);
+      if (timerEl) timerEl.style.display = 'none';
+      if (resendEl) resendEl.style.display = 'inline';
+    }
+  }, 1000);
+}
+
+function siOtpNext(el, n) {
+  el.value = el.value.replace(/[^0-9]/g,'');
+  if (el.value.length === 1 && n < 6) {
+    var next = document.getElementById('si-otp-'+(n+1));
+    if (next) next.focus();
+  }
+  // Highlight filled box
+  el.style.border = el.value ? '2px solid var(--navy)' : '1.5px solid var(--border)';
+}
+
+function siOtpBack(e, el, n) {
+  if (e.key === 'Backspace' && !el.value && n > 1) {
+    var prev = document.getElementById('si-otp-'+(n-1));
+    if (prev) { prev.value = ''; prev.focus(); prev.style.border = '1.5px solid var(--border)'; }
+  }
+}
+
+// Reset sign-in state when navigating back to it
+var _origGoTo = goTo;
+// Patch: reset si state when screen shown
+function resetSignIn() {
+  siOtpSent = false;
+  clearInterval(siResendInterval);
+  var sec = document.getElementById('si-otp-section');
+  var cta = document.getElementById('si-cta');
+  if (sec) sec.style.display = 'none';
+  if (cta) { cta.textContent = 'Send OTP'; cta.onclick = siSendOTP; }
+  [1,2,3,4,5,6].forEach(function(i){ var el=document.getElementById('si-otp-'+i); if(el){ el.value=''; el.style.border='1.5px solid var(--border)'; } });
+}
+
+var FA_RATE = 95.00, FA_INR = 1852187, FA_PRINCIPAL_INR = 1780000, FA_INTEREST_INR = 72187;
+function faSetCurrency(cur) {
+  var uBtn=document.getElementById('fa-cur-usd'), iBtn=document.getElementById('fa-cur-inr');
+  var sym=document.getElementById('fa-cur-sym'), disp=document.getElementById('fa-amount-display');
+  var lbl=document.getElementById('fa-conv-lbl'), val=document.getElementById('fa-conv-val');
+  var prin=document.getElementById('fa-principal'), intr=document.getElementById('fa-interest');
+  if(uBtn){uBtn.style.background=cur==='USD'?'var(--navy)':'transparent';uBtn.style.color=cur==='USD'?'white':'var(--text2)';}
+  if(iBtn){iBtn.style.background=cur==='INR'?'var(--navy)':'transparent';iBtn.style.color=cur==='INR'?'white':'var(--text2)';}
+  if(cur==='USD'){
+    if(sym) sym.textContent='$';
+    if(disp) disp.textContent=Math.round(FA_INR/FA_RATE).toLocaleString('en-US');
+    if(lbl) lbl.textContent='INR equivalent';
+    if(val) val.innerHTML='= &#x20B9;'+FA_INR.toLocaleString('en-IN');
+    if(prin) prin.textContent='$'+Math.round(FA_PRINCIPAL_INR/FA_RATE).toLocaleString('en-US');
+    if(intr) intr.textContent='$'+Math.round(FA_INTEREST_INR/FA_RATE).toLocaleString('en-US');
+  } else {
+    if(sym) sym.innerHTML='&#x20B9;';
+    if(disp) disp.textContent=FA_INR.toLocaleString('en-IN');
+    if(lbl) lbl.textContent='USD equivalent';
+    if(val) val.textContent='≈ $'+(FA_INR/FA_RATE).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});
+    if(prin) prin.innerHTML='&#x20B9;'+FA_PRINCIPAL_INR.toLocaleString('en-IN');
+    if(intr) intr.innerHTML='&#x20B9;'+FA_INTEREST_INR.toLocaleString('en-IN');
+  }
+}
+function pqLockAndContinue() {
+  var usd = (document.getElementById('pq-you-send') || {}).textContent || '';
+  // Review screen amount
+  var rvAmt = document.getElementById('prv-amount');
+  if (rvAmt && usd) rvAmt.textContent = usd;
+  // Confirm screen amount
+  var cAmt = document.getElementById('pconf-amount');
+  if (cAmt && usd) cAmt.textContent = usd;
+  // Authorization text amount
+  var authAmt = document.getElementById('auth-amount');
+  if (authAmt && usd) authAmt.textContent = usd;
+  goTo('sc-pay-review');
+}
+/* ── Full repayment quote screen helpers ── */
+var FQ_RATE = 95.00;
+function fqSetCur(n) {
+  [1,2,3].forEach(function(i){
+    var b = document.getElementById('fq-cur'+i);
+    if (!b) return;
+    b.style.border = i===n ? '2px solid var(--navy)' : '1.5px solid var(--border)';
+    b.style.fontWeight = i===n ? '700' : '600';
+    b.style.color = i===n ? 'var(--navy)' : 'var(--text2)';
+  });
+}
+function fqRefreshRate() {
+  var jitter = (Math.random() - 0.5) * 0.6;
+  FQ_RATE = Math.round((95.00 + jitter) * 100) / 100;
+  var el = document.getElementById('fq-you-send');
+  if (el) el.textContent = '$' + (1852187/FQ_RATE).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});
+  var exp = document.getElementById('fq-expires');
+  if (exp) { exp.textContent = 'Expires in 02:00'; exp.style.color='#FCD34D'; }
+}
+function fqLockAndContinue() {
+  var youSend = document.getElementById('fq-you-send');
+  var rvAmt   = document.getElementById('frv-amount');
+  if (youSend && rvAmt) rvAmt.textContent = youSend.textContent;
+  goTo('sc-full-pay-review');
+}
+function frvMethod(n) {
+  [1,2].forEach(function(i){
+    var b = document.getElementById('frv-m'+i);
+    if (!b) return;
+    if (i===n) { b.style.background='var(--navy)'; b.style.color='white'; b.style.border='2px solid var(--navy)'; }
+    else { b.style.background='white'; b.style.color='var(--text2)'; b.style.border='1.5px solid var(--border)'; }
+  });
+}
+// Init: size the amount input + wire sign-in CTA once DOM is ready
+document.addEventListener('DOMContentLoaded', function() {
+  var inp = document.getElementById('pp-amount-input');
+  if (inp) ppResizeInput(inp);
+  ppUpdateUSDPill(PP_AMOUNT_INR);
+  // Wire initial sign-in CTA
+  var cta = document.getElementById('si-cta');
+  if (cta) cta.onclick = siSendOTP;
+  // Reset sign-in when navigating to it
+  var origGoTo = goTo;
+  goTo = function(id) {
+    if (id === 'sc-signin-phone') resetSignIn();
+    origGoTo(id);
+    if (id === 'sc-pay-success') {
+      // Reset all tracker steps first
+      for (var s = 1; s <= 4; s++) {
+        var ic = document.getElementById('tr-icon-'+s);
+        var lb = document.getElementById('tr-label-'+s);
+        var tk = document.getElementById('tr-tick-'+s);
+        var ln = document.getElementById('tr-line-'+s);
+        if (ic) { ic.style.background='white'; ic.style.borderColor='#E5E7EB'; ic.querySelector('i').style.color='#CBD5E1'; }
+        if (lb) lb.style.color='var(--text2)';
+        if (tk) tk.style.display='none';
+        if (ln) ln.style.background='#E5E7EB';
+      }
+      var succIcon = document.getElementById('succ-icon');
+      var succCheck = document.getElementById('succ-check');
+      if (succIcon) succIcon.style.transform = 'scale(0)';
+      if (succCheck) succCheck.style.strokeDashoffset = '36';
+      // Animate check
+      setTimeout(function() {
+        if (succIcon) succIcon.style.transform = 'scale(1)';
+        if (succCheck) succCheck.style.strokeDashoffset = '0';
+      }, 50);
+      // Cascade tracker steps
+      var stepDelay = [600, 1400, 2200, 3000];
+      for (var n = 1; n <= 4; n++) {
+        (function(step, delay) {
+          setTimeout(function() {
+            var ic2 = document.getElementById('tr-icon-'+step);
+            var lb2 = document.getElementById('tr-label-'+step);
+            var tk2 = document.getElementById('tr-tick-'+step);
+            var ln2 = document.getElementById('tr-line-'+step);
+            if (ic2) { ic2.style.background='#DCFCE7'; ic2.style.borderColor='#059669'; ic2.querySelector('i').style.color='#059669'; }
+            if (lb2) lb2.style.color='var(--text)';
+            if (tk2) tk2.style.display='inline';
+            if (ln2) ln2.style.background='#059669';
+          }, delay);
+        })(n, stepDelay[n-1]);
+      }
+    }
+  };
+});
 </script>
+<!-- Off-screen mirror for input auto-sizing -->
+<span id="pp-amount-mirror" aria-hidden="true"
+  style="font-size:36px;font-weight:800;font-family:inherit;position:fixed;left:-9999px;top:-9999px;visibility:hidden;white-space:pre;pointer-events:none"></span>
 </body>
 </html>
