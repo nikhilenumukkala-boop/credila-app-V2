@@ -352,6 +352,55 @@ h1{font-size:24px;font-weight:700}h2{font-size:20px;font-weight:700}h3{font-size
 </div>
 </div>
 
+<!-- GET STARTED: CO-BORROWER PROFILE SETUP -->
+<div class="screen" id="sc-setup-profile-parent">
+<div class="sb"><span>9:41</span><span>&#x25CF;&#x25CF;&#x25CF;&#x25CF;</span></div>
+<div class="tn"><button class="bb" onclick="back()">&#x2190;</button><span class="nt">Create account</span></div>
+<div class="sc px py">
+  <div style="margin-top:8px;margin-bottom:8px">
+    <span class="role-badge role-parent"><i class="ti ti-users-group" style="font-size:inherit;vertical-align:-2px"></i> Co-borrower</span>
+  </div>
+  <div style="margin-bottom:24px">
+    <h2 class="mb8">Set up your profile</h2>
+    <p class="tm">You'll be linked to the loan as a co-borrower.</p>
+  </div>
+  <div class="ig">
+    <label class="il">Full name</label>
+    <input class="if" value="Rajesh Kumar" style="background:#F7F5FF" placeholder="As per loan records">
+    <p style="font-size:12px;color:var(--text2);margin-top:4px"><i class="ti ti-info-circle" style="font-size:12px;vertical-align:-1px"></i> Pre-filled from Credila loan records</p>
+  </div>
+  <div class="ig">
+    <label class="il">Mobile number</label>
+    <div style="display:flex;gap:0">
+      <div style="padding:14px 12px;background:var(--bg);border:1.5px solid var(--border);border-right:none;border-radius:10px 0 0 10px;color:var(--text2);font-size:15px;white-space:nowrap">+91</div>
+      <input class="if" style="border-radius:0 10px 10px 0;flex:1;background:#F7F5FF" value="87654 32109" placeholder="87654 32109" type="tel" maxlength="10">
+    </div>
+    <div style="margin-top:8px;padding:10px 12px;background:#EDE9FF;border:1px solid #C4B5FD;border-radius:10px;display:flex;align-items:center;gap:8px">
+      <i class="ti ti-circle-check" style="font-size:18px;color:var(--navy);flex-shrink:0"></i>
+      <span style="font-size:13px;color:var(--navy);font-weight:600">Co-borrower on loan #CRL-xxx123 · Aarav Kumar</span>
+    </div>
+  </div>
+  <div class="ig">
+    <label class="il">Set password</label>
+    <div style="position:relative">
+      <input class="if" type="password" placeholder="Minimum 8 characters" style="padding-right:48px">
+      <span style="position:absolute;right:14px;top:50%;transform:translateY(-50%);cursor:pointer;color:var(--text2)"><i class="ti ti-eye" style="font-size:18px"></i></span>
+    </div>
+  </div>
+  <div class="ig">
+    <label class="il">Re-enter password</label>
+    <div style="position:relative">
+      <input class="if" type="password" placeholder="Confirm your password" style="padding-right:48px">
+      <span style="position:absolute;right:14px;top:50%;transform:translateY(-50%);cursor:pointer;color:var(--text2)"><i class="ti ti-eye" style="font-size:18px"></i></span>
+    </div>
+  </div>
+  <div class="card mb16" style="background:var(--orange-bg)">
+    <p style="font-size:13px;color:#92400E"><i class="ti ti-shield" style="font-size:13px;vertical-align:-1px"></i> Your data is protected under DPDP Act 2023. Credila will never share your information without consent.</p>
+  </div>
+  <button class="bp" onclick="goTo('sc-otp-parent')">Continue</button>
+</div>
+</div>
+
 <!-- GET STARTED: PROFILE SETUP -->
 <div class="screen" id="sc-setup-profile">
 <div class="sb"><span>9:41</span><span>●●●●</span></div>
@@ -469,11 +518,12 @@ h1{font-size:24px;font-weight:700}h2{font-size:20px;font-weight:700}h3{font-size
 <div class="sb"><span>9:41</span><span>●●●●</span></div>
 <div class="tn"><button class="bb" onclick="back()">←</button><span class="nt">Verify number</span></div>
 <div class="sc px py">
-  <div style="margin-top:16px;margin-bottom:8px">
+  <div style="margin-top:16px;margin-bottom:12px">
     <span class="role-badge role-parent"><i class="ti ti-users-group" style="font-size:inherit;vertical-align:-2px"></i> Co-borrower</span>
   </div>
-  <h2 class="mb8">Verify your number</h2>
-  <p class="tm mb24">OTP sent to <strong>+91 87654 32109</strong> (co-borrower registered number)</p>
+  <h2 class="mb4">Hi, Rajesh Kumar</h2>
+  <p class="tm mb8" style="font-size:14px">Verify your number to continue.</p>
+  <p class="tm mb24">OTP sent to <strong>+91 87654 32109</strong></p>
   <div class="otp-row">
     <input class="otp-b" maxlength="1" value="7"><input class="otp-b" maxlength="1" value="3">
     <input class="otp-b" maxlength="1" value="1"><input class="otp-b" maxlength="1" value="">
@@ -693,10 +743,25 @@ h1{font-size:24px;font-weight:700}h2{font-size:20px;font-weight:700}h3{font-size
         <button class="bs" style="padding:12px;font-size:13px" onclick="goTo('sc-support')"><i class="ti ti-message-circle" style="font-size:16px;vertical-align:-2px"></i> Support</button>
       </div>
     </div>
+    <!-- Send money abroad -->
+    <div class="card mb12" style="cursor:pointer;border:1.5px solid var(--navy)" onclick="goTo('sc-pb-purpose')">
+      <div class="flex jb aic">
+        <div class="flex g12 aic">
+          <div style="width:42px;height:42px;border-radius:12px;background:linear-gradient(135deg,#5145CD,#7C6FE8);display:flex;align-items:center;justify-content:center;color:white;flex-shrink:0">
+            <i class="ti ti-world-upload" style="font-size:20px"></i>
+          </div>
+          <div>
+            <p class="fw6">Send money abroad</p>
+            <small class="tm">Remittance · LRS · Forex</small>
+          </div>
+        </div>
+        <span style="color:var(--navy);font-size:18px">›</span>
+      </div>
+    </div>
     <!-- Features restricted for parent -->
     <div class="card" style="background:var(--bg);border:1px dashed var(--border)">
       <p class="fw6 f13 mb8">Available to student only</p>
-      <p class="tm f13" style="line-height:1.6">Tranche requests · Remittance · Forex · MCA · Community features are accessible when Aarav logs in as the primary borrower.</p>
+      <p class="tm f13" style="line-height:1.6">Tranche requests · MCA · Community features are accessible when Aarav logs in as the primary borrower.</p>
     </div>
     <div style="height:16px"></div>
   </div>
@@ -706,6 +771,449 @@ h1{font-size:24px;font-weight:700}h2{font-size:20px;font-weight:700}h3{font-size
   <button class="ni" onclick="goTo('sc-my-loan')"><span class="ni-icon" style="font-size:0"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10,9 Q10,5.5 12,5.5 Q14,5.5 14,9"/><path d="M10.8,9 Q12,8 13.2,9"/><ellipse cx="12" cy="13.5" rx="3.5" ry="4"/><text x="12" y="15.5" font-size="5" text-anchor="middle" font-family="Arial" fill="currentColor" stroke="none" font-weight="bold">$</text><path d="M6,19 C6,17.5 7.5,17 9,17 L15,17 C16.5,17 18,17.5 18,19 C18,20.5 16.5,21 15,21 L9,21 C7.5,21 6,20.5 6,19Z"/><line x1="9.5" y1="17" x2="9" y2="15.5"/><line x1="12" y1="17" x2="12" y2="14.5"/><line x1="14.5" y1="17" x2="15" y2="15.5"/></svg></span>My Loan</button>
   <button class="ni" onclick="goTo('sc-money')"><span class="ni-icon" style="font-size:0"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M2,11 L22,11"/><path d="M6,7 L8,3 L16,3"/><circle cx="17" cy="16" r="1.5" fill="currentColor" stroke="none"/></svg></span>Money</button>
   <button class="ni" onclick="goTo('sc-profile')"><span class="ni-icon" style="font-size:0"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4,21 C4,16.5 7.5,13.5 12,13.5 C16.5,13.5 20,16.5 20,21"/></svg></span>Profile</button>
+</div>
+</div>
+
+<!-- PARENT REMITTANCE FLOW -->
+
+<!-- Step 1: Purpose -->
+<div class="screen" id="sc-pb-purpose">
+<div class="sb"><span>9:41</span><span>●●●●</span></div>
+<div class="tn"><button class="bb" onclick="back()">&#x2190;</button><span class="nt">Send money abroad</span></div>
+<div class="sc px py">
+  <!-- Progress -->
+  <div class="flex g0 mb24" style="align-items:center">
+    <div class="flex" style="flex-direction:column;align-items:center;flex:1">
+      <div style="width:28px;height:28px;border-radius:50%;background:var(--navy);color:white;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700">1</div>
+      <div style="font-size:10px;color:var(--navy);font-weight:600;margin-top:4px;text-align:center">Purpose</div>
+    </div>
+    <div style="flex:1;height:2px;background:var(--border);margin-bottom:14px"></div>
+    <div class="flex" style="flex-direction:column;align-items:center;flex:1">
+      <div style="width:28px;height:28px;border-radius:50%;background:var(--border);color:var(--text3);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700">2</div>
+      <div style="font-size:10px;color:var(--text3);font-weight:500;margin-top:4px;text-align:center">Remitter</div>
+    </div>
+    <div style="flex:1;height:2px;background:var(--border);margin-bottom:14px"></div>
+    <div class="flex" style="flex-direction:column;align-items:center;flex:1">
+      <div style="width:28px;height:28px;border-radius:50%;background:var(--border);color:var(--text3);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700">3</div>
+      <div style="font-size:10px;color:var(--text3);font-weight:500;margin-top:4px;text-align:center">Beneficiary</div>
+    </div>
+    <div style="flex:1;height:2px;background:var(--border);margin-bottom:14px"></div>
+    <div class="flex" style="flex-direction:column;align-items:center;flex:1">
+      <div style="width:28px;height:28px;border-radius:50%;background:var(--border);color:var(--text3);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700">4</div>
+      <div style="font-size:10px;color:var(--text3);font-weight:500;margin-top:4px;text-align:center">Quote</div>
+    </div>
+    <div style="flex:1;height:2px;background:var(--border);margin-bottom:14px"></div>
+    <div class="flex" style="flex-direction:column;align-items:center;flex:1">
+      <div style="width:28px;height:28px;border-radius:50%;background:var(--border);color:var(--text3);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700">5</div>
+      <div style="font-size:10px;color:var(--text3);font-weight:500;margin-top:4px;text-align:center">Documents</div>
+    </div>
+  </div>
+
+  <h2 class="mb4">Purpose of remittance</h2>
+  <p class="tm mb20" style="font-size:14px">Select the reason for sending money abroad. This is required for RBI / LRS compliance.</p>
+
+  <!-- Linked loan info -->
+  <div class="card mb16" style="background:linear-gradient(135deg,#EDE9FF,#F0FDFB);border:1.5px solid var(--navy)">
+    <div class="flex g10 aic">
+      <div style="width:36px;height:36px;border-radius:10px;background:var(--navy);display:flex;align-items:center;justify-content:center;flex-shrink:0"><i class="ti ti-school" style="color:white;font-size:16px"></i></div>
+      <div>
+        <p class="fw6 f13">Linked to Credila loan #CRL-xxx123</p>
+        <p class="tm" style="font-size:12px">Aarav Kumar · Carnegie Mellon University</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Purpose options -->
+  <div id="pb-purpose-opts">
+    <div class="card mb10" id="pb-p-1" style="cursor:pointer;border:2px solid var(--navy);transition:all 0.2s" onclick="pbSelectPurpose(1)">
+      <div class="flex jb aic">
+        <div class="flex g12 aic">
+          <div style="width:36px;height:36px;border-radius:10px;background:var(--bg);display:flex;align-items:center;justify-content:center"><i class="ti ti-building-bank" style="font-size:18px;color:var(--navy)"></i></div>
+          <div>
+            <p class="fw6">University tuition fees</p>
+            <small class="tm">Direct payment to educational institution</small>
+          </div>
+        </div>
+        <div id="pb-p-tick-1" style="width:20px;height:20px;border-radius:50%;background:var(--navy);display:flex;align-items:center;justify-content:center;flex-shrink:0"><i class="ti ti-check" style="font-size:12px;color:white"></i></div>
+      </div>
+    </div>
+    <div class="card mb10" id="pb-p-2" style="cursor:pointer;border:1.5px solid var(--border);transition:all 0.2s" onclick="pbSelectPurpose(2)">
+      <div class="flex jb aic">
+        <div class="flex g12 aic">
+          <div style="width:36px;height:36px;border-radius:10px;background:var(--bg);display:flex;align-items:center;justify-content:center"><i class="ti ti-home" style="font-size:18px;color:var(--text2)"></i></div>
+          <div>
+            <p class="fw6">Living expenses / rent</p>
+            <small class="tm">Hostel, accommodation, daily expenses</small>
+          </div>
+        </div>
+        <div id="pb-p-tick-2" style="width:20px;height:20px;border-radius:50%;background:var(--border);display:flex;align-items:center;justify-content:center;flex-shrink:0"><i class="ti ti-check" style="font-size:12px;color:var(--text3)"></i></div>
+      </div>
+    </div>
+    <div class="card mb10" id="pb-p-3" style="cursor:pointer;border:1.5px solid var(--border);transition:all 0.2s" onclick="pbSelectPurpose(3)">
+      <div class="flex jb aic">
+        <div class="flex g12 aic">
+          <div style="width:36px;height:36px;border-radius:10px;background:var(--bg);display:flex;align-items:center;justify-content:center"><i class="ti ti-user" style="font-size:18px;color:var(--text2)"></i></div>
+          <div>
+            <p class="fw6">Student's personal account</p>
+            <small class="tm">Transfer to child's overseas bank account</small>
+          </div>
+        </div>
+        <div id="pb-p-tick-3" style="width:20px;height:20px;border-radius:50%;background:var(--border);display:flex;align-items:center;justify-content:center;flex-shrink:0"><i class="ti ti-check" style="font-size:12px;color:var(--text3)"></i></div>
+      </div>
+    </div>
+    <div class="card mb20" id="pb-p-4" style="cursor:pointer;border:1.5px solid var(--border);transition:all 0.2s" onclick="pbSelectPurpose(4)">
+      <div class="flex jb aic">
+        <div class="flex g12 aic">
+          <div style="width:36px;height:36px;border-radius:10px;background:var(--bg);display:flex;align-items:center;justify-content:center"><i class="ti ti-books" style="font-size:18px;color:var(--text2)"></i></div>
+          <div>
+            <p class="fw6">Other education expenses</p>
+            <small class="tm">Books, equipment, exam fees</small>
+          </div>
+        </div>
+        <div id="pb-p-tick-4" style="width:20px;height:20px;border-radius:50%;background:var(--border);display:flex;align-items:center;justify-content:center;flex-shrink:0"><i class="ti ti-check" style="font-size:12px;color:var(--text3)"></i></div>
+      </div>
+    </div>
+  </div>
+
+  <div style="background:rgba(81,69,205,0.06);border-radius:12px;padding:12px;margin-bottom:20px">
+    <p class="f12 tm"><i class="ti ti-info-circle" style="color:var(--navy);vertical-align:-2px"></i> Under RBI's LRS scheme, resident individuals can remit up to <strong>USD 2,50,000</strong> per financial year for overseas education. TCS applicable above ₹7L.</p>
+  </div>
+
+  <button class="bp" onclick="goTo('sc-pb-remitter')">Continue</button>
+</div>
+</div>
+
+<!-- Step 2: Remitter Details -->
+<div class="screen" id="sc-pb-remitter">
+<div class="sb"><span>9:41</span><span>●●●●</span></div>
+<div class="tn"><button class="bb" onclick="back()">&#x2190;</button><span class="nt">Remitter details</span></div>
+<div class="sc px py">
+  <!-- Progress -->
+  <div class="flex g0 mb24" style="align-items:center">
+    <div class="flex" style="flex-direction:column;align-items:center;flex:1"><div style="width:28px;height:28px;border-radius:50%;background:var(--success);color:white;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700"><i class="ti ti-check" style="font-size:12px"></i></div><div style="font-size:10px;color:var(--success);font-weight:600;margin-top:4px">Purpose</div></div>
+    <div style="flex:1;height:2px;background:var(--navy);margin-bottom:14px"></div>
+    <div class="flex" style="flex-direction:column;align-items:center;flex:1"><div style="width:28px;height:28px;border-radius:50%;background:var(--navy);color:white;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700">2</div><div style="font-size:10px;color:var(--navy);font-weight:600;margin-top:4px">Remitter</div></div>
+    <div style="flex:1;height:2px;background:var(--border);margin-bottom:14px"></div>
+    <div class="flex" style="flex-direction:column;align-items:center;flex:1"><div style="width:28px;height:28px;border-radius:50%;background:var(--border);color:var(--text3);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700">3</div><div style="font-size:10px;color:var(--text3);font-weight:500;margin-top:4px">Beneficiary</div></div>
+    <div style="flex:1;height:2px;background:var(--border);margin-bottom:14px"></div>
+    <div class="flex" style="flex-direction:column;align-items:center;flex:1"><div style="width:28px;height:28px;border-radius:50%;background:var(--border);color:var(--text3);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700">4</div><div style="font-size:10px;color:var(--text3);font-weight:500;margin-top:4px">Quote</div></div>
+    <div style="flex:1;height:2px;background:var(--border);margin-bottom:14px"></div>
+    <div class="flex" style="flex-direction:column;align-items:center;flex:1"><div style="width:28px;height:28px;border-radius:50%;background:var(--border);color:var(--text3);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700">5</div><div style="font-size:10px;color:var(--text3);font-weight:500;margin-top:4px">Documents</div></div>
+  </div>
+
+  <h2 class="mb4">Your details</h2>
+  <p class="tm mb20" style="font-size:14px">Pre-filled from Credila loan records. Verify before proceeding.</p>
+
+  <div class="ig">
+    <label class="il">Full name (as per PAN)</label>
+    <input class="if" value="Rajesh Kumar" style="background:var(--bg)">
+    <p style="font-size:11px;color:var(--text2);margin-top:4px"><i class="ti ti-lock" style="font-size:11px;vertical-align:-1px"></i> Pre-filled from loan records</p>
+  </div>
+  <div class="ig">
+    <label class="il">PAN number</label>
+    <input class="if" value="ABCPK1234F" style="background:var(--bg);letter-spacing:2px;font-weight:600">
+  </div>
+  <div class="ig">
+    <label class="il">Email address</label>
+    <input class="if" value="rajesh.kumar@gmail.com" type="email">
+  </div>
+  <div class="ig">
+    <label class="il">Mobile number</label>
+    <input class="if" value="+91 87654 32109" style="background:var(--bg)">
+    <p style="font-size:11px;color:var(--text2);margin-top:4px"><i class="ti ti-lock" style="font-size:11px;vertical-align:-1px"></i> Pre-filled · cannot be changed</p>
+  </div>
+  <div class="ig">
+    <label class="il">Residential address</label>
+    <textarea class="if" style="height:72px;resize:none">42, Bougainvillea Road, Koregaon Park, Pune – 411 001, Maharashtra</textarea>
+  </div>
+
+  <p class="fw6 f13 mb12" style="color:var(--text2);text-transform:uppercase;letter-spacing:.4px">Debit bank account</p>
+  <div class="card mb16" style="border:1.5px solid var(--navy)">
+    <div class="flex jb aic">
+      <div class="flex g12 aic">
+        <div style="width:38px;height:38px;border-radius:10px;background:#E8F0FE;display:flex;align-items:center;justify-content:center;flex-shrink:0"><span style="font-size:13px;font-weight:700;color:#1A73E8">HD</span></div>
+        <div>
+          <p class="fw6">HDFC Bank</p>
+          <small class="tm">Savings ···4521 · Pune</small>
+        </div>
+      </div>
+      <div style="width:20px;height:20px;border-radius:50%;background:var(--navy);display:flex;align-items:center;justify-content:center"><i class="ti ti-check" style="font-size:12px;color:white"></i></div>
+    </div>
+  </div>
+  <button class="bl mb20" style="font-size:13px"><i class="ti ti-plus" style="vertical-align:-2px"></i> Add another bank account</button>
+
+  <button class="bp" onclick="goTo('sc-pb-beneficiary')">Continue</button>
+  <div style="height:16px"></div>
+</div>
+</div>
+
+<!-- Step 3: Beneficiary Details -->
+<div class="screen" id="sc-pb-beneficiary">
+<div class="sb"><span>9:41</span><span>●●●●</span></div>
+<div class="tn"><button class="bb" onclick="back()">&#x2190;</button><span class="nt">Beneficiary details</span></div>
+<div class="sc px py">
+  <!-- Progress -->
+  <div class="flex g0 mb24" style="align-items:center">
+    <div class="flex" style="flex-direction:column;align-items:center;flex:1"><div style="width:28px;height:28px;border-radius:50%;background:var(--success);color:white;display:flex;align-items:center;justify-content:center;font-size:12px"><i class="ti ti-check" style="font-size:12px"></i></div><div style="font-size:10px;color:var(--success);font-weight:600;margin-top:4px">Purpose</div></div>
+    <div style="flex:1;height:2px;background:var(--success);margin-bottom:14px"></div>
+    <div class="flex" style="flex-direction:column;align-items:center;flex:1"><div style="width:28px;height:28px;border-radius:50%;background:var(--success);color:white;display:flex;align-items:center;justify-content:center;font-size:12px"><i class="ti ti-check" style="font-size:12px"></i></div><div style="font-size:10px;color:var(--success);font-weight:600;margin-top:4px">Remitter</div></div>
+    <div style="flex:1;height:2px;background:var(--navy);margin-bottom:14px"></div>
+    <div class="flex" style="flex-direction:column;align-items:center;flex:1"><div style="width:28px;height:28px;border-radius:50%;background:var(--navy);color:white;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700">3</div><div style="font-size:10px;color:var(--navy);font-weight:600;margin-top:4px">Beneficiary</div></div>
+    <div style="flex:1;height:2px;background:var(--border);margin-bottom:14px"></div>
+    <div class="flex" style="flex-direction:column;align-items:center;flex:1"><div style="width:28px;height:28px;border-radius:50%;background:var(--border);color:var(--text3);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700">4</div><div style="font-size:10px;color:var(--text3);font-weight:500;margin-top:4px">Quote</div></div>
+    <div style="flex:1;height:2px;background:var(--border);margin-bottom:14px"></div>
+    <div class="flex" style="flex-direction:column;align-items:center;flex:1"><div style="width:28px;height:28px;border-radius:50%;background:var(--border);color:var(--text3);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700">5</div><div style="font-size:10px;color:var(--text3);font-weight:500;margin-top:4px">Documents</div></div>
+  </div>
+
+  <h2 class="mb4">Who are you sending to?</h2>
+  <p class="tm mb16" style="font-size:14px">Saved beneficiaries from your loan profile.</p>
+
+  <!-- Saved beneficiaries -->
+  <div class="card mb10" id="pb-b-1" style="cursor:pointer;border:2px solid var(--navy);transition:all 0.2s" onclick="pbSelectBene(1)">
+    <div class="flex jb aic mb8">
+      <div class="flex g10 aic">
+        <div style="width:38px;height:38px;border-radius:10px;background:#E8F0FE;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:#1A73E8;flex-shrink:0">CM</div>
+        <div>
+          <p class="fw6">Carnegie Mellon University</p>
+          <small class="tm">University · Pittsburgh, USA</small>
+        </div>
+      </div>
+      <div id="pb-b-tick-1" style="width:20px;height:20px;border-radius:50%;background:var(--navy);display:flex;align-items:center;justify-content:center;flex-shrink:0"><i class="ti ti-check" style="font-size:12px;color:white"></i></div>
+    </div>
+    <div style="border-top:1px solid var(--border);padding-top:8px">
+      <div class="flex jb"><small class="tm">Bank</small><small class="fw6" style="font-size:12px">PNC Bank N.A.</small></div>
+      <div class="flex jb mt4"><small class="tm">Account</small><small class="fw6" style="font-size:12px">●●●● 0012</small></div>
+      <div class="flex jb mt4"><small class="tm">SWIFT</small><small class="fw6" style="font-size:12px">PNCCUS33</small></div>
+    </div>
+  </div>
+
+  <div class="card mb16" id="pb-b-2" style="cursor:pointer;border:1.5px solid var(--border);transition:all 0.2s" onclick="pbSelectBene(2)">
+    <div class="flex jb aic mb8">
+      <div class="flex g10 aic">
+        <div style="width:38px;height:38px;border-radius:10px;background:#F0FDF4;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:#059669;flex-shrink:0">AK</div>
+        <div>
+          <p class="fw6">Aarav Kumar</p>
+          <small class="tm">Student's personal account · New York</small>
+        </div>
+      </div>
+      <div id="pb-b-tick-2" style="width:20px;height:20px;border-radius:50%;background:var(--border);display:flex;align-items:center;justify-content:center;flex-shrink:0"><i class="ti ti-check" style="font-size:12px;color:var(--text3)"></i></div>
+    </div>
+    <div style="border-top:1px solid var(--border);padding-top:8px">
+      <div class="flex jb"><small class="tm">Bank</small><small class="fw6" style="font-size:12px">Chase Bank</small></div>
+      <div class="flex jb mt4"><small class="tm">Account</small><small class="fw6" style="font-size:12px">●●●● 4401</small></div>
+      <div class="flex jb mt4"><small class="tm">SWIFT</small><small class="fw6" style="font-size:12px">CHASUS33</small></div>
+    </div>
+  </div>
+
+  <button class="bl mb20" style="font-size:13px"><i class="ti ti-plus" style="vertical-align:-2px"></i> Add new beneficiary</button>
+  <button class="bp" onclick="goTo('sc-pb-quote')">Continue</button>
+  <div style="height:16px"></div>
+</div>
+</div>
+
+<!-- Step 4: Quote / Transaction Details -->
+<div class="screen" id="sc-pb-quote">
+<div class="sb"><span>9:41</span><span>●●●●</span></div>
+<div class="tn"><button class="bb" onclick="back()">&#x2190;</button><span class="nt">Transaction details</span></div>
+<div class="sc px py">
+  <!-- Progress -->
+  <div class="flex g0 mb24" style="align-items:center">
+    <div class="flex" style="flex-direction:column;align-items:center;flex:1"><div style="width:28px;height:28px;border-radius:50%;background:var(--success);color:white;display:flex;align-items:center;justify-content:center;font-size:12px"><i class="ti ti-check" style="font-size:12px"></i></div><div style="font-size:10px;color:var(--success);font-weight:600;margin-top:4px">Purpose</div></div>
+    <div style="flex:1;height:2px;background:var(--success);margin-bottom:14px"></div>
+    <div class="flex" style="flex-direction:column;align-items:center;flex:1"><div style="width:28px;height:28px;border-radius:50%;background:var(--success);color:white;display:flex;align-items:center;justify-content:center;font-size:12px"><i class="ti ti-check" style="font-size:12px"></i></div><div style="font-size:10px;color:var(--success);font-weight:600;margin-top:4px">Remitter</div></div>
+    <div style="flex:1;height:2px;background:var(--success);margin-bottom:14px"></div>
+    <div class="flex" style="flex-direction:column;align-items:center;flex:1"><div style="width:28px;height:28px;border-radius:50%;background:var(--success);color:white;display:flex;align-items:center;justify-content:center;font-size:12px"><i class="ti ti-check" style="font-size:12px"></i></div><div style="font-size:10px;color:var(--success);font-weight:600;margin-top:4px">Beneficiary</div></div>
+    <div style="flex:1;height:2px;background:var(--navy);margin-bottom:14px"></div>
+    <div class="flex" style="flex-direction:column;align-items:center;flex:1"><div style="width:28px;height:28px;border-radius:50%;background:var(--navy);color:white;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700">4</div><div style="font-size:10px;color:var(--navy);font-weight:600;margin-top:4px">Quote</div></div>
+    <div style="flex:1;height:2px;background:var(--border);margin-bottom:14px"></div>
+    <div class="flex" style="flex-direction:column;align-items:center;flex:1"><div style="width:28px;height:28px;border-radius:50%;background:var(--border);color:var(--text3);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700">5</div><div style="font-size:10px;color:var(--text3);font-weight:500;margin-top:4px">Documents</div></div>
+  </div>
+
+  <!-- Transaction Details Card -->
+  <div class="card mb16" style="padding:0;overflow:hidden">
+    <div style="padding:18px 18px 14px;border-bottom:1px solid var(--border)">
+      <p class="fw6" style="font-size:16px">Transaction Details</p>
+    </div>
+
+    <!-- Enter Amount -->
+    <div style="padding:14px 18px;border-bottom:1px solid var(--border)">
+      <p class="tm f12 mb10">Enter Amount</p>
+      <div style="border:1.5px solid var(--border);border-radius:12px;padding:12px 16px;display:flex;align-items:center;justify-content:space-between;background:var(--bg)">
+        <div class="flex g10 aic">
+          <span style="font-size:22px" title="US Flag">🇺🇸</span>
+          <span class="fw6" style="font-size:15px;color:var(--text2)">USD</span>
+        </div>
+        <input id="pb-usd-input" type="number" value="10000" style="border:none;background:transparent;font-size:22px;font-weight:800;color:var(--text);text-align:right;width:140px;outline:none" oninput="pbCalc()">
+      </div>
+    </div>
+
+    <!-- Forex Rate -->
+    <div style="padding:12px 18px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between">
+      <span style="font-size:14px;color:var(--text2)">Forex Rate</span>
+      <div style="text-align:right">
+        <p class="fw6" id="pb-rate-val">95.0644</p>
+        <p style="font-size:12px;color:#1A73E8;cursor:pointer;margin-top:2px">Apply Coupon Code</p>
+      </div>
+    </div>
+
+    <!-- Transfer Fee -->
+    <div style="padding:12px 18px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between">
+      <span style="font-size:14px;color:var(--text2)">Transfer Fee</span>
+      <span class="fw6" id="pb-fee-val">1,500</span>
+    </div>
+
+    <!-- TCS -->
+    <div style="padding:12px 18px;border-bottom:1px solid var(--border);background:#F8F8F8">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px">
+        <span style="font-size:14px;color:var(--text2)">Tax Collected at Source [TCS]</span>
+        <span class="fw6" id="pb-tcs-val">2,257</span>
+      </div>
+      <div style="display:flex;align-items:center;justify-content:space-between">
+        <p style="font-size:12px;color:#1A73E8;cursor:pointer">Add additional LRS transactions</p>
+        <p style="font-size:12px;color:#1A73E8;font-weight:600">1 Added</p>
+      </div>
+    </div>
+
+    <!-- GST -->
+    <div style="padding:12px 18px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between">
+      <span style="font-size:14px;color:var(--text2)">Goods and Service Tax</span>
+      <span class="fw6" id="pb-gst-val">1,215</span>
+    </div>
+
+    <!-- INR Total -->
+    <div style="padding:14px 18px">
+      <div style="border:1.5px solid var(--border);border-radius:12px;padding:12px 16px;display:flex;align-items:center;justify-content:space-between;background:var(--bg)">
+        <div class="flex g10 aic">
+          <span style="font-size:22px" title="India Flag">🇮🇳</span>
+          <span class="fw6" style="font-size:15px;color:var(--text2)">INR</span>
+        </div>
+        <span id="pb-inr-total" class="fw6" style="font-size:22px;font-weight:800;color:var(--text)">9,55,616</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Rate lock notice -->
+  <div style="background:rgba(0,196,140,0.08);border-radius:12px;padding:12px;margin-bottom:20px;border:1px solid rgba(0,196,140,0.2)">
+    <p class="f12" style="color:#059669"><i class="ti ti-clock" style="vertical-align:-2px"></i> Rate locked for <strong id="pb-countdown">2:00</strong> · Rates refresh every 2 minutes</p>
+  </div>
+
+  <button class="bp" onclick="goTo('sc-pb-docs')">Confirm Transfer</button>
+  <div style="height:16px"></div>
+</div>
+</div>
+
+<!-- Step 5: Document Upload -->
+<div class="screen" id="sc-pb-docs">
+<div class="sb"><span>9:41</span><span>●●●●</span></div>
+<div class="tn"><button class="bb" onclick="back()">&#x2190;</button><span class="nt">Supporting documents</span></div>
+<div class="sc px py">
+  <!-- Progress -->
+  <div class="flex g0 mb24" style="align-items:center">
+    <div class="flex" style="flex-direction:column;align-items:center;flex:1"><div style="width:28px;height:28px;border-radius:50%;background:var(--success);color:white;display:flex;align-items:center;justify-content:center;font-size:12px"><i class="ti ti-check" style="font-size:12px"></i></div><div style="font-size:10px;color:var(--success);font-weight:600;margin-top:4px">Purpose</div></div>
+    <div style="flex:1;height:2px;background:var(--success);margin-bottom:14px"></div>
+    <div class="flex" style="flex-direction:column;align-items:center;flex:1"><div style="width:28px;height:28px;border-radius:50%;background:var(--success);color:white;display:flex;align-items:center;justify-content:center;font-size:12px"><i class="ti ti-check" style="font-size:12px"></i></div><div style="font-size:10px;color:var(--success);font-weight:600;margin-top:4px">Remitter</div></div>
+    <div style="flex:1;height:2px;background:var(--success);margin-bottom:14px"></div>
+    <div class="flex" style="flex-direction:column;align-items:center;flex:1"><div style="width:28px;height:28px;border-radius:50%;background:var(--success);color:white;display:flex;align-items:center;justify-content:center;font-size:12px"><i class="ti ti-check" style="font-size:12px"></i></div><div style="font-size:10px;color:var(--success);font-weight:600;margin-top:4px">Beneficiary</div></div>
+    <div style="flex:1;height:2px;background:var(--success);margin-bottom:14px"></div>
+    <div class="flex" style="flex-direction:column;align-items:center;flex:1"><div style="width:28px;height:28px;border-radius:50%;background:var(--success);color:white;display:flex;align-items:center;justify-content:center;font-size:12px"><i class="ti ti-check" style="font-size:12px"></i></div><div style="font-size:10px;color:var(--success);font-weight:600;margin-top:4px">Quote</div></div>
+    <div style="flex:1;height:2px;background:var(--navy);margin-bottom:14px"></div>
+    <div class="flex" style="flex-direction:column;align-items:center;flex:1"><div style="width:28px;height:28px;border-radius:50%;background:var(--navy);color:white;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700">5</div><div style="font-size:10px;color:var(--navy);font-weight:600;margin-top:4px">Documents</div></div>
+  </div>
+
+  <h2 class="mb4">Supporting documents</h2>
+  <p class="tm mb20" style="font-size:14px">Required for RBI / LRS compliance. The below are pre-attached from your loan file.</p>
+
+  <!-- Pre-attached docs -->
+  <p class="fw6 f12 mb10" style="color:var(--text2);text-transform:uppercase;letter-spacing:.4px">Attached documents</p>
+
+  <div class="card mb10" style="border:1.5px solid var(--success)">
+    <div class="flex jb aic">
+      <div class="flex g10 aic">
+        <div style="width:38px;height:38px;border-radius:10px;background:#DCFCE7;display:flex;align-items:center;justify-content:center;flex-shrink:0"><i class="ti ti-file-check" style="font-size:18px;color:#059669"></i></div>
+        <div>
+          <p class="fw6">Student Visa (F-1)</p>
+          <small class="tm">Aarav_Kumar_F1_Visa.pdf · 342 KB</small>
+        </div>
+      </div>
+      <div class="flex aic g6">
+        <span class="tag tg">Verified</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="card mb16" style="border:1.5px solid var(--success)">
+    <div class="flex jb aic">
+      <div class="flex g10 aic">
+        <div style="width:38px;height:38px;border-radius:10px;background:#DCFCE7;display:flex;align-items:center;justify-content:center;flex-shrink:0"><i class="ti ti-file-check" style="font-size:18px;color:#059669"></i></div>
+        <div>
+          <p class="fw6">Hostel / Accommodation Invoice</p>
+          <small class="tm">CMU_Housing_Invoice_2026.pdf · 518 KB</small>
+        </div>
+      </div>
+      <div class="flex aic g6">
+        <span class="tag tg">Verified</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Optional additional doc upload -->
+  <p class="fw6 f12 mb10" style="color:var(--text2);text-transform:uppercase;letter-spacing:.4px">Additional documents (optional)</p>
+
+  <div id="pb-upload-box" style="border:2px dashed var(--border);border-radius:16px;padding:24px;text-align:center;cursor:pointer;margin-bottom:20px;background:var(--bg)" onclick="pbUploadTap()">
+    <div style="width:44px;height:44px;border-radius:12px;background:white;display:flex;align-items:center;justify-content:center;margin:0 auto 10px;box-shadow:0 2px 8px rgba(81,69,205,0.12)">
+      <i class="ti ti-upload" style="font-size:20px;color:var(--navy)"></i>
+    </div>
+    <p class="fw6 f13">Upload additional document</p>
+    <p class="tm f12 mt4">Admission letter, fee receipt, I-20</p>
+  </div>
+  <input type="file" id="pb-file-input" accept=".pdf,.jpg,.png" style="display:none" onchange="pbFileChosen(this)">
+
+  <!-- LRS declaration -->
+  <div class="card mb20" style="background:rgba(81,69,205,0.04);border:1px solid var(--border)">
+    <p class="fw6 f13 mb6">LRS Declaration</p>
+    <p class="tm f12" style="line-height:1.6">I declare that the amount being remitted does not exceed USD 2,50,000 in the current financial year and is in compliance with the Foreign Exchange Management Act (FEMA), 1999 and RBI's Liberalised Remittance Scheme.</p>
+    <div class="flex g8 aic mt10">
+      <input type="checkbox" id="pb-lrs-check" checked style="width:16px;height:16px;accent-color:var(--navy);cursor:pointer">
+      <label for="pb-lrs-check" class="f12 fw6" style="cursor:pointer">I agree to the above declaration</label>
+    </div>
+  </div>
+
+  <button class="bp" onclick="goTo('sc-pb-success')">Initiate transfer</button>
+  <div style="height:16px"></div>
+</div>
+</div>
+
+<!-- Success screen -->
+<div class="screen" id="sc-pb-success">
+<div class="sb"><span>9:41</span><span>●●●●</span></div>
+<div class="sc px py" style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100%">
+  <!-- Animated check -->
+  <div id="pb-succ-icon" style="width:80px;height:80px;border-radius:50%;background:linear-gradient(135deg,#059669,#34D399);display:flex;align-items:center;justify-content:center;margin-bottom:20px;box-shadow:0 8px 24px rgba(5,150,105,0.30);transform:scale(0);transition:transform 0.4s cubic-bezier(.34,1.56,.64,1)">
+    <svg id="pb-succ-check" width="38" height="38" viewBox="0 0 38 38" fill="none" stroke="white" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" style="stroke-dasharray:60;stroke-dashoffset:60;transition:stroke-dashoffset 0.5s ease 0.4s">
+      <polyline points="7,19 16,28 31,11"/>
+    </svg>
+  </div>
+  <h2 class="mb8" style="text-align:center">Transfer submitted!</h2>
+  <p class="tm mb24" style="text-align:center;font-size:14px">Your remittance request is being processed. You'll receive an SMS and email update.</p>
+
+  <div class="card mb16 wf" style="border:1.5px solid var(--border)">
+    <div class="flex jb mb8"><small class="tm">Amount sent</small><span class="fw6">USD 10,000</span></div>
+    <div class="flex jb mb8"><small class="tm">INR debited</small><span class="fw6">₹9,55,616</span></div>
+    <div class="flex jb mb8"><small class="tm">Recipient</small><span class="fw6" style="font-size:13px">Carnegie Mellon University</span></div>
+    <div class="flex jb"><small class="tm">Reference</small><span class="fw6" style="font-size:12px;color:var(--navy)">LRS-20260615-8834</span></div>
+  </div>
+
+  <!-- Status tracker -->
+  <div class="card wf mb20">
+    <p class="fw6 f13 mb12">Transfer status</p>
+    <div class="flex g10 aic mb10"><div id="pb-tk-1" style="width:28px;height:28px;border-radius:50%;background:var(--border);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:background 0.4s"><i class="ti ti-check" style="font-size:12px;color:var(--text3)"></i></div><div><p class="fw6 f12" id="pb-tl-1" style="color:var(--text3)">Request received</p><p class="f11 tm">Processing your submission</p></div></div>
+    <div class="flex g10 aic mb10"><div id="pb-tk-2" style="width:28px;height:28px;border-radius:50%;background:var(--border);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:background 0.4s"><i class="ti ti-check" style="font-size:12px;color:var(--text3)"></i></div><div><p class="fw6 f12" id="pb-tl-2" style="color:var(--text3)">Compliance check</p><p class="f11 tm">RBI / LRS / FEMA verification</p></div></div>
+    <div class="flex g10 aic mb10"><div id="pb-tk-3" style="width:28px;height:28px;border-radius:50%;background:var(--border);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:background 0.4s"><i class="ti ti-check" style="font-size:12px;color:var(--text3)"></i></div><div><p class="fw6 f12" id="pb-tl-3" style="color:var(--text3)">Bank transfer initiated</p><p class="f11 tm">Funds sent to Apex Remittance Inc.</p></div></div>
+    <div class="flex g10 aic"><div id="pb-tk-4" style="width:28px;height:28px;border-radius:50%;background:var(--border);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:background 0.4s"><i class="ti ti-check" style="font-size:12px;color:var(--text3)"></i></div><div><p class="fw6 f12" id="pb-tl-4" style="color:var(--text3)">Delivered to recipient</p><p class="f11 tm">Expected: 1–2 business days</p></div></div>
+  </div>
+
+  <button class="bp wf" onclick="goTo('sc-parent-home')">Back to home</button>
+  <div style="height:16px"></div>
 </div>
 </div>
 
@@ -1117,7 +1625,7 @@ h1{font-size:24px;font-weight:700}h2{font-size:20px;font-weight:700}h3{font-size
 <!-- SEND MONEY: STEP 1 — AMOUNT & BENEFICIARY -->
 <div class="screen" id="sc-send-money">
 <div class="sb"><span>9:41</span><span>&#x25CF;&#x25CF;&#x25CF;&#x25CF;</span></div>
-<div class="tn"><button class="bb" onclick="back()">&#x2190;</button><span class="nt">Send money abroad</span></div>
+<div class="tn"><button class="bb" onclick="back()">&#x2190;</button><span class="nt">Send money</span></div>
 <div class="sc px py" style="padding-bottom:80px">
 
   <div class="pay-steps">
@@ -1279,20 +1787,73 @@ h1{font-size:24px;font-weight:700}h2{font-size:20px;font-weight:700}h3{font-size
     </div>
   </div>
   <p class="fw6 mb12">Choose payment type</p>
-  <div class="card mb8" style="cursor:pointer;border:1.5px solid var(--navy)" onclick="goTo('sc-part-payment')">
+  <div class="card mb8" style="cursor:pointer;border:1.5px solid var(--navy)" onclick="goToPartPayment()">
     <div class="flex g12 aic">
       <div style="width:44px;height:44px;border-radius:12px;background:#EEF2FF;display:flex;align-items:center;justify-content:center"><i class="ti ti-cash" style="font-size:22px;color:var(--navy)"></i></div>
       <div style="flex:1"><p class="fw6">Part repayment</p><small class="tm">Pay extra · reduce tenure or lower EMI</small></div>
       <span class="tm f18">›</span>
     </div>
   </div>
-  <div class="card" style="cursor:pointer;border:1.5px solid var(--border)" onclick="goTo('sc-payments-full')">
+  <div class="card" style="cursor:pointer;border:1.5px solid var(--border)" onclick="goToFullPayment()">
     <div class="flex g12 aic">
       <div style="width:44px;height:44px;border-radius:12px;background:var(--bg);display:flex;align-items:center;justify-content:center"><i class="ti ti-check" style="font-size:22px;color:var(--text2)"></i></div>
       <div style="flex:1"><p class="fw6">Full repayment / foreclosure</p><small class="tm">Close your loan early · get foreclosure quote</small></div>
       <span class="tm f18">›</span>
     </div>
   </div>
+</div>
+</div>
+
+<!-- PAYMENT GATEWAY REDIRECT (co-borrower only) -->
+<div class="screen" id="sc-pg-redirect">
+<div class="sb"><span>9:41</span><span>●●●●</span></div>
+<div class="tn"><button class="bb" onclick="back()">&#x2190;</button><span class="nt" id="pg-title">Part repayment</span></div>
+<div class="sc px py" style="display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;min-height:100%">
+
+  <!-- Animated spinner -->
+  <div style="position:relative;width:88px;height:88px;margin-bottom:24px">
+    <svg width="88" height="88" viewBox="0 0 88 88" style="position:absolute;top:0;left:0">
+      <circle cx="44" cy="44" r="38" fill="none" stroke="var(--border)" stroke-width="5"/>
+      <circle cx="44" cy="44" r="38" fill="none" stroke="var(--navy)" stroke-width="5"
+        stroke-dasharray="80 160" stroke-linecap="round" transform="rotate(-90 44 44)">
+        <animateTransform attributeName="transform" type="rotate" from="-90 44 44" to="270 44 44" dur="1.4s" repeatCount="indefinite"/>
+      </circle>
+    </svg>
+    <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center">
+      <i class="ti ti-lock" style="font-size:26px;color:var(--navy)"></i>
+    </div>
+  </div>
+
+  <h2 class="mb8">Redirecting to payment gateway</h2>
+  <p class="tm mb6" style="font-size:14px">You're being securely redirected to complete your <span id="pg-type">repayment</span>.</p>
+  <p class="tm mb28" style="font-size:13px">Do not close or refresh this screen.</p>
+
+  <!-- Payment summary card -->
+  <div class="card wf mb20" style="text-align:left">
+    <div class="flex jb mb10 aic">
+      <p class="fw6 f13">Payment summary</p>
+      <span class="tag ti">Secure</span>
+    </div>
+    <div class="flex jb mb8"><small class="tm">Borrower</small><span class="fw6 f13">Aarav Kumar</span></div>
+    <div class="flex jb mb8"><small class="tm">Loan account</small><span class="fw6 f13">#CRL-xxx123</span></div>
+    <div class="flex jb mb8"><small class="tm">Payment type</small><span class="fw6 f13" id="pg-payment-type">Part repayment</span></div>
+    <div class="flex jb"><small class="tm">Initiated by</small><span class="fw6 f13">Rajesh Kumar (Co-borrower)</span></div>
+  </div>
+
+  <!-- Security badges -->
+  <div class="flex g12 aic" style="justify-content:center;margin-bottom:24px">
+    <div style="display:flex;align-items:center;gap:5px;background:var(--white);border-radius:8px;padding:6px 10px;border:1px solid var(--border)">
+      <i class="ti ti-shield-check" style="font-size:14px;color:#059669"></i>
+      <span style="font-size:11px;font-weight:600;color:var(--text2)">256-bit SSL</span>
+    </div>
+    <div style="display:flex;align-items:center;gap:5px;background:var(--white);border-radius:8px;padding:6px 10px;border:1px solid var(--border)">
+      <i class="ti ti-currency-rupee" style="font-size:14px;color:var(--navy)"></i>
+      <span style="font-size:11px;font-weight:600;color:var(--text2)">RBI Compliant</span>
+    </div>
+  </div>
+
+  <p class="f11 tm" style="max-width:280px;line-height:1.6">Powered by Credila's secure payment partner. Your bank credentials are never shared with Credila.</p>
+  <div style="height:16px"></div>
 </div>
 </div>
 
@@ -1542,23 +2103,23 @@ h1{font-size:24px;font-weight:700}h2{font-size:20px;font-weight:700}h3{font-size
   <p class="fw6 mb8 f12" style="color:var(--text2);text-transform:uppercase;letter-spacing:.6px">Wire transfer to</p>
   <div class="card mb12" style="background:var(--bg)">
     <div class="flex jb aic" style="padding:7px 0;border-bottom:1px solid var(--border)">
-      <span class="tm f12">Beneficiary name</span>
+      <span class="tm f12">Account name</span>
       <div class="flex g6 aic">
-        <span class="fw7 f12">Credila Financial Services</span>
-        <button onclick="navigator.clipboard&&navigator.clipboard.writeText('Credila Financial Services')" style="border:none;background:none;cursor:pointer;padding:0;color:var(--text2)"><i class="ti ti-copy" style="font-size:13px"></i></button>
+        <span class="fw7 f12">Apex Remittance Inc.</span>
+        <button onclick="navigator.clipboard&&navigator.clipboard.writeText('Apex Remittance Inc.')" style="border:none;background:none;cursor:pointer;padding:0;color:var(--text2)"><i class="ti ti-copy" style="font-size:13px"></i></button>
       </div>
     </div>
     <div class="flex jb aic" style="padding:7px 0;border-bottom:1px solid var(--border)">
-      <span class="tm f12">Bank name</span>
-      <div class="flex g6 aic"><span class="fw7 f12">JPMorgan Chase Bank, N.A.</span><button onclick="navigator.clipboard&&navigator.clipboard.writeText('JPMorgan Chase Bank')" style="border:none;background:none;cursor:pointer;padding:0;color:var(--text2)"><i class="ti ti-copy" style="font-size:13px"></i></button></div>
+      <span class="tm f12">Bank</span>
+      <div class="flex g6 aic"><span class="fw7 f12">JPMorgan Chase</span><button onclick="navigator.clipboard&&navigator.clipboard.writeText('JPMorgan Chase')" style="border:none;background:none;cursor:pointer;padding:0;color:var(--text2)"><i class="ti ti-copy" style="font-size:13px"></i></button></div>
     </div>
     <div class="flex jb aic" style="padding:7px 0;border-bottom:1px solid var(--border)">
       <span class="tm f12">Account number</span>
-      <div class="flex g6 aic"><span class="fw7 f12">4071 8823 9901</span><button onclick="navigator.clipboard&&navigator.clipboard.writeText('407188239901')" style="border:none;background:none;cursor:pointer;padding:0;color:var(--text2)"><i class="ti ti-copy" style="font-size:13px"></i></button></div>
+      <div class="flex g6 aic"><span class="fw7 f12">8872 0041 3321</span><button onclick="navigator.clipboard&&navigator.clipboard.writeText('887200413321')" style="border:none;background:none;cursor:pointer;padding:0;color:var(--text2)"><i class="ti ti-copy" style="font-size:13px"></i></button></div>
     </div>
     <div class="flex jb aic" style="padding:7px 0;border-bottom:1px solid var(--border)">
-      <span class="tm f12">Routing (ABA)</span>
-      <div class="flex g6 aic"><span class="fw7 f12">021 000 021</span><button onclick="navigator.clipboard&&navigator.clipboard.writeText('021000021')" style="border:none;background:none;cursor:pointer;padding:0;color:var(--text2)"><i class="ti ti-copy" style="font-size:13px"></i></button></div>
+      <span class="tm f12">Routing number</span>
+      <div class="flex g6 aic"><span class="fw7 f12">021000021</span><button onclick="navigator.clipboard&&navigator.clipboard.writeText('021000021')" style="border:none;background:none;cursor:pointer;padding:0;color:var(--text2)"><i class="ti ti-copy" style="font-size:13px"></i></button></div>
     </div>
     <div class="flex jb aic" style="padding:7px 0;border-bottom:1px solid var(--border)">
       <span class="tm f12">SWIFT / BIC</span>
@@ -1913,49 +2474,32 @@ h1{font-size:24px;font-weight:700}h2{font-size:20px;font-weight:700}h3{font-size
 
   <!-- Amount card -->
   <div class="card mb14" style="background:var(--bg)">
-
-    <!-- Row 1: Label + currency toggle -->
-    <div class="flex jb aic mb12">
-      <span class="tm f13">Foreclosure amount</span>
-      <div style="display:flex;border:1.5px solid var(--border);border-radius:8px;overflow:hidden;flex-shrink:0">
-        <button id="fa-cur-usd" onclick="faSetCurrency('USD')"
-          style="padding:5px 12px;border:none;font-size:11px;font-weight:700;cursor:pointer;background:var(--navy);color:white;letter-spacing:.4px">USD</button>
-        <button id="fa-cur-inr" onclick="faSetCurrency('INR')"
-          style="padding:5px 12px;border:none;font-size:11px;font-weight:700;cursor:pointer;background:transparent;color:var(--text2);letter-spacing:.4px">INR</button>
+    <div style="margin-bottom:14px">
+      <p style="font-size:12px;font-weight:600;color:var(--text2);text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px">Foreclosure amount</p>
+      <div style="display:flex;align-items:baseline;gap:3px">
+        <span style="font-size:22px;font-weight:800;color:#059669">&#x20B9;</span>
+        <span style="font-size:36px;font-weight:800;color:#059669;line-height:1">18,52,187</span>
       </div>
     </div>
-
-    <!-- Row 2: Amount display (read-only) -->
-    <div style="display:flex;align-items:baseline;gap:3px;margin-bottom:10px;justify-content:flex-end">
-      <span id="fa-cur-sym" style="font-size:18px;font-weight:700;color:#059669">$</span>
-      <span id="fa-amount-display" style="font-size:26px;font-weight:800;color:#059669">19,497</span>
+    <!-- USD equivalent pill -->
+    <div style="display:flex;align-items:center;gap:6px;background:rgba(81,69,205,.08);border-radius:8px;padding:8px 12px;margin-bottom:14px">
+      <i class="ti ti-currency-dollar" style="font-size:14px;color:var(--navy)"></i>
+      <span style="font-size:12px;color:var(--text2)">USD equivalent</span>
+      <span style="font-size:13px;font-weight:700;color:var(--navy);margin-left:auto">&#x2248; $19,496.71</span>
     </div>
-
-    <!-- Row 3: Conversion info -->
-    <div style="background:rgba(81,69,205,.07);border-radius:8px;padding:8px 12px;margin-bottom:12px">
-      <div class="flex jb aic">
-        <span style="font-size:11px;color:var(--text2)">Exchange rate</span>
-        <span style="font-size:11px;font-weight:600;color:var(--text2)">1 USD = &#x20B9;95.00</span>
-      </div>
-      <div class="flex jb aic" style="margin-top:4px">
-        <span style="font-size:11px;color:var(--text2)" id="fa-conv-lbl">INR equivalent</span>
-        <span id="fa-conv-val" style="font-size:13px;font-weight:700;color:var(--navy)">= &#x20B9;18,52,187</span>
-      </div>
-    </div>
-
-    <!-- Row 4: Breakdown -->
+    <!-- Breakdown -->
     <div style="border-top:1px solid var(--border);padding-top:10px">
       <div class="flex jb mb6">
         <span class="tm f13">Outstanding principal</span>
-        <span id="fa-principal" class="fw6 f13">$21,190</span>
+        <span class="fw6 f13">&#x20B9;17,80,000</span>
       </div>
       <div class="flex jb mb6">
         <span class="tm f13">Accrued interest</span>
-        <span id="fa-interest" class="fw6 f13">$859</span>
+        <span class="fw6 f13">&#x20B9;72,187</span>
       </div>
       <div class="flex jb">
         <span class="tm f13">Foreclosure charges</span>
-        <span class="fw6 f13 ts">$0 (waived)</span>
+        <span class="fw6 f13 ts">&#x20B9;0 (waived)</span>
       </div>
     </div>
   </div>
@@ -2065,55 +2609,42 @@ h1{font-size:24px;font-weight:700}h2{font-size:20px;font-weight:700}h3{font-size
   </div>
 
   <!-- Transfer summary -->
-  <p class="fw6 mb12 f13" style="color:var(--text2);text-transform:uppercase;letter-spacing:.6px">Transfer summary</p>
-  <div class="card mb14" style="background:var(--bg)">
-    <div class="flex jb py8" style="padding:10px 0;border-bottom:1px solid var(--border)"><span class="tm f13">Loan</span><span class="fw6 f13">CRL-xxx123</span></div>
-    <div class="flex jb py8" style="padding:10px 0;border-bottom:1px solid var(--border)"><span class="tm f13">Recipient</span><span class="fw6 f13">Credila Financial Services</span></div>
-    <div class="flex jb py8" style="padding:10px 0;border-bottom:1px solid var(--border)"><span class="tm f13">To account</span><span class="fw6 f13">HSBC &#x25CF;&#x25CF;&#x25CF;&#x25CF;8801</span></div>
-    <div class="flex jb py8" style="padding:10px 0;border-bottom:1px solid var(--border)"><span class="tm f13">Exchange rate</span><span class="fw6 f13">1 USD = &#x20B9;95.00</span></div>
-    <div class="flex jb py8" style="padding:10px 0;border-bottom:1px solid var(--border)"><span class="tm f13">Amount</span><span id="frv-amount" class="fw7 f16" style="color:var(--navy)">$19,496.71</span></div>
-    <div class="flex jb py8" style="padding:10px 0"><span class="tm f13">Payment type</span><span class="fw6 f13">Full repayment — foreclosure</span></div>
+  <p class="fw6 mb8 f12" style="color:var(--text2);text-transform:uppercase;letter-spacing:.6px">Transfer summary</p>
+  <div class="card mb10" style="background:var(--bg)">
+    <div class="flex jb py8" style="padding:7px 0;border-bottom:1px solid var(--border)"><span class="tm f12">Loan</span><span class="fw6 f12">CRL-xxx123</span></div>
+    <div class="flex jb py8" style="padding:7px 0;border-bottom:1px solid var(--border)"><span class="tm f12">Recipient</span><span class="fw6 f12">Credila Financial Services</span></div>
+    <div class="flex jb py8" style="padding:7px 0;border-bottom:1px solid var(--border)"><span class="tm f12">To account</span><span class="fw6 f12">HSBC &#x25CF;&#x25CF;&#x25CF;&#x25CF;8801</span></div>
+    <div class="flex jb py8" style="padding:7px 0;border-bottom:1px solid var(--border)"><span class="tm f12">Exchange rate</span><span class="fw6 f12">1 USD = &#x20B9;95.00</span></div>
+    <div class="flex jb py8" style="padding:7px 0;border-bottom:1px solid var(--border)"><span class="tm f12">Amount</span><span id="frv-amount" class="fw7 f15" style="color:var(--navy)">&#x20B9;18,52,187</span></div>
+    <div class="flex jb py8" style="padding:7px 0"><span class="tm f12">Payment type</span><span class="fw6 f12">Full repayment — foreclosure</span></div>
   </div>
 
-  <!-- Transfer method -->
-  <p class="fw6 mb8 f13" style="color:var(--text2);text-transform:uppercase;letter-spacing:.6px">Transfer method</p>
-  <div style="display:flex;gap:10px;margin-bottom:16px">
-    <button id="frv-m1" onclick="frvMethod(1)"
-      style="flex:1;padding:12px;border-radius:10px;border:2px solid var(--navy);background:var(--navy);color:white;font-weight:600;font-size:13px;cursor:pointer">
-      ACH Transfer
-    </button>
-    <button id="frv-m2" onclick="frvMethod(2)"
-      style="flex:1;padding:12px;border-radius:10px;border:1.5px solid var(--border);background:white;color:var(--text2);font-weight:600;font-size:13px;cursor:pointer">
-      Wire Transfer
-    </button>
-  </div>
-
-  <!-- US bank account details -->
-  <p class="fw6 mb12 f13" style="color:var(--text2);text-transform:uppercase;letter-spacing:.6px">Transfer to</p>
-  <div class="card mb16" style="background:var(--bg)">
-    <div class="flex jb py8 aic" style="padding:10px 0;border-bottom:1px solid var(--border)">
-      <span class="tm f13">Beneficiary name</span>
-      <div class="flex g8 aic"><span class="fw7 f13">Credila Financial Services</span><button onclick="navigator.clipboard&&navigator.clipboard.writeText('Credila Financial Services')" style="border:none;background:none;cursor:pointer;padding:0;color:var(--text2)"><i class="ti ti-copy" style="font-size:14px"></i></button></div>
+  <!-- Wire transfer details -->
+  <p class="fw6 mb8 f12" style="color:var(--text2);text-transform:uppercase;letter-spacing:.6px">Wire transfer to</p>
+  <div class="card mb12" style="background:var(--bg)">
+    <div class="flex jb py8 aic" style="padding:7px 0;border-bottom:1px solid var(--border)">
+      <span class="tm f12">Account name</span>
+      <div class="flex g6 aic"><span class="fw7 f12">Apex Remittance Inc.</span><button onclick="navigator.clipboard&&navigator.clipboard.writeText('Apex Remittance Inc.')" style="border:none;background:none;cursor:pointer;padding:0;color:var(--text2)"><i class="ti ti-copy" style="font-size:13px"></i></button></div>
     </div>
-    <div class="flex jb py8 aic" style="padding:10px 0;border-bottom:1px solid var(--border)">
-      <span class="tm f13">Bank name</span>
-      <div class="flex g8 aic"><span class="fw7 f13">JPMorgan Chase Bank, N.A.</span><button onclick="navigator.clipboard&&navigator.clipboard.writeText('JPMorgan Chase Bank')" style="border:none;background:none;cursor:pointer;padding:0;color:var(--text2)"><i class="ti ti-copy" style="font-size:14px"></i></button></div>
+    <div class="flex jb py8 aic" style="padding:7px 0;border-bottom:1px solid var(--border)">
+      <span class="tm f12">Bank</span>
+      <div class="flex g6 aic"><span class="fw7 f12">JPMorgan Chase</span><button onclick="navigator.clipboard&&navigator.clipboard.writeText('JPMorgan Chase')" style="border:none;background:none;cursor:pointer;padding:0;color:var(--text2)"><i class="ti ti-copy" style="font-size:13px"></i></button></div>
     </div>
-    <div class="flex jb py8 aic" style="padding:10px 0;border-bottom:1px solid var(--border)">
-      <span class="tm f13">Account number</span>
-      <div class="flex g8 aic"><span class="fw7 f13">4071 8823 9901</span><button onclick="navigator.clipboard&&navigator.clipboard.writeText('407188239901')" style="border:none;background:none;cursor:pointer;padding:0;color:var(--text2)"><i class="ti ti-copy" style="font-size:14px"></i></button></div>
+    <div class="flex jb py8 aic" style="padding:7px 0;border-bottom:1px solid var(--border)">
+      <span class="tm f12">Account number</span>
+      <div class="flex g6 aic"><span class="fw7 f12">8872 0041 3321</span><button onclick="navigator.clipboard&&navigator.clipboard.writeText('887200413321')" style="border:none;background:none;cursor:pointer;padding:0;color:var(--text2)"><i class="ti ti-copy" style="font-size:13px"></i></button></div>
     </div>
-    <div class="flex jb py8 aic" style="padding:10px 0;border-bottom:1px solid var(--border)">
-      <span class="tm f13">Routing number (ABA)</span>
-      <div class="flex g8 aic"><span class="fw7 f13">021 000 021</span><button onclick="navigator.clipboard&&navigator.clipboard.writeText('021000021')" style="border:none;background:none;cursor:pointer;padding:0;color:var(--text2)"><i class="ti ti-copy" style="font-size:14px"></i></button></div>
+    <div class="flex jb py8 aic" style="padding:7px 0;border-bottom:1px solid var(--border)">
+      <span class="tm f12">Routing number</span>
+      <div class="flex g6 aic"><span class="fw7 f12">021000021</span><button onclick="navigator.clipboard&&navigator.clipboard.writeText('021000021')" style="border:none;background:none;cursor:pointer;padding:0;color:var(--text2)"><i class="ti ti-copy" style="font-size:13px"></i></button></div>
     </div>
-    <div class="flex jb py8 aic" style="padding:10px 0;border-bottom:1px solid var(--border)">
-      <span class="tm f13">SWIFT / BIC</span>
-      <div class="flex g8 aic"><span class="fw7 f13">CHASUS33</span><button onclick="navigator.clipboard&&navigator.clipboard.writeText('CHASUS33')" style="border:none;background:none;cursor:pointer;padding:0;color:var(--text2)"><i class="ti ti-copy" style="font-size:14px"></i></button></div>
+    <div class="flex jb py8 aic" style="padding:7px 0;border-bottom:1px solid var(--border)">
+      <span class="tm f12">SWIFT / BIC</span>
+      <div class="flex g6 aic"><span class="fw7 f12">CHASUS33</span><button onclick="navigator.clipboard&&navigator.clipboard.writeText('CHASUS33')" style="border:none;background:none;cursor:pointer;padding:0;color:var(--text2)"><i class="ti ti-copy" style="font-size:13px"></i></button></div>
     </div>
-    <div class="flex jb py8 aic" style="padding:10px 0">
-      <span class="tm f13">Reference / Memo</span>
-      <div class="flex g8 aic"><span class="fw7 f13">CRL-xxx123</span><button onclick="navigator.clipboard&&navigator.clipboard.writeText('CRL-xxx123')" style="border:none;background:none;cursor:pointer;padding:0;color:var(--text2)"><i class="ti ti-copy" style="font-size:14px"></i></button></div>
+    <div class="flex jb py8 aic" style="padding:7px 0">
+      <span class="tm f12">Reference / Memo</span>
+      <div class="flex g6 aic"><span class="fw7 f12">CRL-xxx123</span><button onclick="navigator.clipboard&&navigator.clipboard.writeText('CRL-xxx123')" style="border:none;background:none;cursor:pointer;padding:0;color:var(--text2)"><i class="ti ti-copy" style="font-size:13px"></i></button></div>
     </div>
   </div>
 
@@ -2145,7 +2676,7 @@ h1{font-size:24px;font-weight:700}h2{font-size:20px;font-weight:700}h3{font-size
   <!-- Final amount card -->
   <div class="card mb14" style="background:linear-gradient(135deg,#1E1659,#5145CD);color:white;padding:20px;text-align:center">
     <small style="color:rgba(255,255,255,.6)">Amount to be paid</small>
-    <div class="fw7 mb4" style="font-size:32px;margin-top:6px">&#x20B9;18,52,187</div>
+    <div class="fw7 mb4" style="font-size:32px;margin-top:6px">$19,496.71</div>
     <div style="background:rgba(255,255,255,.12);border-radius:8px;padding:8px 12px;font-size:12px;color:rgba(255,255,255,.8)">
       towards Loan CRL-xxx123 · full closure
     </div>
@@ -2160,15 +2691,15 @@ h1{font-size:24px;font-weight:700}h2{font-size:20px;font-weight:700}h3{font-size
     <div class="flex jb"><span class="tm f13">Interest saved</span><span class="fw6 f13 ts">&#x20B9;4,32,500 &#x2193;</span></div>
   </div>
 
-  <!-- Authorization -->
-  <div class="card mb16" style="border:1.5px solid var(--border)">
-    <div class="flex g12 aic" onclick="toggleFullAuth()" style="cursor:pointer">
-      <div id="full-auth-box" style="width:22px;height:22px;border-radius:6px;border:2px solid var(--navy);background:var(--navy);display:flex;align-items:center;justify-content:center;flex-shrink:0">
-        <i class="ti ti-check" style="font-size:14px;color:white"></i>
-      </div>
-      <p style="font-size:13px;line-height:1.5;color:var(--text)">I confirm the full repayment of <strong>&#x20B9;18,52,187</strong> towards loan CRL-xxx123 and authorise closure of my loan account.</p>
-    </div>
+  <!-- Payment acknowledgement upload -->
+  <p class="fw6 mb8" style="font-size:13px;color:var(--text)">Payment acknowledgement</p>
+  <div id="fconf-upload-box" onclick="fconfTriggerUpload()" style="border:2px dashed var(--navy);border-radius:12px;padding:16px;text-align:center;cursor:pointer;margin-bottom:16px;transition:background .2s">
+    <i class="ti ti-upload" style="font-size:20px;color:var(--navy);display:block;margin-bottom:6px"></i>
+    <p class="fw6" style="font-size:12px;color:var(--navy);margin-bottom:2px">Tap to upload receipt or screenshot</p>
+    <p style="font-size:11px;color:var(--text2)">PDF, PNG or JPG</p>
+    <p id="fconf-upload-name" style="font-size:12px;color:var(--success);margin-top:6px;display:none"></p>
   </div>
+  <input id="fconf-file-input" type="file" accept=".pdf,.png,.jpg,.jpeg" style="display:none" onchange="fconfFileSelected(this)">
 
   <button class="bp" onclick="paymentDone()">Payment complete &#x2713;</button>
   <button class="bl mt8" onclick="back()" style="margin-top:10px">Go back</button>
@@ -2462,27 +2993,284 @@ h1{font-size:24px;font-weight:700}h2{font-size:20px;font-weight:700}h3{font-size
 </div>
 </div>
 
-<!-- TRANSFER CONFIRM -->
-<div class="screen" id="sc-transfer-confirm">
-<div class="sb"><span>9:41</span><span>●●●●</span></div>
-<div class="tn"><button class="bb" onclick="back()">←</button><span class="nt">Confirm transfer</span></div>
+<!-- TRANSFER: STEP 2 — QUOTE -->
+<div class="screen" id="sc-transfer-quote">
+<div class="sb"><span>9:41</span><span>&#x25CF;&#x25CF;&#x25CF;&#x25CF;</span></div>
+<div class="tn"><button class="bb" onclick="back()">&#x2190;</button><span class="nt">Transfer quote</span></div>
+<div class="sc px py" style="padding-bottom:80px">
+
+  <div class="pay-steps">
+    <div class="pay-step"><div class="pay-step-circle done">&#x2713;</div><div class="pay-step-label done">Amount</div></div>
+    <div class="pay-step-line done"></div>
+    <div class="pay-step"><div class="pay-step-circle active">2</div><div class="pay-step-label active">Quote</div></div>
+    <div class="pay-step-line"></div>
+    <div class="pay-step"><div class="pay-step-circle">3</div><div class="pay-step-label">Review</div></div>
+    <div class="pay-step-line"></div>
+    <div class="pay-step"><div class="pay-step-circle">4</div><div class="pay-step-label">Payment</div></div>
+  </div>
+
+  <!-- Exchange rate card -->
+  <div class="card mb14" style="background:linear-gradient(135deg,#1E1659,#3730A3);color:white;padding:20px">
+    <div class="flex jb aic mb14">
+      <small style="color:rgba(255,255,255,.6);font-size:12px;letter-spacing:.4px;text-transform:uppercase">Exchange rate</small>
+      <span id="tr-expires" style="background:rgba(255,255,255,.12);border-radius:99px;padding:4px 12px;font-size:11px;font-weight:700;color:#FCD34D">Expires in 02:00</span>
+    </div>
+    <div class="flex aic g8" style="margin-bottom:18px">
+      <span style="font-size:22px">&#x1F1FA;&#x1F1F8;</span>
+      <span id="tr-rate-display" class="fw7" style="font-size:22px;color:white;letter-spacing:-.3px">1 USD = &#x20B9;95.00</span>
+    </div>
+    <div class="flex jb aic mb8">
+      <span style="color:rgba(255,255,255,.65);font-size:13px">You send</span>
+      <span id="tr-you-send" class="fw6 f13">&#x20B9;3,50,000</span>
+    </div>
+    <div class="flex jb aic" style="margin-bottom:14px">
+      <span style="color:rgba(255,255,255,.65);font-size:13px">Recipient gets</span>
+      <span id="tr-recipient-gets" class="fw7" style="font-size:17px;color:#86EFAC">$3,684.21</span>
+    </div>
+    <div style="height:1px;background:rgba(255,255,255,.15);margin-bottom:14px"></div>
+    <div class="flex jb mb8">
+      <span style="color:rgba(255,255,255,.65);font-size:12px">Transfer fee</span>
+      <span class="fw6" style="font-size:12px;color:rgba(255,255,255,.75)">&#x20B9;0 (waived)</span>
+    </div>
+    <div class="flex jb" style="margin-bottom:14px">
+      <span style="color:rgba(255,255,255,.65);font-size:12px">Forex markup</span>
+      <span class="fw6" style="font-size:12px;color:rgba(255,255,255,.75)">&#x20B9;0 (waived)</span>
+    </div>
+    <button onclick="trRefreshRate()" style="background:none;border:none;padding:4px 0 0;margin-top:0;color:#93C5FD;font-size:12px;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:5px;border-top:1px solid rgba(255,255,255,.12);width:100%">
+      <span style="font-size:13px">&#x21BB;</span> Refresh rate
+    </button>
+  </div>
+
+  <!-- Beneficiary summary -->
+  <p class="fw6 mb8 f12" style="color:var(--text2);text-transform:uppercase;letter-spacing:.6px">Sending to</p>
+  <div class="card mb14" style="background:var(--bg)">
+    <div class="flex g12 aic">
+      <div style="width:40px;height:40px;background:white;border-radius:10px;border:1.5px solid var(--border);display:flex;align-items:center;justify-content:center;flex-shrink:0">
+        <i class="ti ti-building-bank" style="font-size:18px;color:var(--navy)"></i>
+      </div>
+      <div>
+        <p id="tr-quote-bene" class="fw7 f13">Carnegie Mellon University</p>
+        <small id="tr-quote-bene-sub" class="tm">PNC Bank &#x25CF;&#x25CF;&#x25CF;8824 &#xB7; Pittsburgh</small>
+      </div>
+    </div>
+  </div>
+
+</div>
+<!-- Floating CTA -->
+<div style="padding:12px 20px 20px;background:white;border-top:1px solid var(--border);flex-shrink:0">
+  <button class="bp" style="margin:0" onclick="trQuoteContinue()">Continue &#x2192;</button>
+</div>
+</div>
+
+<!-- TRANSFER: STEP 3 — REVIEW -->
+<div class="screen" id="sc-transfer-review">
+<div class="sb"><span>9:41</span><span>&#x25CF;&#x25CF;&#x25CF;&#x25CF;</span></div>
+<div class="tn"><button class="bb" onclick="back()">&#x2190;</button><span class="nt">Review transfer</span></div>
+<div class="sc px py" style="padding-bottom:8px">
+
+  <div class="pay-steps">
+    <div class="pay-step"><div class="pay-step-circle done">&#x2713;</div><div class="pay-step-label done">Amount</div></div>
+    <div class="pay-step-line done"></div>
+    <div class="pay-step"><div class="pay-step-circle done">&#x2713;</div><div class="pay-step-label done">Quote</div></div>
+    <div class="pay-step-line done"></div>
+    <div class="pay-step"><div class="pay-step-circle active">3</div><div class="pay-step-label active">Review</div></div>
+    <div class="pay-step-line"></div>
+    <div class="pay-step"><div class="pay-step-circle">4</div><div class="pay-step-label">Payment</div></div>
+  </div>
+
+  <!-- Transfer summary -->
+  <p class="fw6 mb8 f12" style="color:var(--text2);text-transform:uppercase;letter-spacing:.6px">Transfer summary</p>
+  <div class="card mb10" style="background:var(--bg)">
+    <div class="flex jb py8" style="padding:7px 0;border-bottom:1px solid var(--border)"><span class="tm f12">Purpose</span><span class="fw6 f12">Wire transfer abroad</span></div>
+    <div class="flex jb py8" style="padding:7px 0;border-bottom:1px solid var(--border)"><span class="tm f12">To</span><span id="trv-to" class="fw6 f12">Carnegie Mellon University</span></div>
+    <div class="flex jb py8" style="padding:7px 0;border-bottom:1px solid var(--border)"><span class="tm f12">Bank</span><span id="trv-bank-short" class="fw6 f12">PNC Bank N.A.</span></div>
+    <div class="flex jb py8" style="padding:7px 0;border-bottom:1px solid var(--border)"><span class="tm f12">Exchange rate</span><span id="trv-rate" class="fw6 f12">1 USD = &#x20B9;95.00</span></div>
+    <div class="flex jb py8" style="padding:7px 0"><span class="tm f12">Amount</span><span id="trv-inr" class="fw7 f15" style="color:var(--navy)">&#x20B9;3,50,000</span></div>
+  </div>
+
+  <!-- Wire transfer details -->
+  <p class="fw6 mb8 f12" style="color:var(--text2);text-transform:uppercase;letter-spacing:.6px">Wire transfer to</p>
+  <div class="card mb12" style="background:var(--bg)">
+    <div class="flex jb aic" style="padding:7px 0;border-bottom:1px solid var(--border)">
+      <span class="tm f12">Beneficiary name</span>
+      <div class="flex g6 aic"><span id="trv-bene-name" class="fw7 f12">Carnegie Mellon University</span><button onclick="navigator.clipboard&&navigator.clipboard.writeText(document.getElementById('trv-bene-name').textContent)" style="border:none;background:none;cursor:pointer;padding:0;color:var(--text2)"><i class="ti ti-copy" style="font-size:13px"></i></button></div>
+    </div>
+    <div class="flex jb aic" style="padding:7px 0;border-bottom:1px solid var(--border)">
+      <span class="tm f12">Bank name</span>
+      <div class="flex g6 aic"><span id="trv-bank" class="fw7 f12">PNC Bank N.A.</span><button onclick="navigator.clipboard&&navigator.clipboard.writeText(document.getElementById('trv-bank').textContent)" style="border:none;background:none;cursor:pointer;padding:0;color:var(--text2)"><i class="ti ti-copy" style="font-size:13px"></i></button></div>
+    </div>
+    <div class="flex jb aic" style="padding:7px 0;border-bottom:1px solid var(--border)">
+      <span class="tm f12">Account number</span>
+      <div class="flex g6 aic"><span id="trv-account" class="fw7 f12">3829 4471 0012</span><button onclick="navigator.clipboard&&navigator.clipboard.writeText(document.getElementById('trv-account').textContent.replace(/ /g,''))" style="border:none;background:none;cursor:pointer;padding:0;color:var(--text2)"><i class="ti ti-copy" style="font-size:13px"></i></button></div>
+    </div>
+    <div class="flex jb aic" style="padding:7px 0;border-bottom:1px solid var(--border)">
+      <span class="tm f12">Routing (ABA)</span>
+      <div class="flex g6 aic"><span id="trv-routing" class="fw7 f12">043 000 096</span><button onclick="navigator.clipboard&&navigator.clipboard.writeText(document.getElementById('trv-routing').textContent.replace(/ /g,''))" style="border:none;background:none;cursor:pointer;padding:0;color:var(--text2)"><i class="ti ti-copy" style="font-size:13px"></i></button></div>
+    </div>
+    <div class="flex jb aic" style="padding:7px 0;border-bottom:1px solid var(--border)">
+      <span class="tm f12">SWIFT / BIC</span>
+      <div class="flex g6 aic"><span id="trv-swift" class="fw7 f12">PNCCUS33</span><button onclick="navigator.clipboard&&navigator.clipboard.writeText(document.getElementById('trv-swift').textContent)" style="border:none;background:none;cursor:pointer;padding:0;color:var(--text2)"><i class="ti ti-copy" style="font-size:13px"></i></button></div>
+    </div>
+    <div class="flex jb aic" style="padding:7px 0">
+      <span class="tm f12">Reference / Memo</span>
+      <div class="flex g6 aic"><span id="trv-ref" class="fw7 f12">NIKHIL-CMU-2026</span><button onclick="navigator.clipboard&&navigator.clipboard.writeText(document.getElementById('trv-ref').textContent)" style="border:none;background:none;cursor:pointer;padding:0;color:var(--text2)"><i class="ti ti-copy" style="font-size:13px"></i></button></div>
+    </div>
+  </div>
+
+</div>
+<!-- Floating CTA -->
+<div style="padding:12px 20px 20px;background:white;border-top:1px solid var(--border);flex-shrink:0">
+  <button class="bp" style="margin:0" onclick="trConfirm()">Confirm</button>
+</div>
+</div>
+
+<!-- TRANSFER: STEP 4 — PAYMENT -->
+<div class="screen" id="sc-transfer-payment">
+<div class="sb"><span>9:41</span><span>&#x25CF;&#x25CF;&#x25CF;&#x25CF;</span></div>
+<div class="tn"><button class="bb" onclick="back()">&#x2190;</button><span class="nt">Complete payment</span></div>
 <div class="sc px py">
-  <div class="card mb12" style="background:var(--navy);color:white;text-align:center;padding:24px"><small style="color:rgba(255,255,255,.6)">Sending</small><div class="fw7" style="font-size:36px;margin:8px 0">USD 4,194.87</div><small style="color:rgba(255,255,255,.6)">= ₹3,50,000 at ₹83.42/USD</small></div>
-  <div class="card mb12"><p class="fw6 mb12">Transfer details</p><div class="flex jb mb8"><span class="tm">To</span><span class="fw6 f13">Carnegie Mellon University</span></div><div class="flex jb mb8"><span class="tm">Fee</span><span class="fw6">₹500</span></div><div class="flex jb mb8"><span class="tm">Total debited</span><span class="fw7 tn2">₹3,50,500</span></div><div class="flex jb"><span class="tm">Expected credit</span><span class="fw6 ts">Jun 8–9, 2026</span></div></div>
-  <button class="bp mb8" onclick="goTo('sc-transfer-ok')">Confirm & send USD 4,194.87</button>
-  <button class="bl" onclick="back()">Go back</button>
+
+  <div class="pay-steps">
+    <div class="pay-step"><div class="pay-step-circle done">&#x2713;</div><div class="pay-step-label done">Amount</div></div>
+    <div class="pay-step-line done"></div>
+    <div class="pay-step"><div class="pay-step-circle done">&#x2713;</div><div class="pay-step-label done">Quote</div></div>
+    <div class="pay-step-line done"></div>
+    <div class="pay-step"><div class="pay-step-circle done">&#x2713;</div><div class="pay-step-label done">Review</div></div>
+    <div class="pay-step-line done"></div>
+    <div class="pay-step"><div class="pay-step-circle active">4</div><div class="pay-step-label active">Payment</div></div>
+  </div>
+
+  <!-- Amount card -->
+  <div class="card mb14" style="background:linear-gradient(135deg,#1E1659,#5145CD);color:white;padding:20px;text-align:center">
+    <small style="color:rgba(255,255,255,.6)">Amount to be paid</small>
+    <div id="trp-amount" class="fw7 mb4" style="font-size:32px;margin-top:6px">&#x20B9;3,50,000</div>
+    <div style="background:rgba(255,255,255,.12);border-radius:8px;padding:8px 12px;font-size:12px;color:rgba(255,255,255,.8)">
+      Wire transfer to <span id="trp-to">Carnegie Mellon University</span>
+    </div>
+  </div>
+
+  <!-- Reference card -->
+  <div class="card mb14" style="background:var(--bg)">
+    <div class="flex jb mb8"><span class="tm f13">Reference</span><span id="trp-ref" class="fw6 f13" style="color:var(--navy)">NIKHIL-CMU-2026</span></div>
+    <div class="flex jb"><span class="tm f13">Expected credit</span><span class="fw6 f13 ts">2–3 business days</span></div>
+  </div>
+
+  <!-- Payment acknowledgement upload -->
+  <p class="fw6 mb8" style="font-size:13px;color:var(--text)">Payment acknowledgement</p>
+  <div id="trp-upload-box" onclick="trpUploadTrigger()" style="border:2px dashed var(--navy);border-radius:12px;padding:16px;text-align:center;cursor:pointer;margin-bottom:16px;transition:background .2s">
+    <i class="ti ti-upload" style="font-size:20px;color:var(--navy);display:block;margin-bottom:6px"></i>
+    <p class="fw6" style="font-size:12px;color:var(--navy);margin-bottom:2px">Tap to upload receipt or screenshot</p>
+    <p style="font-size:11px;color:var(--text2)">PDF, PNG or JPG</p>
+    <p id="trp-upload-name" style="font-size:12px;color:var(--success);margin-top:6px;display:none"></p>
+  </div>
+  <input id="trp-file-input" type="file" accept=".pdf,.png,.jpg,.jpeg" style="display:none" onchange="trpUploadSelected(this)">
+
+  <button class="bp" onclick="trPaymentDone()">Payment complete &#x2713;</button>
+  <button class="bl mt8" onclick="back()" style="margin-top:10px">Go back</button>
+  <div style="height:16px"></div>
 </div>
 </div>
 
 <!-- TRANSFER SUCCESS -->
 <div class="screen" id="sc-transfer-ok">
-<div class="sb"><span>9:41</span><span>●●●●</span></div>
-<div class="sc px" style="display:flex;flex-direction:column;align-items:center;justify-content:center;padding-top:60px">
-  <div class="sc-circle"><i class="ti ti-circle-check" style="font-size:40px;vertical-align:-2px"></i></div>
-  <h2 class="tc mb8">Transfer initiated!</h2>
-  <p class="tc tm mb24">USD 4,194.87 is on its way to Carnegie Mellon University.</p>
-  <div class="card wf mb12" style="background:var(--bg)"><div class="flex jb mb8"><span class="tm">Reference</span><span class="fw6 f13">TX-20260606-1842</span></div><div class="flex jb mb8"><span class="tm">Amount</span><span class="fw6 ts">USD 4,194.87</span></div><div class="flex jb"><span class="tm">Expected credit</span><span class="fw6 ts">Jun 8–9, 2026</span></div></div>
-  <button class="bp wf mb8" onclick="goTo('sc-home')">Back to home</button>
+<div class="sb"><span>9:41</span><span>&#x25CF;&#x25CF;&#x25CF;&#x25CF;</span></div>
+<div class="sc px py">
+
+  <!-- Animated check -->
+  <div style="display:flex;flex-direction:column;align-items:center;text-align:center;padding-top:12px;margin-bottom:20px">
+    <div id="tr-succ-icon" style="width:80px;height:80px;border-radius:50%;background:#DCFCE7;display:flex;align-items:center;justify-content:center;margin-bottom:16px;transform:scale(0);transition:transform .4s cubic-bezier(.34,1.56,.64,1)">
+      <svg width="40" height="40" viewBox="0 0 44 44" fill="none">
+        <path id="tr-succ-check" d="M10 22L18 30L34 14" stroke="#059669" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="36" stroke-dashoffset="36" style="transition:stroke-dashoffset .5s ease .35s"/>
+      </svg>
+    </div>
+    <h2 style="font-size:21px;font-weight:800;color:var(--text);margin-bottom:6px">Transfer submitted!</h2>
+    <p style="font-size:13px;color:var(--text2);line-height:1.5;max-width:260px"><span id="tr-succ-amount" style="font-weight:700;color:var(--navy)">&#x20B9;3,50,000</span> is on its way to <span id="tr-succ-bene" style="font-weight:700">Carnegie Mellon University</span>.</p>
+  </div>
+
+  <!-- Transfer tracker -->
+  <div style="width:100%;background:var(--bg);border-radius:16px;padding:16px 16px 8px;margin-bottom:16px">
+    <div class="flex aic g8 mb14">
+      <i class="ti ti-bolt" style="font-size:15px;color:var(--navy)"></i>
+      <span style="font-size:12px;font-weight:600;color:var(--text2)">Transfer tracker · Wire transfer</span>
+    </div>
+
+    <!-- Step 1 -->
+    <div class="flex g12" style="margin-bottom:0">
+      <div style="display:flex;flex-direction:column;align-items:center;width:36px;flex-shrink:0">
+        <div id="tr-tr-icon-1" style="width:36px;height:36px;border-radius:50%;background:white;border:2px solid #E5E7EB;display:flex;align-items:center;justify-content:center;transition:all .4s ease;flex-shrink:0">
+          <i class="ti ti-circle-check" style="font-size:16px;color:#CBD5E1"></i>
+        </div>
+        <div style="width:2px;flex:1;min-height:20px;background:#E5E7EB;margin:4px 0" id="tr-tr-line-1"></div>
+      </div>
+      <div style="padding-bottom:20px;padding-top:4px">
+        <p id="tr-tr-label-1" class="fw7" style="font-size:13px;color:var(--text2);margin-bottom:2px">Transfer initiated <span id="tr-tr-tick-1" style="display:none;color:#059669">&#x2713;</span></p>
+        <p style="font-size:12px;color:var(--text2)">Your payment has been authorised</p>
+      </div>
+    </div>
+
+    <!-- Step 2 -->
+    <div class="flex g12">
+      <div style="display:flex;flex-direction:column;align-items:center;width:36px;flex-shrink:0">
+        <div id="tr-tr-icon-2" style="width:36px;height:36px;border-radius:50%;background:white;border:2px solid #E5E7EB;display:flex;align-items:center;justify-content:center;transition:all .4s ease;flex-shrink:0">
+          <i class="ti ti-arrows-exchange" style="font-size:16px;color:#CBD5E1"></i>
+        </div>
+        <div style="width:2px;flex:1;min-height:20px;background:#E5E7EB;margin:4px 0" id="tr-tr-line-2"></div>
+      </div>
+      <div style="padding-bottom:20px;padding-top:4px">
+        <p id="tr-tr-label-2" class="fw7" style="font-size:13px;color:var(--text2);margin-bottom:2px">Payment received <span id="tr-tr-tick-2" style="display:none;color:#059669">&#x2713;</span></p>
+        <p style="font-size:12px;color:var(--text2)">Funds received by our partner</p>
+      </div>
+    </div>
+
+    <!-- Step 3 -->
+    <div class="flex g12">
+      <div style="display:flex;flex-direction:column;align-items:center;width:36px;flex-shrink:0">
+        <div id="tr-tr-icon-3" style="width:36px;height:36px;border-radius:50%;background:white;border:2px solid #E5E7EB;display:flex;align-items:center;justify-content:center;transition:all .4s ease;flex-shrink:0">
+          <i class="ti ti-building-bank" style="font-size:16px;color:#CBD5E1"></i>
+        </div>
+        <div style="width:2px;flex:1;min-height:20px;background:#E5E7EB;margin:4px 0" id="tr-tr-line-3"></div>
+      </div>
+      <div style="padding-bottom:20px;padding-top:4px">
+        <p id="tr-tr-label-3" class="fw7" style="font-size:13px;color:var(--text2);margin-bottom:2px">Routing to bank <span id="tr-tr-tick-3" style="display:none;color:#059669">&#x2713;</span></p>
+        <p style="font-size:12px;color:var(--text2)">Converting and routing to beneficiary</p>
+      </div>
+    </div>
+
+    <!-- Step 4 -->
+    <div class="flex g12">
+      <div style="display:flex;flex-direction:column;align-items:center;width:36px;flex-shrink:0">
+        <div id="tr-tr-icon-4" style="width:36px;height:36px;border-radius:50%;background:white;border:2px solid #E5E7EB;display:flex;align-items:center;justify-content:center;transition:all .4s ease;flex-shrink:0">
+          <i class="ti ti-credit-card" style="font-size:16px;color:#CBD5E1"></i>
+        </div>
+      </div>
+      <div style="padding-bottom:8px;padding-top:4px">
+        <p id="tr-tr-label-4" class="fw7" style="font-size:13px;color:var(--text2);margin-bottom:2px">Credited to account <span id="tr-tr-tick-4" style="display:none;color:#059669">&#x2713;</span></p>
+        <p style="font-size:12px;color:var(--text2)">Funds deposited to recipient account</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Reference card -->
+  <div style="width:100%;background:var(--bg);border-radius:16px;padding:14px 16px;margin-bottom:20px">
+    <div class="flex jb mb8">
+      <span class="tm f13">Reference ID</span>
+      <span class="fw7 f13" style="color:var(--navy);letter-spacing:.3px">TX-20260615-4219</span>
+    </div>
+    <div class="flex jb mb8">
+      <span class="tm f13">Amount sent</span>
+      <span id="tr-succ-amt2" class="fw7 f13" style="color:var(--success)">&#x20B9;3,50,000</span>
+    </div>
+    <div class="flex jb mb8">
+      <span class="tm f13">Status</span>
+      <span style="font-size:12px;font-weight:700;color:#D97706;background:#FEF3C7;border-radius:99px;padding:2px 10px">Processing</span>
+    </div>
+    <div class="flex jb">
+      <span class="tm f13">Expected credit</span>
+      <span class="fw6 f13 ts">2–3 business days</span>
+    </div>
+  </div>
+
+  <button class="bp mb10 wf" onclick="goTo('sc-home')">Back to home</button>
   <button class="bl wf" onclick="goTo('sc-send-money')">Send another</button>
 </div>
 </div>
@@ -2683,7 +3471,11 @@ function toggleNotif(el){
 var selectedRole = 'student';
 function setRole(role){
   selectedRole = role;
-  goTo('sc-setup-profile');
+  if (role === 'parent') {
+    goTo('sc-setup-profile-parent');
+  } else {
+    goTo('sc-setup-profile');
+  }
 }
 function goToHome(){
   if(selectedRole === 'parent'){ goTo('sc-parent-home'); }
@@ -2794,6 +3586,18 @@ function pconfFileSelected(inp) {
   var name = inp.files[0].name;
   var box = document.getElementById('pconf-upload-box');
   var lbl = document.getElementById('pconf-upload-name');
+  if (box) box.style.background = 'rgba(5,150,105,.06)';
+  if (lbl) { lbl.textContent = '✓ ' + name; lbl.style.display = 'block'; }
+}
+function fconfTriggerUpload() {
+  var inp = document.getElementById('fconf-file-input');
+  if (inp) inp.click();
+}
+function fconfFileSelected(inp) {
+  if (!inp.files || !inp.files[0]) return;
+  var name = inp.files[0].name;
+  var box = document.getElementById('fconf-upload-box');
+  var lbl = document.getElementById('fconf-upload-name');
   if (box) box.style.background = 'rgba(5,150,105,.06)';
   if (lbl) { lbl.textContent = '✓ ' + name; lbl.style.display = 'block'; }
 }
@@ -3253,11 +4057,317 @@ document.addEventListener('DOMContentLoaded', function() {
   // Wire initial sign-in CTA
   var cta = document.getElementById('si-cta');
   if (cta) cta.onclick = siSendOTP;
+
+  // ── TRANSFERS FLOW ──────────────────────────────────────────────────
+  var TR_BENE = 1; // 1 = CMU, 2 = Aarav Kumar
+  var TR_AMOUNT_INR = 350000;
+
+  var TR_BENE_DATA = {
+    1: { name: 'Carnegie Mellon University', bank: 'PNC Bank N.A.', account: '3829 4471 0012', routing: '043 000 096', swift: 'PNCCUS33', ref: 'NIKHIL-CMU-2026', sub: 'PNC Bank ●●●8824 \xb7 Pittsburgh' },
+    2: { name: 'Aarav Kumar', bank: 'Chase Bank', account: '7723 9910 4401', routing: '021 000 021', swift: 'CHASUS33', ref: 'NIKHIL-AK-2026', sub: 'Chase Bank ●●●2291 \xb7 New York' }
+  };
+
+  function trSelectBene(n) {
+    TR_BENE = n;
+    [1, 2].forEach(function(i) {
+      var card = document.getElementById('tr-bene-' + i);
+      if (!card) return;
+      card.style.border = i === n ? '2px solid var(--navy)' : '1.5px solid var(--border)';
+      card.style.background = i === n ? '#EDE9FF' : 'white';
+      var radio = card.querySelector('div[style*="border-radius:50%"]');
+      if (radio && i === n) { radio.style.background = 'var(--navy)'; radio.style.border = 'none'; radio.innerHTML = '<div style="width:8px;height:8px;border-radius:50%;background:white"></div>'; }
+      if (radio && i !== n) { radio.style.background = 'transparent'; radio.innerHTML = ''; radio.style.border = '2px solid var(--border)'; }
+      var icon = card.querySelector('i');
+      if (icon) icon.style.color = i === n ? 'var(--navy)' : 'var(--text2)';
+      var iconWrap = card.querySelector('div[style*="width:40px"]');
+      if (iconWrap) iconWrap.style.background = i === n ? 'white' : 'var(--bg)';
+    });
+  }
+
+  function trFromInput(el) {
+    var raw = el.value.replace(/[^0-9]/g, '');
+    var num = parseInt(raw) || 0;
+    TR_AMOUNT_INR = num;
+    if (raw.length > 0) {
+      el.value = num.toLocaleString('en-IN');
+      var len = el.value.length; el.setSelectionRange(len, len);
+    }
+    var mirror = document.getElementById('tr-amount-mirror');
+    if (mirror) { mirror.textContent = el.value || '0'; el.style.width = (mirror.offsetWidth + 4) + 'px'; }
+    var usd = num / USD_RATE;
+    var pill = document.getElementById('tr-usd-eq');
+    if (pill) pill.textContent = '≈ $' + usd.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+  }
+
+  function trProceed() {
+    if (!TR_AMOUNT_INR || TR_AMOUNT_INR < 1000) return;
+    var usd = TR_AMOUNT_INR / USD_RATE;
+    var usdStr = '$' + usd.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+    var inrStr = '₹' + TR_AMOUNT_INR.toLocaleString('en-IN');
+    var ys = document.getElementById('tr-you-send'); if (ys) ys.textContent = inrStr;
+    var rg = document.getElementById('tr-recipient-gets'); if (rg) rg.textContent = usdStr;
+    var b = TR_BENE_DATA[TR_BENE];
+    var qb = document.getElementById('tr-quote-bene'); if (qb) qb.textContent = b.name;
+    var qbs = document.getElementById('tr-quote-bene-sub'); if (qbs) qbs.textContent = b.sub;
+    trStartTimer();
+    goTo('sc-transfer-quote');
+  }
+
+  var trTimer = null;
+  function trStartTimer() {
+    var el = document.getElementById('tr-expires');
+    if (!el) return;
+    clearInterval(trTimer);
+    var secs = 120;
+    el.textContent = 'Expires in 02:00';
+    trTimer = setInterval(function() {
+      secs--;
+      if (secs <= 0) { clearInterval(trTimer); el.textContent = 'Expired'; return; }
+      var m = Math.floor(secs / 60), s = secs % 60;
+      el.textContent = 'Expires in 0' + m + ':' + (s < 10 ? '0' : '') + s;
+    }, 1000);
+  }
+
+  function trRefreshRate() {
+    var jitter = (Math.random() - 0.5) * 0.4;
+    var newRate = Math.round((95.00 + jitter) * 100) / 100;
+    var rd = document.getElementById('tr-rate-display'); if (rd) rd.innerHTML = '1 USD = &#x20B9;' + newRate.toFixed(2);
+    var usd = TR_AMOUNT_INR / newRate;
+    var usdStr = '$' + usd.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+    var rg = document.getElementById('tr-recipient-gets'); if (rg) rg.textContent = usdStr;
+    trStartTimer();
+  }
+
+  function trQuoteContinue() {
+    var b = TR_BENE_DATA[TR_BENE];
+    var inrStr = '₹' + TR_AMOUNT_INR.toLocaleString('en-IN');
+    var ids = ['trv-to','trv-bank-short','trv-bene-name','trv-bank','trv-account','trv-routing','trv-swift','trv-ref'];
+    var vals = [b.name, b.bank, b.name, b.bank, b.account, b.routing, b.swift, b.ref];
+    ids.forEach(function(id, i) { var el = document.getElementById(id); if (el) el.textContent = vals[i]; });
+    var ri = document.getElementById('trv-inr'); if (ri) ri.textContent = inrStr;
+    var pa = document.getElementById('trp-amount'); if (pa) pa.textContent = inrStr;
+    var pt = document.getElementById('trp-to'); if (pt) pt.textContent = b.name;
+    var pr = document.getElementById('trp-ref'); if (pr) pr.textContent = b.ref;
+    goTo('sc-transfer-review');
+  }
+
+  function trConfirm() { goTo('sc-transfer-payment'); }
+
+  function trpUploadTrigger() { var inp = document.getElementById('trp-file-input'); if (inp) inp.click(); }
+  function trpUploadSelected(inp) {
+    if (!inp.files || !inp.files[0]) return;
+    var box = document.getElementById('trp-upload-box'); if (box) box.style.background = 'rgba(5,150,105,.06)';
+    var lbl = document.getElementById('trp-upload-name'); if (lbl) { lbl.textContent = '✓ ' + inp.files[0].name; lbl.style.display = 'block'; }
+  }
+
+  function trPaymentDone() {
+    var b = TR_BENE_DATA[TR_BENE];
+    var inrStr = '₹' + TR_AMOUNT_INR.toLocaleString('en-IN');
+    var sa = document.getElementById('tr-succ-amount'); if (sa) sa.textContent = inrStr;
+    var sb = document.getElementById('tr-succ-bene'); if (sb) sb.textContent = b.name;
+    var sa2 = document.getElementById('tr-succ-amt2'); if (sa2) sa2.textContent = inrStr;
+    goTo('sc-transfer-ok');
+  }
+  // Expose to global scope so onclick attributes can reach them
+  window.trSelectBene = trSelectBene;
+  window.trFromInput = trFromInput;
+  window.trProceed = trProceed;
+  window.trRefreshRate = trRefreshRate;
+  window.trQuoteContinue = trQuoteContinue;
+  window.trConfirm = trConfirm;
+  window.trpUploadTrigger = trpUploadTrigger;
+  window.trpUploadSelected = trpUploadSelected;
+  window.trPaymentDone = trPaymentDone;
+  // ── END TRANSFERS FLOW ───────────────────────────────────────────────
+
+  // ── PARENT REMITTANCE FLOW ────────────────────────────────────────────
+  var PB_PURPOSE = 1;
+  var PB_BENE = 1;
+  var PB_RATE = 95.0644;
+  var PB_FEE = 1500;
+  var PB_COUNTDOWN_INTERVAL = null;
+
+  function pbSelectPurpose(n) {
+    PB_PURPOSE = n;
+    for (var i = 1; i <= 4; i++) {
+      var card = document.getElementById('pb-p-' + i);
+      var tick = document.getElementById('pb-p-tick-' + i);
+      if (i === n) {
+        card.style.border = '2px solid var(--navy)';
+        tick.style.background = 'var(--navy)';
+        tick.querySelector('i').style.color = 'white';
+      } else {
+        card.style.border = '1.5px solid var(--border)';
+        tick.style.background = 'var(--border)';
+        tick.querySelector('i').style.color = 'var(--text3)';
+      }
+    }
+  }
+
+  function pbSelectBene(n) {
+    PB_BENE = n;
+    for (var i = 1; i <= 2; i++) {
+      var card = document.getElementById('pb-b-' + i);
+      var tick = document.getElementById('pb-b-tick-' + i);
+      if (i === n) {
+        card.style.border = '2px solid var(--navy)';
+        tick.style.background = 'var(--navy)';
+        tick.querySelector('i').style.color = 'white';
+      } else {
+        card.style.border = '1.5px solid var(--border)';
+        tick.style.background = 'var(--border)';
+        tick.querySelector('i').style.color = 'var(--text3)';
+      }
+    }
+  }
+
+  function pbCalc() {
+    var usd = parseFloat(document.getElementById('pb-usd-input').value) || 0;
+    var principal = usd * PB_RATE;
+    var fee = PB_FEE;
+    // TCS: 0.5% on education remittance above 7L threshold (simplified)
+    var tcs = Math.round(principal * 0.0024);
+    // GST: 18% on fee portion (simplified blended)
+    var gst = Math.round(fee * 0.18 + principal * 0.000926);
+    var total = Math.round(principal + fee + tcs + gst);
+    document.getElementById('pb-tcs-val').textContent = tcs.toLocaleString('en-IN');
+    document.getElementById('pb-gst-val').textContent = gst.toLocaleString('en-IN');
+    document.getElementById('pb-inr-total').textContent = total.toLocaleString('en-IN');
+  }
+
+  function pbStartCountdown() {
+    if (PB_COUNTDOWN_INTERVAL) clearInterval(PB_COUNTDOWN_INTERVAL);
+    var secs = 120;
+    var el = document.getElementById('pb-countdown');
+    if (!el) return;
+    el.textContent = '2:00';
+    PB_COUNTDOWN_INTERVAL = setInterval(function() {
+      secs--;
+      if (secs <= 0) {
+        clearInterval(PB_COUNTDOWN_INTERVAL);
+        el.textContent = '0:00';
+        return;
+      }
+      var m = Math.floor(secs / 60);
+      var s = secs % 60;
+      el.textContent = m + ':' + (s < 10 ? '0' : '') + s;
+    }, 1000);
+  }
+
+  function pbUploadTap() {
+    document.getElementById('pb-file-input').click();
+  }
+
+  function pbFileChosen(input) {
+    if (!input.files || !input.files[0]) return;
+    var f = input.files[0];
+    var box = document.getElementById('pb-upload-box');
+    box.innerHTML = '<div class="flex g10 aic"><div style="width:38px;height:38px;border-radius:10px;background:#DCFCE7;display:flex;align-items:center;justify-content:center;flex-shrink:0"><i class="ti ti-file-check" style="font-size:18px;color:#059669"></i></div><div><p class="fw6 f13">' + f.name + '</p><small class="tm">Attached · ' + Math.round(f.size/1024) + ' KB</small></div></div>';
+    box.style.border = '1.5px solid var(--success)';
+  }
+
+  window.pbSelectPurpose = pbSelectPurpose;
+  window.pbSelectBene = pbSelectBene;
+  window.pbCalc = pbCalc;
+  window.pbUploadTap = pbUploadTap;
+  window.pbFileChosen = pbFileChosen;
+  // ── END PARENT REMITTANCE FLOW ────────────────────────────────────────
+
+  // ── ROLE-AWARE PAYMENT ROUTING ────────────────────────────────────────
+  function goToPartPayment() {
+    if (selectedRole === 'parent') {
+      document.getElementById('pg-title').textContent = 'Part repayment';
+      document.getElementById('pg-type').textContent = 'part repayment';
+      document.getElementById('pg-payment-type').textContent = 'Part repayment';
+      goTo('sc-pg-redirect');
+    } else {
+      goTo('sc-part-payment');
+    }
+  }
+  function goToFullPayment() {
+    if (selectedRole === 'parent') {
+      document.getElementById('pg-title').textContent = 'Full repayment';
+      document.getElementById('pg-type').textContent = 'full repayment / foreclosure';
+      document.getElementById('pg-payment-type').textContent = 'Full repayment / foreclosure';
+      goTo('sc-pg-redirect');
+    } else {
+      goTo('sc-payments-full');
+    }
+  }
+  window.goToPartPayment = goToPartPayment;
+  window.goToFullPayment = goToFullPayment;
+  // ── END ROLE-AWARE PAYMENT ROUTING ───────────────────────────────────
+
   // Reset sign-in when navigating to it
   var origGoTo = goTo;
   goTo = function(id) {
     if (id === 'sc-signin-phone') resetSignIn();
     origGoTo(id);
+    if (id === 'sc-pb-quote') {
+      pbCalc();
+      pbStartCountdown();
+    }
+    if (id === 'sc-pb-success') {
+      // Reset tracker
+      for (var ps = 1; ps <= 4; ps++) {
+        var ptk = document.getElementById('pb-tk-' + ps);
+        var ptl = document.getElementById('pb-tl-' + ps);
+        if (ptk) { ptk.style.background = 'var(--border)'; ptk.querySelector('i').style.color = 'var(--text3)'; }
+        if (ptl) ptl.style.color = 'var(--text3)';
+      }
+      // Animate check
+      var psi = document.getElementById('pb-succ-icon');
+      var psc = document.getElementById('pb-succ-check');
+      if (psi) psi.style.transform = 'scale(0)';
+      if (psc) psc.style.strokeDashoffset = '60';
+      setTimeout(function() {
+        if (psi) psi.style.transform = 'scale(1)';
+        if (psc) psc.style.strokeDashoffset = '0';
+      }, 50);
+      // Cascade tracker
+      var pbDelays = [600, 1300, 2100, 2900];
+      for (var pn = 1; pn <= 4; pn++) {
+        (function(step, delay) {
+          setTimeout(function() {
+            var ptk2 = document.getElementById('pb-tk-' + step);
+            var ptl2 = document.getElementById('pb-tl-' + step);
+            if (ptk2) { ptk2.style.background = '#059669'; ptk2.querySelector('i').style.color = 'white'; }
+            if (ptl2) ptl2.style.color = 'var(--text)';
+          }, delay);
+        })(pn, pbDelays[pn - 1]);
+      }
+    }
+    if (id === 'sc-transfer-ok') {
+      for (var ts = 1; ts <= 4; ts++) {
+        var tic = document.getElementById('tr-tr-icon-'+ts);
+        var ttk = document.getElementById('tr-tr-tick-'+ts);
+        var tln = document.getElementById('tr-tr-line-'+ts);
+        if (tic) { tic.style.background='white'; tic.style.borderColor='#E5E7EB'; tic.querySelector('i').style.color='#CBD5E1'; }
+        if (ttk) ttk.style.display='none';
+        if (tln) tln.style.background='#E5E7EB';
+      }
+      var tsi = document.getElementById('tr-succ-icon');
+      var tsc = document.getElementById('tr-succ-check');
+      if (tsi) tsi.style.transform = 'scale(0)';
+      if (tsc) tsc.style.strokeDashoffset = '36';
+      setTimeout(function() {
+        if (tsi) tsi.style.transform = 'scale(1)';
+        if (tsc) tsc.style.strokeDashoffset = '0';
+      }, 50);
+      var trStepDelay = [600, 1400, 2200, 3000];
+      for (var tn = 1; tn <= 4; tn++) {
+        (function(step, delay) {
+          setTimeout(function() {
+            var tic2 = document.getElementById('tr-tr-icon-'+step);
+            var ttk2 = document.getElementById('tr-tr-tick-'+step);
+            var tln2 = document.getElementById('tr-tr-line-'+step);
+            if (tic2) { tic2.style.background='#DCFCE7'; tic2.style.borderColor='#059669'; tic2.querySelector('i').style.color='#059669'; }
+            if (ttk2) ttk2.style.display='inline';
+            if (tln2) tln2.style.background='#059669';
+          }, delay);
+        })(tn, trStepDelay[tn-1]);
+      }
+    }
     if (id === 'sc-pay-success') {
       // Reset all tracker steps first
       for (var s = 1; s <= 4; s++) {
@@ -3299,8 +4409,10 @@ document.addEventListener('DOMContentLoaded', function() {
   };
 });
 </script>
-<!-- Off-screen mirror for input auto-sizing -->
+<!-- Off-screen mirrors for input auto-sizing -->
 <span id="pp-amount-mirror" aria-hidden="true"
+  style="font-size:36px;font-weight:800;font-family:inherit;position:fixed;left:-9999px;top:-9999px;visibility:hidden;white-space:pre;pointer-events:none"></span>
+<span id="tr-amount-mirror" aria-hidden="true"
   style="font-size:36px;font-weight:800;font-family:inherit;position:fixed;left:-9999px;top:-9999px;visibility:hidden;white-space:pre;pointer-events:none"></span>
 </body>
 </html>
